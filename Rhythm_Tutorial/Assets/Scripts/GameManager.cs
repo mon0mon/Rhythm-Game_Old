@@ -8,13 +8,34 @@ public class GameManager : MonoBehaviour
     public AudioSource theMusic;
     public bool startPlaying;
     public BeatScroller theBS;
-    public static GameManager instance;
+    private static GameManager instance = null;
 
     private void Start()
     {
-        instance = this;
+        Initialize();
     }
     
+    // 싱글톤 구성
+    public static GameManager Instance
+    {
+        get { return instance; }
+    }
+    
+    private void Initialize()
+    {
+        // 싱글톤 구성
+        if (instance)
+        {
+            DestroyImmediate(gameObject);
+            return;
+        }
+
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+        
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 60;
+    }
 
     private void Update()
     {

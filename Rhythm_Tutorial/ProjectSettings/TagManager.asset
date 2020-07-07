@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Activator
+  - Note
+  - DeadZone
   layers:
   - Default
   - TransparentFX
@@ -42,6 +44,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Arrows
-    uniqueID: 185368017
+  - name: Arrow
+    uniqueID: 2915218271
     locked: 0
