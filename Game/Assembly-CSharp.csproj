@@ -62,6 +62,7 @@
      <Compile Include="Assets\Scripts\ButtonController.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\NoteObject.cs" />
+     <Compile Include="Assets\Scripts\TouchManager.cs" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>D:/Study/GitHub/Projects/Team Project/Rhythm-Game/Game/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
