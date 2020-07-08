@@ -1,16 +1,21 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using Debug = UnityEngine.Debug;
 
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance = null;
+    private BeatScroller _beatScroller;
+    private LoadingSceneManager _loading;
     
     public AudioSource theMusic;
-    public BeatScroller theBS;
     
     public bool startPlaying;
+    public NextLevelScene enableNextLevel = NextLevelScene.DisableNextLevel;
 
     private int hitCount = 0;
     
@@ -37,6 +42,9 @@ public class GameManager : MonoBehaviour
         instance = this;
         
         ResetVariables();
+
+        _beatScroller = GameObject.Find("NoteHolder").GetComponent<BeatScroller>();
+        _loading = gameObject.GetComponent<LoadingSceneManager>();
         
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
@@ -47,7 +55,7 @@ public class GameManager : MonoBehaviour
         if (!startPlaying)
         {
             startPlaying = true;
-            theBS.hasStarted = true;
+            _beatScroller.setStart(true);
                 
             theMusic.Play();
         }
@@ -68,9 +76,17 @@ public class GameManager : MonoBehaviour
 
     public void CheckHitNotes()
     {
-        if (hitCount >= 5)
+        if ((hitCount >= 5))
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene("Loading_Scene");
+            switch (enableNextLevel)
+            {
+                case NextLevelScene.DisableNextLevel:
+                    Debug.Log("DisableNextLevel");
+                    break;
+                case NextLevelScene.EnableNextLevel:
+                    SceneManager.LoadScene("Loading_Scene");
+                    break;
+            }
         }
     }
 
@@ -78,4 +94,10 @@ public class GameManager : MonoBehaviour
     {
         hitCount = 0;
     }
+}
+
+public enum NextLevelScene
+{
+    EnableNextLevel,
+    DisableNextLevel
 }

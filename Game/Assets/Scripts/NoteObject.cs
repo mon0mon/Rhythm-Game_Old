@@ -15,7 +15,7 @@ public class NoteObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _gameManager = GameManager.Instance;
+        _gameManager = GameObject.Find("Manager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame

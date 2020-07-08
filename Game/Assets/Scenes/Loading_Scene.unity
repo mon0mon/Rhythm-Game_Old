@@ -234,6 +234,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scene: 1
+  AutoLoading: 1
 --- !u!4 &1707897696
 Transform:
   m_ObjectHideFlags: 0

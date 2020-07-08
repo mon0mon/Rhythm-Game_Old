@@ -8,6 +8,7 @@ public class LoadingSceneManager : MonoBehaviour
 {
     public static SceneList list;
     public SceneList scene = SceneList.RhythmGame_Test_PC;
+    public bool AutoLoading = false;
 
     private static LoadingSceneManager instance = null;
 
@@ -26,7 +27,10 @@ public class LoadingSceneManager : MonoBehaviour
     void Start()
     {
         Initialize();
-        StartCoroutine("Load");
+        if (AutoLoading)
+        { 
+            StartCoroutine("Load");
+        }
     }
 
     private void Initialize()
@@ -60,16 +64,18 @@ public class LoadingSceneManager : MonoBehaviour
             yield return true;
 
             if (canOpen)
-                yield return new WaitForSeconds(RandomNumber());
+            {
+                yield return new WaitForSeconds(RandomNumber(5, 10));
                 async.allowSceneActivation = true;
+            }
         }
     }
 
-    public int RandomNumber()
+    public int RandomNumber(int a, int b)
     {
-        int a = rand.Next(5, 10);
-        Debug.Log("RandomNumber : " + a);
-        return a;
+        int temp = rand.Next(a, b);
+        Debug.Log("RandomNumber : " + temp);
+        return temp;
     }
 
     private void SelecteScene()
