@@ -5,11 +5,15 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public AudioSource theMusic;
-    public bool startPlaying;
-    public BeatScroller theBS;
     private static GameManager instance = null;
+    
+    public AudioSource theMusic;
+    public BeatScroller theBS;
+    
+    public bool startPlaying;
 
+    private int hitCount = 0;
+    
     private void Start()
     {
         Initialize();
@@ -31,7 +35,8 @@ public class GameManager : MonoBehaviour
         }
 
         instance = this;
-        DontDestroyOnLoad(gameObject);
+        
+        ResetVariables();
         
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
@@ -41,23 +46,36 @@ public class GameManager : MonoBehaviour
     {
         if (!startPlaying)
         {
-            if (Input.anyKeyDown)
-            {
-                startPlaying = true;
-                theBS.hasStarted = true;
+            startPlaying = true;
+            theBS.hasStarted = true;
                 
-                theMusic.Play();
-            }
+            theMusic.Play();
         }
+        
+        CheckHitNotes();
     }
 
     public void NoteHit()
     {
+        hitCount++;
         Debug.Log("Hit On Time");
     }
 
     public void NoteMissed()
     {
         Debug.Log("Missed Note");
+    }
+
+    public void CheckHitNotes()
+    {
+        if (hitCount >= 5)
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Loading_Scene");
+        }
+    }
+
+    public void ResetVariables()
+    {
+        hitCount = 0;
     }
 }
