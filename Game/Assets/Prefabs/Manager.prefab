@@ -46,7 +46,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   theMusic: {fileID: 0}
   startPlaying: 0
-  enableNextLevel: 0
+  moveNextLevel: 1
+  EnableNextLevel: 0
+  NextScene: 0
 --- !u!114 &6500961997061063974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,3 +62,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scene: 1
+  AutoLoading: 0
+  MinLoadingTime: 4
+  MaxLoadingTime: 6
