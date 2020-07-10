@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 public class NoteObject : MonoBehaviour
 {
     private GameManager _gameManager;
     
     private bool isDeleted = false;
+    private bool canBePressed;
     
-    public bool canBePressed;
-    public KeyCode KeyToPress;
+    public TouchInputType TouchInputType;
+    public TouchPosition TouchPosition = TouchPosition.NULL;
     
     // Start is called before the first frame update
     void Start()
@@ -21,13 +24,95 @@ public class NoteObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (TouchManager.Instance.CheckHit())
+        switch (TouchInputType)
         {
-            if (canBePressed)
-            {
-                DestroyImmediate(gameObject);
-                GameManager.Instance.NoteHit();
-            }
+            case TouchInputType.Tab:
+                if (TouchManager.Instance.CheckHit())
+                {
+                    // 터치할 수 있는 화면 영역 설정이 없을 경우
+                    if (TouchPosition == TouchPosition.NULL)
+                    {
+                        if (canBePressed)
+                        {
+                            DestroyImmediate(gameObject);
+                            GameManager.Instance.NoteHit();
+                        }
+                    }
+                    // 터치할 수 있는 화면 영역 설징이 되어있을 경우
+                    else
+                    {
+                        switch (TouchManager.Instance.TouchSide())
+                        {
+                            case 0 :
+                                if (TouchPosition == TouchPosition.Left)
+                                {
+                                    if (canBePressed)
+                                    {
+                                        DestroyImmediate(gameObject);
+                                        GameManager.Instance.NoteHit();
+                                        Debug.Log("NoteObject : TouchPosition _ Tab _ Left");
+                                    }
+                                }
+                                break;
+                            case 1 :
+                                if (TouchPosition == TouchPosition.Right)
+                                {
+                                    if (canBePressed)
+                                    {
+                                        DestroyImmediate(gameObject);
+                                        GameManager.Instance.NoteHit();
+                                        Debug.Log("NoteObject : TouchPosition _ Tab _ Right");
+                                    }
+                                }
+                                break;
+                        }
+                    }
+                }
+                break;
+            case TouchInputType.Swipe:
+                if (TouchManager.Instance.CheckSwipe())
+                {
+                    // 터치할 수 있는 화면 영역 설정이 없을 경우
+                    if (TouchPosition == TouchPosition.NULL)
+                    {
+                        if (canBePressed)
+                        {
+                            DestroyImmediate(gameObject);
+                            GameManager.Instance.NoteHit();
+                        }
+                    }
+                    // 터치할 수 있는 화면 영역 설징이 되어있을 경우
+                    else
+                    {
+                        switch (TouchManager.Instance.TouchSide())
+                        {
+                            case 0 :
+                                if (TouchPosition == TouchPosition.Left)
+                                {
+                                    if (canBePressed)
+                                    {
+                                        DestroyImmediate(gameObject);
+                                        GameManager.Instance.NoteHit();
+                                        GameManager.Instance.NoteHit();
+                                        Debug.Log("NoteObject : TouchPosition _ Swipe _ Left");
+                                    }
+                                }
+                                break;
+                            case 1 :
+                                if (TouchPosition == TouchPosition.Right)
+                                {
+                                    if (canBePressed)
+                                    {
+                                        DestroyImmediate(gameObject);
+                                        GameManager.Instance.NoteHit();
+                                        Debug.Log("NoteObject : TouchPosition _ Swipe _ Right");
+                                    }
+                                }
+                                break;
+                        }
+                    }
+                }
+                break;
         }
     }
 
@@ -52,4 +137,17 @@ public class NoteObject : MonoBehaviour
             isDeleted = true;
         }
     }
+}
+
+public enum TouchPosition
+{
+    Right,
+    Left,
+    NULL
+}
+
+public enum TouchInputType 
+{
+    Tab,
+    Swipe
 }

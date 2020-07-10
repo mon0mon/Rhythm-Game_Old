@@ -102,7 +102,7 @@ public class GameManager : MonoBehaviour
     public void CheckHitNotes()
     {
         // 히트 카운트가 5회 이상, moveNextLevel이 참 일 경우 실행
-        if (hitCount >= 5 && moveNextLevel)
+        if (hitCount >= 50 && moveNextLevel)
         {
             // GameManager에서 EnableNextLevel의 설정 확인
             switch (EnableNextLevel)
@@ -159,6 +159,12 @@ public class GameManager : MonoBehaviour
             case SceneList.RhythmGame_Test_PC:
                 sceneName = "Scenes/RhythmGame_Test_PC";
                 break;
+            case SceneList.StoneAge:
+                sceneName = "Scenes/Stage_StoneAge";
+                break;
+            case SceneList.Touch_Test:
+                sceneName = "Scenes/TouchTset";
+                break;
             default:
                 sceneName = "Scenes/Loading_Scene";
                 break;
@@ -174,5 +180,5 @@ public enum NextLevelScene
 
 public enum SceneList
 {
-    LoadingScene, RhythmGame_Test_PC, TouchSwipe_Test_Mobile, NULL
+    LoadingScene, RhythmGame_Test_PC, TouchSwipe_Test_Mobile, Touch_Test, StoneAge, NULL
 }

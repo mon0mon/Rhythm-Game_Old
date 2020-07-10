@@ -6,8 +6,8 @@ public class SceneData : MonoBehaviour
 {
     private static SceneData instance;
 
-    private string str;
     private int cnt = 0;
+    public string str;
     
     // Start is called before the first frame update
     void Start()

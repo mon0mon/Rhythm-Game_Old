@@ -25,7 +25,7 @@ public class LoadingSceneManager : MonoBehaviour
 
     public enum SceneList
     {
-        LoadingScene, RhythmGame_Test_PC, TouchSwipe_Test_Mobile, NULL
+        LoadingScene, RhythmGame_Test_PC, TouchSwipe_Test_Mobile, Touch_Test, StoneAge, NULL
     }
         
     // Start is called before the first frame update
@@ -112,7 +112,6 @@ public class LoadingSceneManager : MonoBehaviour
                 new WaitForSeconds(TransitionTime);
                 break;
             case SceneTransition.End:
-                Debug.Log("End");
                 SceneAnimationManager.Instance.EndTransition();
                 new WaitForSeconds(TransitionTime);
                 break;
@@ -139,6 +138,12 @@ public class LoadingSceneManager : MonoBehaviour
                 break;
             case SceneList.RhythmGame_Test_PC:
                 str = "Scenes/RhythmGame_Test_PC";
+                break;
+            case SceneList.StoneAge:
+                str = "Scenes/Stage_StoneAge";
+                break;
+            case SceneList.Touch_Test:
+                str = "Scenes/TouchTset";
                 break;
             default :
                 str = "Scenes/Loading_Scene";

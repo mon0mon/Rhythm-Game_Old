@@ -5,23 +5,21 @@ using UnityEngine;
 
 public class ButtonController : MonoBehaviour
 {
-    private SpriteRenderer theSR;
-    
     public Sprite defaultImage;
     public Sprite pressedImage;
     
     private void Start()
     {
-        theSR = GetComponent<SpriteRenderer>();
+        
     }
 
     public void ButtonPressedImage()
     {
-        theSR.sprite = pressedImage;
+        gameObject.GetComponent<SpriteRenderer>().sprite = pressedImage;
     }
 
     public void ButtonDefaultImage()
     {
-        theSR.sprite = defaultImage;
+        gameObject.GetComponent<SpriteRenderer>().sprite = defaultImage;
     }
 }

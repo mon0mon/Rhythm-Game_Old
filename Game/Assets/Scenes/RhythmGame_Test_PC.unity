@@ -166,8 +166,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c8630c5d938934eb00b9df8787e0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canBePressed: 0
-  KeyToPress: 273
+  TouchInputType: 0
+  TouchPosition: 2
 --- !u!58 &50598834
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -279,8 +279,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c8630c5d938934eb00b9df8787e0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canBePressed: 0
-  KeyToPress: 275
+  TouchInputType: 0
+  TouchPosition: 2
 --- !u!58 &104396128
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -490,8 +490,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c8630c5d938934eb00b9df8787e0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canBePressed: 0
-  KeyToPress: 276
+  TouchInputType: 0
+  TouchPosition: 2
 --- !u!58 &298479937
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -603,8 +603,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c8630c5d938934eb00b9df8787e0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canBePressed: 0
-  KeyToPress: 276
+  TouchInputType: 0
+  TouchPosition: 2
 --- !u!58 &382496012
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -716,8 +716,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c8630c5d938934eb00b9df8787e0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canBePressed: 0
-  KeyToPress: 274
+  TouchInputType: 0
+  TouchPosition: 2
 --- !u!58 &438426111
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -918,8 +918,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c8630c5d938934eb00b9df8787e0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canBePressed: 0
-  KeyToPress: 274
+  TouchInputType: 0
+  TouchPosition: 2
 --- !u!58 &526839568
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1031,8 +1031,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c8630c5d938934eb00b9df8787e0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canBePressed: 0
-  KeyToPress: 273
+  TouchInputType: 0
+  TouchPosition: 2
 --- !u!58 &549406620
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1144,8 +1144,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c8630c5d938934eb00b9df8787e0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canBePressed: 0
-  KeyToPress: 275
+  TouchInputType: 0
+  TouchPosition: 2
 --- !u!58 &706603138
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1402,8 +1402,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c8630c5d938934eb00b9df8787e0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canBePressed: 0
-  KeyToPress: 274
+  TouchInputType: 0
+  TouchPosition: 2
 --- !u!58 &1062971881
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1581,8 +1581,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c8630c5d938934eb00b9df8787e0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canBePressed: 0
-  KeyToPress: 275
+  TouchInputType: 0
+  TouchPosition: 2
 --- !u!1 &1165289316
 GameObject:
   m_ObjectHideFlags: 0
@@ -1758,7 +1758,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultImage: {fileID: 21300000, guid: 1bbda9210988dfd4db252a09838d254f, type: 3}
   pressedImage: {fileID: 21300000, guid: cacc39dd2a4e88a43aadeddd73e9b1e2, type: 3}
-  keyToPress: 274
 --- !u!212 &1254156488
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1967,8 +1966,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c8630c5d938934eb00b9df8787e0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canBePressed: 0
-  KeyToPress: 276
+  TouchInputType: 0
+  TouchPosition: 2
 --- !u!1 &1405174338
 GameObject:
   m_ObjectHideFlags: 0
@@ -2080,8 +2079,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c8630c5d938934eb00b9df8787e0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canBePressed: 0
-  KeyToPress: 274
+  TouchInputType: 0
+  TouchPosition: 2
 --- !u!1 &1464734892
 GameObject:
   m_ObjectHideFlags: 0
@@ -2127,8 +2126,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c8630c5d938934eb00b9df8787e0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canBePressed: 0
-  KeyToPress: 273
+  TouchInputType: 0
+  TouchPosition: 2
 --- !u!58 &1464734895
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2300,8 +2299,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c8630c5d938934eb00b9df8787e0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canBePressed: 0
-  KeyToPress: 276
+  TouchInputType: 0
+  TouchPosition: 2
 --- !u!58 &1676931773
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2379,6 +2378,7 @@ GameObject:
   - component: {fileID: 1859647367}
   - component: {fileID: 1859647366}
   - component: {fileID: 1859647368}
+  - component: {fileID: 1859647369}
   m_Layer: 0
   m_Name: SaveData
   m_TagString: Untagged
@@ -2427,6 +2427,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SceneTransition: {fileID: 1293423564154246377, guid: 51395466f6a7e704f8000bdab692591c,
     type: 3}
+--- !u!114 &1859647369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859647365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af397a861e98a7842bf05de6c01a305b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TouchScreenDivision: 0
+  SwipeType: 3
+  Vertical_Sensitivity: 0.6
+  Horizontal_Sensitivity: 0.6
+  Free_Sensitivty: 0.6
+  btnTap: {fileID: 0}
+  btnSlide: {fileID: 0}
 --- !u!1 &1869095433
 GameObject:
   m_ObjectHideFlags: 0
@@ -2475,7 +2494,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultImage: {fileID: 21300000, guid: ed2984e24d5df6f46a80ead6ad2964fa, type: 3}
   pressedImage: {fileID: 21300000, guid: 8f47ff751b3bdec48862adf0100c74fa, type: 3}
-  keyToPress: 275
 --- !u!212 &1869095436
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2655,7 +2673,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultImage: {fileID: 21300000, guid: c3c13b1f8baa5dd4a86d3dc186668178, type: 3}
   pressedImage: {fileID: 21300000, guid: 2d10ec486261df445b73774ff82f1b69, type: 3}
-  keyToPress: 276
 --- !u!212 &2068365846
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2864,8 +2881,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c8630c5d938934eb00b9df8787e0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canBePressed: 0
-  KeyToPress: 273
+  TouchInputType: 0
+  TouchPosition: 2
 --- !u!1 &2104091423
 GameObject:
   m_ObjectHideFlags: 0
@@ -2911,8 +2928,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c8630c5d938934eb00b9df8787e0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canBePressed: 0
-  KeyToPress: 275
+  TouchInputType: 0
+  TouchPosition: 2
 --- !u!58 &2104091426
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3027,7 +3044,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultImage: {fileID: 21300000, guid: ad187f74f2d0cc4499f39a0267b9eda8, type: 3}
   pressedImage: {fileID: 21300000, guid: 18bf226de2d59284e904c26430f659c9, type: 3}
-  keyToPress: 273
 --- !u!212 &2122905766
 SpriteRenderer:
   m_ObjectHideFlags: 0
