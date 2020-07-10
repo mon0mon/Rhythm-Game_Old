@@ -21,7 +21,7 @@ public class NoteObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyToPress))
+        if (TouchManager.Instance.CheckHit())
         {
             if (canBePressed)
             {

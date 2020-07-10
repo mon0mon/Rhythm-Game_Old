@@ -9,24 +9,19 @@ public class ButtonController : MonoBehaviour
     
     public Sprite defaultImage;
     public Sprite pressedImage;
-
-    public KeyCode keyToPress;
     
     private void Start()
     {
         theSR = GetComponent<SpriteRenderer>();
     }
 
-    private void Update()
+    public void ButtonPressedImage()
     {
-        if (Input.GetKeyDown(keyToPress))
-        {
-            theSR.sprite = pressedImage;
-        }
+        theSR.sprite = pressedImage;
+    }
 
-        if (Input.GetKeyUp(keyToPress))
-        {
-            theSR.sprite = defaultImage;
-        }
+    public void ButtonDefaultImage()
+    {
+        theSR.sprite = defaultImage;
     }
 }

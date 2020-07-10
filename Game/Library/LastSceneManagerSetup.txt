@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/RhythmGame_Test_PC.unity
+- path: Assets/Scenes/Stage_StoneAge.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
