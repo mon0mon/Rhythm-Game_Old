@@ -7,13 +7,15 @@ using Random = System.Random;
 public class LoadingSceneManager : MonoBehaviour
 {
     public static SceneList list;
-    public SceneList scene;
     public bool AutoLoading = true;
     public int MinLoadingTime = 4;
     public int MaxLoadingTime = 10;
+    public float TransitionTime = 1f;
+    public bool StartTransitionOn = true;
 
     private static LoadingSceneManager instance = null;
 
+    private SceneList scene = SceneList.LoadingScene;
     private AsyncOperation async;
     private string str;
     private bool canOpen = true;
@@ -34,11 +36,17 @@ public class LoadingSceneManager : MonoBehaviour
         if (GameObject.Find("SaveData").GetComponent<SceneData>().CheckIsThisSceneNext())
         {
             str = GameObject.Find("SaveData").GetComponent<SceneData>().GetNextSceneName();
-            Debug.Log("Start : " + str);
+        }
+        
+        if (StartTransitionOn)
+        {
+            // SceneAnimationManager.Instance.StartTransition();
+            // new WaitForSeconds(TransitionTime);
+            StartCoroutine(TransitionAnimation(SceneTransition.Start));
         }
         
         if (AutoLoading)
-        { 
+        {
             StartCoroutine("Load");
         }
     }
@@ -67,37 +75,55 @@ public class LoadingSceneManager : MonoBehaviour
     // 로딩
     IEnumerator Load()
     {
-        Debug.Log("Load : " + str);
         // 다른 클래스에서 SceneName을 설정한 적이 없고, str 값이 없을 경우
         if (!isSceneNameSet && str == null)
         {
             // Enum에 있는 대로 다음 씬을 설정
             SelecteScene();
         }
-
-        Debug.Log(str);
         async = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(str); // 열고 싶은 씬
         async.allowSceneActivation = false;
 
         while (!async.isDone)
         {
             float progress = async.progress;
-            Debug.Log("Progress : " + progress);
 
             yield return true;
 
             if (canOpen)
             {
-                yield return new WaitForSeconds(RandomNumber(MinLoadingTime, MaxLoadingTime));
+                int num = RandomNumber(MinLoadingTime, MaxLoadingTime);
+                yield return new WaitForSeconds(num);
+                StartCoroutine(TransitionAnimation(SceneTransition.End));
+                yield return new WaitForSeconds(2f);
+                // SceneAnimationManager.Instance.EndTransition();
+                // new WaitForSeconds(TransitionTime);
                 async.allowSceneActivation = true;
             }
         }
     }
 
+    public IEnumerator TransitionAnimation(SceneTransition st)
+    {
+        switch (st)
+        {
+            case SceneTransition.Start:
+                SceneAnimationManager.Instance.StartTransition();
+                new WaitForSeconds(TransitionTime);
+                break;
+            case SceneTransition.End:
+                Debug.Log("End");
+                SceneAnimationManager.Instance.EndTransition();
+                new WaitForSeconds(TransitionTime);
+                break;
+        }
+
+        yield return null;
+    }
+
     public int RandomNumber(int a, int b)
     {
         int temp = rand.Next(a, b);
-        Debug.Log("RandomNumber : " + temp);
         return temp;
     }
 
@@ -118,6 +144,11 @@ public class LoadingSceneManager : MonoBehaviour
                 str = "Scenes/Loading_Scene";
                 break;
         }
+    }
+
+    public enum SceneTransition
+    {
+        Start, End
     }
 
     public void setTimer(int minTime, int maxTime)

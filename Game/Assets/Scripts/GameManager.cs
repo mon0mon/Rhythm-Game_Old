@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     private static GameManager instance = null;
     private BeatScroller _beatScroller;
     private LoadingSceneManager _loading;
+    private SceneData _sceneData;
     
     public AudioSource theMusic;
     
@@ -54,6 +55,10 @@ public class GameManager : MonoBehaviour
         // 컴포넌트 연결
         _beatScroller = GameObject.Find("NoteHolder").GetComponent<BeatScroller>();
         _loading = gameObject.GetComponent<LoadingSceneManager>();
+        _sceneData = GameObject.Find("SaveData").GetComponent<SceneData>();
+        
+        _sceneData.ClearSceneInfo();
+        SceneAnimationManager.Instance.StartTransition();
         
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
@@ -112,8 +117,7 @@ public class GameManager : MonoBehaviour
                     isNotPlaying = true;
                     _loading.enabled = true;
                     SelecteScene();
-                    GameObject.Find("SaveData").GetComponent<SceneData>().SetNextSceneName(sceneName);
-                    Debug.Log(sceneName);
+                    _sceneData.SetNextSceneName(sceneName);
                     // _loading.setSceneName(sceneName);
                     // _loading.setTimer(MinLoadTime, MaxLoadTime);
                     // if (NextScene != SceneList.NULL)

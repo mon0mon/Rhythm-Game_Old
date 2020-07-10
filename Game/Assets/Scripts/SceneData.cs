@@ -24,6 +24,11 @@ public class SceneData : MonoBehaviour
 
     public static SceneData Instance => instance;
 
+    public void ClearSceneInfo()
+    {
+        str = null;
+    }
+
     public string GetNextSceneName()
     {
         return str;
