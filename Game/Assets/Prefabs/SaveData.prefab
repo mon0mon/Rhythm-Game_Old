@@ -78,12 +78,18 @@ MonoBehaviour:
   Vertical_Sensitivity: 0.6
   Horizontal_Sensitivity: 0.6
   Free_Sensitivty: 0.6
-  btnTap: {fileID: 0}
-  btnSlide: {fileID: 0}
-  btnTap_Right: {fileID: 0}
-  btnTap_Left: {fileID: 0}
-  btnSwipe_Right: {fileID: 0}
-  btnSwipe_Left: {fileID: 0}
+  btnTap: {fileID: 6141786801300875634, guid: fe82c166ed72d46419b91f09bf60d1fb, type: 3}
+  btnSwipe: {fileID: 3515369653156002700, guid: 7fb9ace2b98713449ba6defe144dd046,
+    type: 3}
+  btnTap_Right: {fileID: 7764196183048266069, guid: 122e96b910e8a0041a8ad2ba268bf619,
+    type: 3}
+  btnTap_Left: {fileID: 8418292856806537495, guid: 0433fd27867938240b31e1e9622b5375,
+    type: 3}
+  btnSwipe_Right: {fileID: 2259306260215546926, guid: b4b7b1a528e611c4492a2d29452a5e27,
+    type: 3}
+  btnSwipe_Left: {fileID: 7910313538119457388, guid: 5b28d73af0e43384ea7ef35cfabdebab,
+    type: 3}
+  ButtonPressed: 0
 --- !u!1001 &5733599437579105580
 PrefabInstance:
   m_ObjectHideFlags: 0

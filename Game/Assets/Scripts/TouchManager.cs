@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class TouchManager : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class TouchManager : MonoBehaviour
     private Vector2 touchStartPos;
     private bool isTap = false;
     private bool isSwiped = false;
-    private int touchSide;
+    private int touchSide = 0;
 
     public TouchSpaceDivision TouchScreenDivision = TouchSpaceDivision.Single;
     public SwipeType SwipeType = SwipeType.NULL;
@@ -20,11 +21,13 @@ public class TouchManager : MonoBehaviour
     public float Free_Sensitivty = 0.6f;
 
     public GameObject btnTap;
-    public GameObject btnSlide;
+    public GameObject btnSwipe;
     public GameObject btnTap_Right;
     public GameObject btnTap_Left;
     public GameObject btnSwipe_Right;
     public GameObject btnSwipe_Left;
+
+    public ButtonPressed ButtonPressed;
 
     void Start()
     {
@@ -48,11 +51,11 @@ public class TouchManager : MonoBehaviour
             btnTap = GameObject.Find("Button_Tap");
         }
 
-        if (btnSlide == null)
+        if (btnSwipe == null)
         {
             if (GameObject.Find("Button_Slide") != null)
             {
-                btnSlide = GameObject.Find("Button_Slide");
+                btnSwipe = GameObject.Find("Button_Slide");
             }
         }
     }
@@ -68,12 +71,12 @@ public class TouchManager : MonoBehaviour
             {
                 case TouchPhase.Began:
                     touchStartPos = Input.GetTouch(0).deltaPosition;
-                    btnTap.GetComponent<ButtonController>().ButtonPressedImage();
                     isTap = true;
+                    DisplayButtonPress();
                     break;
                 
                 case TouchPhase.Moved:
-                    btnTap.GetComponent<ButtonController>().ButtonDefaultImage();
+                    isTap = false;
                     switch (SwipeType)
                     {
                         case SwipeType.Vertical :
@@ -81,8 +84,8 @@ public class TouchManager : MonoBehaviour
                             if (Mathf.Abs(Input.GetTouch(0).deltaPosition.y - touchStartPos.y) >= 3)
                             {
                                 isSwiped = true;
-                                btnSlide.GetComponent<ButtonController>().ButtonPressedImage();
-                                gameObject.transform.Translate(new Vector2(0, Input.GetTouch(0).deltaPosition.y) * Time.deltaTime * Vertical_Sensitivity);
+                                DisplayButtonPress();
+                                // gameObject.transform.Translate(new Vector2(0, Input.GetTouch(0).deltaPosition.y) * Time.deltaTime * Vertical_Sensitivity);
                             }
                             break;
                         case SwipeType.Horizontal :
@@ -90,16 +93,16 @@ public class TouchManager : MonoBehaviour
                             if (Mathf.Abs(Input.GetTouch(0).deltaPosition.x - touchStartPos.x) >= 3)
                             {
                                 isSwiped = true;
-                                btnSlide.GetComponent<ButtonController>().ButtonPressedImage();
-                                gameObject.transform.Translate(new Vector2(Input.GetTouch(0).deltaPosition.x, 0) * Time.deltaTime * Horizontal_Sensitivity);
+                                DisplayButtonPress();
+                                // gameObject.transform.Translate(new Vector2(Input.GetTouch(0).deltaPosition.x, 0) * Time.deltaTime * Horizontal_Sensitivity);
                             }
                             break;
                         case SwipeType.Free :
                             if (Mathf.Abs(Input.GetTouch(0).deltaPosition.y - touchStartPos.y) >= 3
                                 && Mathf.Abs(Input.GetTouch(0).deltaPosition.x - touchStartPos.x) >= 3) {
                                 isSwiped = true;
-                                btnSlide.GetComponent<ButtonController>().ButtonPressedImage();
-                                gameObject.transform.Translate(Input.GetTouch(0).deltaPosition * Time.deltaTime * Free_Sensitivty);
+                                DisplayButtonPress();
+                                // gameObject.transform.Translate(Input.GetTouch(0).deltaPosition * Time.deltaTime * Free_Sensitivty);
                             }
                             break;
                         default:
@@ -111,28 +114,13 @@ public class TouchManager : MonoBehaviour
                 case TouchPhase.Ended :
                     if (!isSwiped)
                     {
-                        btnTap.GetComponent<ButtonController>().ButtonDefaultImage();
-                        Debug.Log("Touch Tap Active");
-                        // isTap = true;
-                        // StartCoroutine(Timer((float)0.15));
+                        DisplayButtonDefault();
                         isTap = false;
                     }
                     else
                     {
-                        btnSlide.GetComponent<ButtonController>().ButtonDefaultImage();
-                        Debug.Log("Swipe Active");
-                        isTap = false;
+                        DisplayButtonDefault();
                         isSwiped = false;
-                    }
-                    
-                    
-                    if (Input.GetTouch(0).position.x > Screen.width / 2)
-                    {
-                        touchSide = 1;    // 우측 화면 터치
-                    }
-                    else
-                    {
-                        touchSide = 0;    // 좌측 화면 터치
                     }
                     break;
             }
@@ -153,6 +141,116 @@ public class TouchManager : MonoBehaviour
     {
         return touchSide;
     }
+
+    private void ScreenTouchSideCalc(float num)
+    {
+        if (num > Screen.width / 2)
+        {
+            touchSide = 1;    // 우측 화면 터치
+            Debug.Log("TouchManager : Right");
+            return;
+        }
+        else
+        {
+            touchSide = -1;    // 좌측 화면 터치
+            Debug.Log("TouchManager : Left");
+            return;
+        }
+    }
+
+    private void DisplayButtonPress()
+    {
+        if (!isSwiped)
+        {
+            if (TouchScreenDivision == TouchSpaceDivision.Double)
+            { 
+                ScreenTouchSideCalc(Input.GetTouch(0).position.x);
+                switch (TouchSide())
+                {
+                    case 1:
+                        btnTap_Right.GetComponent<ButtonController>().ButtonPressedImage();
+                        ButtonPressed = ButtonPressed.Button_Tab_Right;
+                        Debug.Log("ButtonPressed.Button_Tab_Right");
+                        break;
+                    case -1:
+                        btnTap_Left.GetComponent<ButtonController>().ButtonPressedImage();
+                        ButtonPressed = ButtonPressed.Button_Tab_Left;
+                        Debug.Log("ButtonPressed.Button_Tab_Left");
+                        break;
+                }
+            }
+            else
+            {
+                btnTap.GetComponent<ButtonController>().ButtonPressedImage();
+                ButtonPressed = ButtonPressed.Button_Tab;
+                Debug.Log("ButtonPressed.Button_Tab");
+            }
+        }
+        else
+        {
+            if (TouchScreenDivision == TouchSpaceDivision.Double)
+            { 
+                ScreenTouchSideCalc(Input.GetTouch(0).position.x);
+                switch (TouchSide())
+                {
+                    case 1:
+                        btnSwipe_Right.GetComponent<ButtonController>().ButtonPressedImage();
+                        ButtonPressed = ButtonPressed.Button_Swipe_Right;
+                        Debug.Log("ButtonPressed.Button_Swipe_Right");
+                        break;
+                    case -1:
+                        btnSwipe_Left.GetComponent<ButtonController>().ButtonPressedImage();
+                        ButtonPressed = ButtonPressed.Button_Swipe_Left;
+                        Debug.Log("ButtonPressed.Button_Swipe_Left");
+                        break;
+                }
+            }
+            else
+            {
+                btnSwipe.GetComponent<ButtonController>().ButtonPressedImage();
+                ButtonPressed = ButtonPressed.Button_Swipe;
+                Debug.Log("ButtonPressed.Button_Swipe");
+            }
+        }
+    }
+
+    private void DisplayButtonDefault()
+    {
+        switch (ButtonPressed)
+        {
+            case ButtonPressed.Button_Tab:
+                btnTap.GetComponent<ButtonController>().ButtonDefaultImage();
+                break;
+            case ButtonPressed.Button_Tab_Right:
+                btnTap_Right.GetComponent<ButtonController>().ButtonDefaultImage();
+                break;
+            case ButtonPressed.Button_Tab_Left:
+                btnTap_Left.GetComponent<ButtonController>().ButtonDefaultImage();
+                break;
+            case ButtonPressed.Button_Swipe:
+                btnSwipe.GetComponent<ButtonController>().ButtonDefaultImage();
+                break;
+            case ButtonPressed.Button_Swipe_Right:
+                btnSwipe_Right.GetComponent<ButtonController>().ButtonDefaultImage();
+                break;
+            case ButtonPressed.Button_Swipe_Left:
+                btnSwipe_Left.GetComponent<ButtonController>().ButtonDefaultImage();
+                break;
+        }
+        
+        ButtonPressed = ButtonPressed.NULL;
+    }
+}
+
+public enum ButtonPressed
+{
+    Button_Tab,
+    Button_Swipe,
+    Button_Tab_Right,
+    Button_Tab_Left,
+    Button_Swipe_Right,
+    Button_Swipe_Left,
+    NULL
 }
 
 public enum SwipeType

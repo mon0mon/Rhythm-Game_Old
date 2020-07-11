@@ -43,7 +43,7 @@ public class NoteObject : MonoBehaviour
                     {
                         switch (TouchManager.Instance.TouchSide())
                         {
-                            case 0 :
+                            case -1 :
                                 if (TouchPosition == TouchPosition.Left)
                                 {
                                     if (canBePressed)
@@ -64,6 +64,9 @@ public class NoteObject : MonoBehaviour
                                         Debug.Log("NoteObject : TouchPosition _ Tab _ Right");
                                     }
                                 }
+                                break;
+                            default :
+                                Debug.Log("NoteObejct : Unexcpected Value");
                                 break;
                         }
                     }
@@ -86,7 +89,7 @@ public class NoteObject : MonoBehaviour
                     {
                         switch (TouchManager.Instance.TouchSide())
                         {
-                            case 0 :
+                            case -1 :
                                 if (TouchPosition == TouchPosition.Left)
                                 {
                                     if (canBePressed)

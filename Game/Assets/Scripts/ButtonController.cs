@@ -7,11 +7,6 @@ public class ButtonController : MonoBehaviour
 {
     public Sprite defaultImage;
     public Sprite pressedImage;
-    
-    private void Start()
-    {
-        
-    }
 
     public void ButtonPressedImage()
     {
