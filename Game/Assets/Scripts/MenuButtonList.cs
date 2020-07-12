@@ -108,23 +108,24 @@ public class MenuButtonList : MonoBehaviour
             SetButtonColorDeactive();
             _configWindow.enabled = true;
             DeactiveButtons();
-            isConfigOn = true;
         }
         else
         {
             ResetColor();
             _configWindow.enabled = false;
-            isConfigOn = false;
             ActiveButtons();
         }
+        isConfigOn = !isConfigOn;
     }
 
     public void OnClick_Screen()
     {
-        Debug.Log("OnClick_Screen");
         ResetColor();
         ResetButtonSprite();
-        _configWindow.enabled = false;
+        if (isConfigOn)
+        {
+            OnClick_Config();
+        }
         SelectedScene = SceneList.NULL;
     }
 

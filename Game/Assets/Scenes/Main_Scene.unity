@@ -2071,6 +2071,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7099321359105857489, guid: d5f99e73c57ff5e499d71896108e69a7,
+        type: 3}
+      propertyPath: StartTransitionOn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7099321359105857489, guid: d5f99e73c57ff5e499d71896108e69a7,
+        type: 3}
+      propertyPath: MinLoadingTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7099321359105857489, guid: d5f99e73c57ff5e499d71896108e69a7,
+        type: 3}
+      propertyPath: MaxLoadingTime
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7099321359105857489, guid: d5f99e73c57ff5e499d71896108e69a7,
+        type: 3}
+      propertyPath: RemoveStartTrainsitionDelay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7099321359105857489, guid: d5f99e73c57ff5e499d71896108e69a7,
+        type: 3}
+      propertyPath: TurnOnOnlyMainScene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7099321359105857490, guid: d5f99e73c57ff5e499d71896108e69a7,
+        type: 3}
+      propertyPath: EnableLoadingScreen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7099321359105857490, guid: d5f99e73c57ff5e499d71896108e69a7,
+        type: 3}
+      propertyPath: EnableStartTransition
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7099321359105857503, guid: d5f99e73c57ff5e499d71896108e69a7,
         type: 3}
       propertyPath: m_Name

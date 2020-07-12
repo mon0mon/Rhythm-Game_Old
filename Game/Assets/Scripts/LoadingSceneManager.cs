@@ -12,6 +12,7 @@ public class LoadingSceneManager : MonoBehaviour
     public float MaxLoadingTime = 10;
     public float TransitionTime = 1f;
     public bool StartTransitionOn = true;
+    public bool TurnOnOnlyMainScene = false;
 
     private static LoadingSceneManager instance = null;
 
@@ -99,7 +100,10 @@ public class LoadingSceneManager : MonoBehaviour
             if (canOpen)
             {
                 float num = RandomNumber(MinLoadingTime, MaxLoadingTime);
-                yield return new WaitForSeconds(num);
+                if (!TurnOnOnlyMainScene)
+                {
+                    yield return new WaitForSeconds(num);
+                }
                 StartCoroutine(TransitionAnimation(SceneTransition.End));
                 yield return new WaitForSeconds(2f);
                 // SceneAnimationManager.Instance.EndTransition();
