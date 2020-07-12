@@ -516,10 +516,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98d1c1d631d6163489176f73947be582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: 3
   AutoLoading: 1
-  MinLoadingTime: 4
-  MaxLoadingTime: 10
+  MinLoadingTime: 2
+  MaxLoadingTime: 3
   TransitionTime: 1
   StartTransitionOn: 1
 --- !u!4 &1707897696

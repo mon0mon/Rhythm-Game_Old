@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3289872817868035383
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3289872817868035384}
+  - component: {fileID: 3289872817868035386}
+  - component: {fileID: 3289872817868035385}
+  - component: {fileID: 6438316102512759118}
+  m_Layer: 0
+  m_Name: Menu_Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3289872817868035384
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3289872817868035383}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 461.0369, y: 223.63191, z: -521.4375}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3289872817868035386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3289872817868035383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 012d6418d5426784694ff78819bb57db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NextScene: 8
+  EnableLoadingScreen: 0
+  MinLoadTime: 1.5
+  MaxLoadTime: 2
+  EnableStartTransition: 1
+--- !u!114 &3289872817868035385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3289872817868035383}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98d1c1d631d6163489176f73947be582, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AutoLoading: 1
+  MinLoadingTime: 2
+  MaxLoadingTime: 3
+  TransitionTime: 1
+  StartTransitionOn: 1
+--- !u!114 &6438316102512759118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3289872817868035383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8128c722ffc889142886968f02e23485, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectedScene: 0
+  Default_Barbarian: {fileID: 21300000, guid: 4c958c0fea24a9745a0af2816a81b764, type: 3}
+  Default_Knight: {fileID: 21300000, guid: 928b3caee799dbd438dbd9777d564aef, type: 3}
+  Default_Worker: {fileID: 21300000, guid: 81b85981049c9514e91bbc7566c59622, type: 3}
+  Default_Spaceship: {fileID: 21300000, guid: d56237bc79eb7514b88ec2f535edd479, type: 3}
+  Highlight_Barbarian: {fileID: 21300000, guid: 72c27f9bc1c46c94a99c2223a7668f3c,
+    type: 3}
+  Highlight_Knight: {fileID: 21300000, guid: e20913c093c626c4982b3d4d8832c440, type: 3}
+  Highlight_Worker: {fileID: 21300000, guid: 7e8bb1a858b64fd4096e8ec95fc03f01, type: 3}
+  Highlight_Spaceship: {fileID: 21300000, guid: 6c3e5f26600a5c44f90229b510340cf1,
+    type: 3}

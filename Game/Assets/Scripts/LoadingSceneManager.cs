@@ -2,14 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = System.Random;
+using Random = UnityEngine.Random;
 
 public class LoadingSceneManager : MonoBehaviour
 {
     public static SceneList list;
     public bool AutoLoading = true;
-    public int MinLoadingTime = 4;
-    public int MaxLoadingTime = 10;
+    public float MinLoadingTime = 4;
+    public float MaxLoadingTime = 10;
     public float TransitionTime = 1f;
     public bool StartTransitionOn = true;
 
@@ -19,13 +19,19 @@ public class LoadingSceneManager : MonoBehaviour
     private AsyncOperation async;
     private string str;
     private bool canOpen = true;
-    private Random rand = new Random();
     private bool isSceneNameSet = false;
     private static string nextSceneName;
 
     public enum SceneList
     {
-        LoadingScene, RhythmGame_Test_PC, TouchSwipe_Test_Mobile, Touch_Test, StoneAge, NULL
+        // 디버그용 씬
+        RhythmGame_Test_PC, TouchSwipe_Test_Mobile, Touch_Test, 
+        // 게임 플레이 스테이지
+        StoneAge, MiddleAge, ModernAge, SciFi,
+        // 메뉴 화면 씬
+        Main_Scene, Start_Scene,LoadingScene,
+        // 예외처리
+        NULL
     }
         
     // Start is called before the first frame update
@@ -92,7 +98,7 @@ public class LoadingSceneManager : MonoBehaviour
 
             if (canOpen)
             {
-                int num = RandomNumber(MinLoadingTime, MaxLoadingTime);
+                float num = RandomNumber(MinLoadingTime, MaxLoadingTime);
                 yield return new WaitForSeconds(num);
                 StartCoroutine(TransitionAnimation(SceneTransition.End));
                 yield return new WaitForSeconds(2f);
@@ -120,10 +126,9 @@ public class LoadingSceneManager : MonoBehaviour
         yield return null;
     }
 
-    public int RandomNumber(int a, int b)
+    public float RandomNumber(float a, float b)
     {
-        int temp = rand.Next(a, b);
-        return temp;
+        return Random.Range(a, b);
     }
 
     private void SelecteScene()

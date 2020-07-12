@@ -21,9 +21,7 @@ public class SceneAnimationManager : MonoBehaviour
             DestroyImmediate(gameObject);
             return;
         }
-
         instance = this;
-        DontDestroyOnLoad(gameObject);
 
         SceneTransition = GameObject.Find("Crossfade").GetComponent<Animator>();
     }

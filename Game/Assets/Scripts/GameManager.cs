@@ -17,10 +17,7 @@ public class GameManager : MonoBehaviour
     
     public bool startPlaying;
     public bool moveNextLevel = true;
-    public NextLevelScene EnableNextLevel = NextLevelScene.DisableNextLevel;
     public SceneList NextScene = SceneList.NULL;
-    public int MinLoadTime = 4;
-    public int MaxLoadTime = 6;
 
     private int hitCount = 0;
     private string sceneName;
@@ -58,7 +55,6 @@ public class GameManager : MonoBehaviour
         _sceneData = GameObject.Find("SaveData").GetComponent<SceneData>();
         
         _sceneData.ClearSceneInfo();
-        SceneAnimationManager.Instance.StartTransition();
         
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
@@ -104,36 +100,12 @@ public class GameManager : MonoBehaviour
         // 히트 카운트가 5회 이상, moveNextLevel이 참 일 경우 실행
         if (hitCount >= 50 && moveNextLevel)
         {
-            // GameManager에서 EnableNextLevel의 설정 확인
-            switch (EnableNextLevel)
-            {
-                case NextLevelScene.DisableNextLevel:
-                    Debug.Log("DisableNextLevel");
-                    moveNextLevel = false;
-                    break;
-                case NextLevelScene.EnableNextLevel:
-                    // EnableNextLevel로 설정 되어 있을 경우
-                    // 다음 씬으로 로딩
-                    isNotPlaying = true;
-                    _loading.enabled = true;
-                    SelecteScene();
-                    _sceneData.SetNextSceneName(sceneName);
-                    // _loading.setSceneName(sceneName);
-                    // _loading.setTimer(MinLoadTime, MaxLoadTime);
-                    // if (NextScene != SceneList.NULL)
-                    // {
-                    //     // NextScene이 NULL값이 아닐 경우 Enum에 맞게 다음 씬 선택
-                    //     SelecteScene();
-                    //     _loading.setSceneName(sceneName);
-                    // }
-                    // else
-                    // {
-                    //     _loading.setSceneName("Scenes/Loading_Scene");
-                    // }
-                    // _loading.StartLoad();
-                    moveNextLevel = false;
-                    break;
-            }
+            // 다음 씬으로 로딩
+            isNotPlaying = true;
+            _loading.StartLoad();
+            SelecteScene();
+            _sceneData.SetNextSceneName(sceneName);
+            moveNextLevel = false;
         }
     }
 
@@ -165,20 +137,27 @@ public class GameManager : MonoBehaviour
             case SceneList.Touch_Test:
                 sceneName = "Scenes/TouchTset";
                 break;
+            case SceneList.Main_Scene:
+                sceneName = "Scenes/Main_Scene";
+                break;
+            case SceneList.Start_Scene:
+                sceneName = "Scenes/Start_Scene";
+                break;
             default:
-                sceneName = "Scenes/Loading_Scene";
+                sceneName = "Scenes/Start_Scene";
                 break;
         }
     }
 }
 
-public enum NextLevelScene
-{
-    EnableNextLevel,
-    DisableNextLevel
-}
-
 public enum SceneList
 {
-    LoadingScene, RhythmGame_Test_PC, TouchSwipe_Test_Mobile, Touch_Test, StoneAge, NULL
+    // 디버그용 씬
+    RhythmGame_Test_PC, TouchSwipe_Test_Mobile, Touch_Test, 
+    // 게임 플레이 스테이지
+    StoneAge, MiddleAge, ModernAge, SciFi,
+    // 메뉴 화면 씬
+    Main_Scene, Start_Scene,LoadingScene,
+    // 예외처리
+    NULL
 }

@@ -15,9 +15,15 @@ EditorBuildSettings:
     path: Assets/Scenes/Loading_Scene.unity
     guid: 582e85cd524c2084c833e95273bf67b6
   - enabled: 1
-    path: Assets/Scenes/Stage_StoneAge.unity
-    guid: 247be8bcbf62c204ba28892dba9c43cf
-  - enabled: 1
     path: Assets/Scenes/TouchTset.unity
     guid: 08bdc0a8dcfa137419ed41acc944e296
+  - enabled: 1
+    path: Assets/Scenes/Start_Scene.unity
+    guid: 6849cc460c2014f4886467816c0cf48d
+  - enabled: 1
+    path: Assets/Scenes/Main_Scene.unity
+    guid: 07cd0535f9db8ec4dbaef7e8d31f672f
+  - enabled: 1
+    path: Assets/Scenes/Stage_StoneAge.unity
+    guid: 7449c1e37ab513a40ba0b0a83af51611
   m_configObjects: {}
