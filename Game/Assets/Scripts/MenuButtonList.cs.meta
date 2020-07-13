@@ -3,7 +3,19 @@ guid: 8128c722ffc889142886968f02e23485
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - Default_Barbarian: {fileID: 21300000, guid: 4c958c0fea24a9745a0af2816a81b764,
+      type: 3}
+  - Default_Knight: {fileID: 21300000, guid: 928b3caee799dbd438dbd9777d564aef, type: 3}
+  - Default_Worker: {fileID: 21300000, guid: 81b85981049c9514e91bbc7566c59622, type: 3}
+  - Default_Spaceship: {fileID: 21300000, guid: d56237bc79eb7514b88ec2f535edd479,
+      type: 3}
+  - Highlight_Barbarian: {fileID: 21300000, guid: 72c27f9bc1c46c94a99c2223a7668f3c,
+      type: 3}
+  - Highlight_Knight: {fileID: 21300000, guid: e20913c093c626c4982b3d4d8832c440, type: 3}
+  - Highlight_Worker: {fileID: 21300000, guid: 7e8bb1a858b64fd4096e8ec95fc03f01, type: 3}
+  - Highlight_Spaceship: {fileID: 21300000, guid: 6c3e5f26600a5c44f90229b510340cf1,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

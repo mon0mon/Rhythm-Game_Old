@@ -10,7 +10,7 @@ public class MenuButtonList : MonoBehaviour
     private Button _gameStart;
     private Button _configBtn;
     private Button _screen;
-    private Image _configWindow;
+    private GameObject _configWindow;
     
     private string selected_Scene;
     private bool isConfigOn = false;
@@ -55,7 +55,7 @@ public class MenuButtonList : MonoBehaviour
 
         if (GameObject.Find("Config_Window") != null)
         {
-            _configWindow = GameObject.Find("Config_Window").GetComponent<Image>();
+            _configWindow = GameObject.Find("Config_Window");
         }
 
         if (GameObject.Find("Screen") != null)
@@ -105,14 +105,14 @@ public class MenuButtonList : MonoBehaviour
     {
         if (!isConfigOn)
         {
-            SetButtonColorDeactive();
-            _configWindow.enabled = true;
+            SetButtonColorDeactive(); 
+            GameObject.Find("Config_Window").transform.GetChild(0).gameObject.SetActive(true);
             DeactiveButtons();
         }
         else
         {
             ResetColor();
-            _configWindow.enabled = false;
+            GameObject.Find("Config_Window").transform.GetChild(0).gameObject.SetActive(false);
             ActiveButtons();
         }
         isConfigOn = !isConfigOn;

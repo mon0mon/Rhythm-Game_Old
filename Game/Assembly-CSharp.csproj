@@ -64,6 +64,7 @@
      <Compile Include="Assets\Scripts\LoadingSceneManager.cs" />
      <Compile Include="Assets\Scripts\MenuButtonList.cs" />
      <Compile Include="Assets\Scripts\MenuManger.cs" />
+     <Compile Include="Assets\Scripts\MusicManager.cs" />
      <Compile Include="Assets\Scripts\NoteObject.cs" />
      <Compile Include="Assets\Scripts\SceneAnimationManager.cs" />
      <Compile Include="Assets\Scripts\SceneData.cs" />
