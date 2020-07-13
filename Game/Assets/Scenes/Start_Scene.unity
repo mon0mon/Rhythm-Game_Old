@@ -687,8 +687,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 530703479}
+  - component: {fileID: 530703480}
+  - component: {fileID: 530703481}
   m_Layer: 0
-  m_Name: MusicManager
+  m_Name: MainMenuMusic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -701,13 +703,124 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 530703478}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 408.81158, y: 281.718, z: -304.625}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 407.85974, y: 281.12433, z: -293.9157}
+  m_LocalScale: {x: 0.99767166, y: 0.99767166, z: 0.99767166}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_Father: {fileID: 951371903}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &530703480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530703478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae76d518c639ff34db8b0df06703023d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Music: {fileID: 530703481}
+  AudioMixer: {fileID: 24100000, guid: 15f9ba3cfd1c3f74ab516d546e6ef7e4, type: 2}
+--- !u!82 &530703481
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530703478}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 5709332547291111470, guid: 15f9ba3cfd1c3f74ab516d546e6ef7e4,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: 39672ab68a0a2004d815a9fd6b82d923, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &785219441
 GameObject:
   m_ObjectHideFlags: 0
@@ -791,6 +904,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &951371903 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6801279515098305447, guid: 2fe1aac471a2b85459baf5264108426c,
+    type: 3}
+  m_PrefabInstance: {fileID: 166906771}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1152446009
 GameObject:
   m_ObjectHideFlags: 0
@@ -1147,6 +1266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8128c722ffc889142886968f02e23485, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Mixer: {fileID: 0}
   SelectedScene: 0
   Default_Barbarian: {fileID: 0}
   Default_Knight: {fileID: 0}

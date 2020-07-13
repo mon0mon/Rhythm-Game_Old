@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class MenuButtonList : MonoBehaviour
@@ -11,10 +12,12 @@ public class MenuButtonList : MonoBehaviour
     private Button _configBtn;
     private Button _screen;
     private GameObject _configWindow;
+    private MusicManager _MainMenuMusic;
     
     private string selected_Scene;
     private bool isConfigOn = false;
 
+    public AudioMixer Mixer;
     public SceneList SelectedScene = SceneList.NULL;
     public Sprite Default_Barbarian;
     public Sprite Default_Knight;
@@ -44,8 +47,10 @@ public class MenuButtonList : MonoBehaviour
 
         if (GameObject.Find("Game_Start") != null)
         {
+            Debug.Log(GameObject.Find("Game_Start"));
             _gameStart = GameObject.Find("Game_Start").GetComponent<Button>();
             _gameStart.interactable = false;
+            Debug.Log(_gameStart);
         }
         
         if (GameObject.Find("ConfigButton") != null)
@@ -66,6 +71,7 @@ public class MenuButtonList : MonoBehaviour
 
     public void OnClick_StoneAge()
     {
+        Debug.Log(_gameStart);
         _gameStart.interactable = true;
         _menuManger.NextScene = MenuManger.SceneList.StoneAge;
         SelectedScene = SceneList.StoneAge;
@@ -74,6 +80,7 @@ public class MenuButtonList : MonoBehaviour
     
     public void OnClick_MiddleAge()
     {
+        Debug.Log(_gameStart);
         _gameStart.interactable = true;
         _menuManger.NextScene = MenuManger.SceneList.MiddleAge;
         SelectedScene = SceneList.MiddleAge;
@@ -82,6 +89,7 @@ public class MenuButtonList : MonoBehaviour
     
     public void OnClick_ModernAge()
     {
+        Debug.Log(_gameStart);
         _gameStart.interactable = true;
         _menuManger.NextScene = MenuManger.SceneList.ModernAge;
         SelectedScene = SceneList.ModernAge;
@@ -90,6 +98,7 @@ public class MenuButtonList : MonoBehaviour
     
     public void OnClick_SciFi()
     {
+        Debug.Log(_gameStart);
         _gameStart.interactable = true;
         _menuManger.NextScene = MenuManger.SceneList.SciFi;
         SelectedScene = SceneList.SciFi;
@@ -99,6 +108,8 @@ public class MenuButtonList : MonoBehaviour
     public void OnClick_GameStart()
     {
         _menuManger.MoveNextScene();
+        GameObject.Find("MainMenuMusic").GetComponent<AudioSource>().Stop();
+        GameObject.Find("MainMenuMusic").GetComponent<AudioSource>().enabled = false;
     }
 
     public void OnClick_Config()
@@ -112,6 +123,7 @@ public class MenuButtonList : MonoBehaviour
         else
         {
             ResetColor();
+            ResetButtonSprite();
             GameObject.Find("Config_Window").transform.GetChild(0).gameObject.SetActive(false);
             ActiveButtons();
         }
@@ -127,6 +139,16 @@ public class MenuButtonList : MonoBehaviour
             OnClick_Config();
         }
         SelectedScene = SceneList.NULL;
+    }
+
+    public void OnBGMVolSlider()
+    {
+        GameObject.Find("MainMenuMusic").GetComponent<MusicManager>().VolChangeBGM(GameObject.Find("BGM_Slider").GetComponent<Slider>().value);
+    }
+
+    public void OnSFXVolSlider()
+    {
+        Debug.Log(GameObject.Find("SFX_Slider").GetComponent<Slider>().value);
     }
 
     private void ChangeButtonSprite()
