@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -47,10 +48,8 @@ public class MenuButtonList : MonoBehaviour
 
         if (GameObject.Find("Game_Start") != null)
         {
-            Debug.Log(GameObject.Find("Game_Start"));
             _gameStart = GameObject.Find("Game_Start").GetComponent<Button>();
             _gameStart.interactable = false;
-            Debug.Log(_gameStart);
         }
         
         if (GameObject.Find("ConfigButton") != null)
@@ -69,9 +68,16 @@ public class MenuButtonList : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        if (SelectedScene == SceneList.NULL)
+        {
+            _gameStart.interactable = false;
+        }
+    }
+
     public void OnClick_StoneAge()
     {
-        Debug.Log(_gameStart);
         _gameStart.interactable = true;
         _menuManger.NextScene = MenuManger.SceneList.StoneAge;
         SelectedScene = SceneList.StoneAge;
@@ -80,7 +86,6 @@ public class MenuButtonList : MonoBehaviour
     
     public void OnClick_MiddleAge()
     {
-        Debug.Log(_gameStart);
         _gameStart.interactable = true;
         _menuManger.NextScene = MenuManger.SceneList.MiddleAge;
         SelectedScene = SceneList.MiddleAge;
@@ -89,7 +94,6 @@ public class MenuButtonList : MonoBehaviour
     
     public void OnClick_ModernAge()
     {
-        Debug.Log(_gameStart);
         _gameStart.interactable = true;
         _menuManger.NextScene = MenuManger.SceneList.ModernAge;
         SelectedScene = SceneList.ModernAge;
@@ -98,7 +102,6 @@ public class MenuButtonList : MonoBehaviour
     
     public void OnClick_SciFi()
     {
-        Debug.Log(_gameStart);
         _gameStart.interactable = true;
         _menuManger.NextScene = MenuManger.SceneList.SciFi;
         SelectedScene = SceneList.SciFi;
@@ -108,8 +111,11 @@ public class MenuButtonList : MonoBehaviour
     public void OnClick_GameStart()
     {
         _menuManger.MoveNextScene();
-        GameObject.Find("MainMenuMusic").GetComponent<AudioSource>().Stop();
-        GameObject.Find("MainMenuMusic").GetComponent<AudioSource>().enabled = false;
+        if (SelectedScene != SceneList.NULL)
+        {
+            GameObject.Find("MainMenuMusic").GetComponent<AudioSource>().Stop();
+            GameObject.Find("MainMenuMusic").GetComponent<AudioSource>().enabled = false;
+        }
     }
 
     public void OnClick_Config()
@@ -148,7 +154,22 @@ public class MenuButtonList : MonoBehaviour
 
     public void OnSFXVolSlider()
     {
-        Debug.Log(GameObject.Find("SFX_Slider").GetComponent<Slider>().value);
+        GameObject.Find("MainMenuMusic").GetComponent<MusicManager>().VolChangeSFX(GameObject.Find("SFX_Slider").GetComponent<Slider>().value);
+    }
+
+    public void OnClick_Exit()
+    {
+        Application.Quit();
+    }
+
+    public void OnClick_Credit()
+    {
+        Debug.Log("Credit");
+    }
+
+    public void OnToggle_Animation()
+    {
+        _menuManger.MenuAnimation(GameObject.Find("Background_Animation_Toggle").GetComponent<Toggle>().isOn);
     }
 
     private void ChangeButtonSprite()

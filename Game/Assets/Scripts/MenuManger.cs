@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -15,6 +16,7 @@ public class MenuManger : MonoBehaviour
     public float MinLoadTime = 1.5f;
     public float MaxLoadTime = 2.0f;
     public bool EnableStartTransition = true;
+    public bool isAnimationOn = true;
     
     private string sceneName;
 
@@ -75,11 +77,16 @@ public class MenuManger : MonoBehaviour
         }
     }
     
-    public void ResetVariables()
+    private void ResetVariables()
     {
         GameObject.Find("SaveData").GetComponent<SceneData>().SetNextSceneName(null);
     }
-    
+
+    public void MenuAnimation(bool check)
+    {
+        SceneData.Instance.SetMenuAnimation(check);
+    }
+
     private void SelecteScene()
     {
         switch (NextScene)

@@ -16,27 +16,31 @@ public class MusicManager : MonoBehaviour
 
     public void StartMainMenuMusic()
     {
-        
+        Music.Play();
     }
 
     public void StopMainMenuMusic()
     {
-        
+        Music.Stop();
+    }
+    
+    public void PauseMainMenuMusic()
+    {
+        Music.Pause();
+    }
+
+    public void UnpauseMainMenuMusic()
+    {
+        Music.UnPause();
     }
 
     public void VolChangeBGM(float value)
     {
-        if (value != 0)
-        {
-            value = value * 10;
-        }
-        else
-        {
-            value = -80f;
-        }
-        
-        Debug.Log(value);
-        Debug.Log(AudioMixer.outputAudioMixerGroup.name);
-        // Debug.Log(AudioMixer.FindMatchingGroups("BGM").GetValue(0));
+        AudioMixer.SetFloat("BGM_Vol", value);
+    }
+
+    public void VolChangeSFX(float value)
+    {
+        AudioMixer.SetFloat("SFX_Vol", value);
     }
 }
