@@ -18,7 +18,6 @@ public class MenuButtonList : MonoBehaviour
     private string selected_Scene;
     private bool isConfigOn = false;
 
-    public AudioMixer Mixer;
     public SceneList SelectedScene = SceneList.NULL;
     public Sprite Default_Barbarian;
     public Sprite Default_Knight;
@@ -36,7 +35,7 @@ public class MenuButtonList : MonoBehaviour
         // 예외처리
         NULL
     }
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -123,6 +122,8 @@ public class MenuButtonList : MonoBehaviour
         {
             SetButtonColorDeactive(); 
             GameObject.Find("Config_Window").transform.GetChild(0).gameObject.SetActive(true);
+            GameObject.Find("Background_Animation_Toggle").GetComponent<Toggle>().isOn = GameObject.Find("SaveData")
+                .transform.GetComponentInChildren<AnimationManager>().isMenuAnimationOn;
             DeactiveButtons();
         }
         else
@@ -159,6 +160,7 @@ public class MenuButtonList : MonoBehaviour
     public void OnClick_Exit()
     {
         Application.Quit();
+        Debug.Log("Exit");
     }
 
     public void OnClick_Credit()
