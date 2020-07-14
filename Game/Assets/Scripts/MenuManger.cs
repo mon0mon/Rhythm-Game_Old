@@ -16,7 +16,6 @@ public class MenuManger : MonoBehaviour
     public float MinLoadTime = 1.5f;
     public float MaxLoadTime = 2.0f;
     public bool EnableStartTransition = true;
-    public bool isAnimationOn = true;
     
     private string sceneName;
 
@@ -39,6 +38,7 @@ public class MenuManger : MonoBehaviour
         _loading = gameObject.GetComponent<LoadingSceneManager>();
         _sceneData = GameObject.Find("SaveData").GetComponent<SceneData>();
         _sceneData.ClearSceneInfo();
+        StartCoroutine(LateStart(0.01f));
         StopAllCoroutines();
 
         if (EnableStartTransition)
@@ -63,6 +63,7 @@ public class MenuManger : MonoBehaviour
 
     public void MoveNextScene()
     {
+        _sceneData.transform.GetComponentInChildren<AnimationManager>().enabled = false;
         if (EnableLoadingScreen)
         {
             _loading.enabled = true;
@@ -71,7 +72,6 @@ public class MenuManger : MonoBehaviour
         }
         else
         {
-            Debug.Log("MoveNextScene");
             SelecteScene();
             StartCoroutine(EndTansition());
         }
@@ -84,7 +84,7 @@ public class MenuManger : MonoBehaviour
 
     public void MenuAnimation(bool check)
     {
-        SceneData.Instance.SetMenuAnimation(check);
+        SceneData.Instance.SetMenuAnimationState(check);
     }
 
     private void SelecteScene()
@@ -132,5 +132,11 @@ public class MenuManger : MonoBehaviour
         SceneAnimationManager.Instance.EndTransition();
         yield return new WaitForSeconds((Random.Range(MinLoadTime, MaxLoadTime)));
         SceneManager.LoadScene(sceneName);
+    }
+
+    IEnumerator LateStart(float waitTime)
+    {
+        _sceneData.transform.GetComponentInChildren<AnimationManager>().enabled = true;
+        yield return new WaitForSeconds(waitTime);
     }
 }

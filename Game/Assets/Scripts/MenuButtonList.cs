@@ -113,8 +113,7 @@ public class MenuButtonList : MonoBehaviour
         _menuManger.MoveNextScene();
         if (SelectedScene != SceneList.NULL)
         {
-            GameObject.Find("MainMenuMusic").GetComponent<AudioSource>().Stop();
-            GameObject.Find("MainMenuMusic").GetComponent<AudioSource>().enabled = false;
+            GameObject.Find("MainMenuMusic").GetComponent<MusicManager>().StopMainMenuMusic();
         }
     }
 

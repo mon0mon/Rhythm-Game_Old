@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 public class MusicManager : MonoBehaviour
 {
@@ -12,6 +14,22 @@ public class MusicManager : MonoBehaviour
     {
         Music = gameObject.GetComponent<AudioSource>();
         Music.Play();
+    }
+
+    private void Update()
+    {
+        if (!Music.isPlaying)
+        {
+            switch (SceneManager.GetActiveScene().name)
+            {
+                case "Start_Scene" :
+                case "Main_Scene" :
+                    Music.Play();
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     public void StartMainMenuMusic()
