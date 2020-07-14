@@ -12,9 +12,9 @@ public class GameManager : MonoBehaviour
     private BeatScroller _beatScroller;
     private LoadingSceneManager _loading;
     private SceneData _sceneData;
-    
-    public AudioSource theMusic;
-    
+    private IngameMusicManager _ingameMusic;
+    private IngameSFXManager _ingameSFX;
+
     public bool startPlaying;
     public bool moveNextLevel = true;
     public SceneList NextScene = SceneList.NULL;
@@ -53,6 +53,8 @@ public class GameManager : MonoBehaviour
         _beatScroller = GameObject.Find("NoteHolder").GetComponent<BeatScroller>();
         _loading = gameObject.GetComponent<LoadingSceneManager>();
         _sceneData = GameObject.Find("SaveData").GetComponent<SceneData>();
+        _ingameMusic = GameObject.Find("BGM").GetComponent<IngameMusicManager>();
+        _ingameSFX = GameObject.Find("SFX").GetComponent<IngameSFXManager>();
         
         _sceneData.ClearSceneInfo();
         
@@ -67,8 +69,11 @@ public class GameManager : MonoBehaviour
         {
             startPlaying = true;
             _beatScroller.setStart(true);
-            theMusic.Play();
+            // 음악 메소드인 IngameMusicManager 호출로 변경
+            _ingameMusic.PlayBGM();
         }
+        
+        if (!_ingameMusic.AudioSource.isPlaying)
         
         CheckHitNotes();
     }
@@ -97,16 +102,12 @@ public class GameManager : MonoBehaviour
     // 일정 수 이상 노트를 적중 했을 경우 동작하는 메소드
     public void CheckHitNotes()
     {
-        // 히트 카운트가 5회 이상, moveNextLevel이 참 일 경우 실행
-        if (hitCount >= 50 && moveNextLevel)
-        {
-            // 다음 씬으로 로딩
-            isNotPlaying = true;
-            _loading.StartLoad();
-            SelecteScene();
-            _sceneData.SetNextSceneName(sceneName);
-            moveNextLevel = false;
-        }
+        // // 히트 카운트가 5회 이상, moveNextLevel이 참 일 경우 실행
+        // if (hitCount >= 50 && moveNextLevel)
+        // {
+        //     // 다음 씬으로 로딩
+        //     MoveNextScene();
+        // }
     }
 
     public void ResetVariables()
@@ -116,6 +117,15 @@ public class GameManager : MonoBehaviour
         isNotPlaying = false;
         
         GameObject.Find("SaveData").GetComponent<SceneData>().SetNextSceneName(null);
+    }
+
+    public void MoveNextScene()
+    {
+        isNotPlaying = true;
+        _loading.StartLoad();
+        SelecteScene();
+        _sceneData.SetNextSceneName(sceneName);
+        moveNextLevel = false;
     }
     
     private void SelecteScene()

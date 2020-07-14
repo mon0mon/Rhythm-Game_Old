@@ -147,13 +147,11 @@ public class TouchManager : MonoBehaviour
         if (num > Screen.width / 2)
         {
             touchSide = 1;    // 우측 화면 터치
-            Debug.Log("TouchManager : Right");
             return;
         }
         else
         {
             touchSide = -1;    // 좌측 화면 터치
-            Debug.Log("TouchManager : Left");
             return;
         }
     }
@@ -209,6 +207,7 @@ public class TouchManager : MonoBehaviour
             {
                 btnSwipe.GetComponent<ButtonController>().ButtonPressedImage();
                 ButtonPressed = ButtonPressed.Button_Swipe;
+                ResetButtonTapSprite();
                 Debug.Log("ButtonPressed.Button_Swipe");
             }
         }
@@ -239,6 +238,13 @@ public class TouchManager : MonoBehaviour
         }
         
         ButtonPressed = ButtonPressed.NULL;
+    }
+
+    private void ResetButtonTapSprite()
+    {
+        if (btnTap != null) btnTap.GetComponent<ButtonController>().ButtonDefaultImage();
+        if (btnTap_Right != null) btnTap_Right.GetComponent<ButtonController>().ButtonDefaultImage();
+        if (btnTap_Left != null) btnTap_Left.GetComponent<ButtonController>().ButtonDefaultImage();
     }
 }
 

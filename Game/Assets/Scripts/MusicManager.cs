@@ -18,17 +18,14 @@ public class MusicManager : MonoBehaviour
 
     private void Update()
     {
-        if (!Music.isPlaying)
+        switch (SceneManager.GetActiveScene().name)
         {
-            switch (SceneManager.GetActiveScene().name)
-            {
-                case "Start_Scene" :
-                case "Main_Scene" :
-                    Music.Play();
-                    break;
-                default:
-                    break;
-            }
+            case "Start_Scene" :
+            case "Main_Scene" :
+                break;
+            default:
+                Music.Stop();
+                break;
         }
     }
 

@@ -62,6 +62,9 @@
      <Compile Include="Assets\Scripts\BeatScroller.cs" />
      <Compile Include="Assets\Scripts\ButtonController.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
+     <Compile Include="Assets\Scripts\IngameMusicManager.cs" />
+     <Compile Include="Assets\Scripts\IngameSFXManager.cs" />
+     <Compile Include="Assets\Scripts\IngameUIManager.cs" />
      <Compile Include="Assets\Scripts\LoadingSceneManager.cs" />
      <Compile Include="Assets\Scripts\MenuButtonList.cs" />
      <Compile Include="Assets\Scripts\MenuManger.cs" />

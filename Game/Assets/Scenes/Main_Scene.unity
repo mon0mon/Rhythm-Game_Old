@@ -3825,11 +3825,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NextScene: 8
-  EnableLoadingScreen: 0
+  EnableLoadingScreen: 1
   MinLoadTime: 1.5
   MaxLoadTime: 2
   EnableStartTransition: 1
-  isAnimationOn: 1
 --- !u!4 &3289872817968355546
 Transform:
   m_ObjectHideFlags: 0
@@ -3860,8 +3859,8 @@ MonoBehaviour:
   MinLoadingTime: 2
   MaxLoadingTime: 3
   TransitionTime: 1
-  StartTransitionOn: 1
-  TurnOnOnlyMainScene: 0
+  StartTransitionOn: 0
+  TurnOnOnlyMainScene: 1
 --- !u!114 &6438316102613736620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3874,7 +3873,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8128c722ffc889142886968f02e23485, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Mixer: {fileID: 24100000, guid: 15f9ba3cfd1c3f74ab516d546e6ef7e4, type: 2}
   SelectedScene: 0
   Default_Barbarian: {fileID: 21300000, guid: 4c958c0fea24a9745a0af2816a81b764, type: 3}
   Default_Knight: {fileID: 21300000, guid: 928b3caee799dbd438dbd9777d564aef, type: 3}
