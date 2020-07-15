@@ -139,23 +139,35 @@ public class LoadingSceneManager : MonoBehaviour
     {
         switch (list)
         {
-            case SceneList.LoadingScene:
-                str = "Scenes/Loading_Scene";
-                break;
+            // Debug Scene
             case SceneList.TouchSwipe_Test_Mobile:
                 str = "Scenes/TouchSwipe_Test_Mobile";
                 break;
             case SceneList.RhythmGame_Test_PC:
                 str = "Scenes/RhythmGame_Test_PC";
                 break;
-            case SceneList.StoneAge:
-                str = "Scenes/Stage_StoneAge";
-                break;
             case SceneList.Touch_Test:
                 str = "Scenes/TouchTset";
                 break;
-            default :
+            // Ingame MenuScene
+            case SceneList.Start_Scene:
+                str = "Scenes/Start_Scene";
+                break;
+            case SceneList.Main_Scene:
+                str = "Scenes/Main_Scene";
+                break;
+            case SceneList.LoadingScene:
                 str = "Scenes/Loading_Scene";
+                break;
+            // Ingame StageScene
+            case SceneList.StoneAge:
+                str = "Scenes/Stage_StoneAge";
+                break;
+            case SceneList.MiddleAge :
+            case SceneList.ModernAge :
+            case SceneList.SciFi :
+            default:
+                str = "Scenes/Start_Scene";
                 break;
         }
     }

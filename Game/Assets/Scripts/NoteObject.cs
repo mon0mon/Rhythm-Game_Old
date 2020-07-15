@@ -8,13 +8,15 @@ using Debug = UnityEngine.Debug;
 public class NoteObject : MonoBehaviour
 {
     private GameManager _gameManager;
+    private CircleCollider2D _collider2D;
+    private GameObject PressedButton;
     
     private bool isDeleted = false;
     private bool canBePressed;
     
     public TouchInputType TouchInputType;
     public TouchPosition TouchPosition = TouchPosition.NULL;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,7 +37,7 @@ public class NoteObject : MonoBehaviour
                         if (canBePressed)
                         {
                             DestroyImmediate(gameObject);
-                            GameManager.Instance.NoteHit();
+                            GameManager.Instance.NoteHit(TouchInputType);
                         }
                     }
                     // 터치할 수 있는 화면 영역 설징이 되어있을 경우
@@ -49,7 +51,7 @@ public class NoteObject : MonoBehaviour
                                     if (canBePressed)
                                     {
                                         DestroyImmediate(gameObject);
-                                        GameManager.Instance.NoteHit();
+                                        GameManager.Instance.NoteHit(TouchInputType);
                                         Debug.Log("NoteObject : TouchPosition _ Tab _ Left");
                                     }
                                 }
@@ -60,7 +62,7 @@ public class NoteObject : MonoBehaviour
                                     if (canBePressed)
                                     {
                                         DestroyImmediate(gameObject);
-                                        GameManager.Instance.NoteHit();
+                                        GameManager.Instance.NoteHit(TouchInputType);
                                         Debug.Log("NoteObject : TouchPosition _ Tab _ Right");
                                     }
                                 }
@@ -81,7 +83,7 @@ public class NoteObject : MonoBehaviour
                         if (canBePressed)
                         {
                             DestroyImmediate(gameObject);
-                            GameManager.Instance.NoteHit();
+                            GameManager.Instance.NoteHit(TouchInputType);
                         }
                     }
                     // 터치할 수 있는 화면 영역 설징이 되어있을 경우
@@ -95,8 +97,7 @@ public class NoteObject : MonoBehaviour
                                     if (canBePressed)
                                     {
                                         DestroyImmediate(gameObject);
-                                        GameManager.Instance.NoteHit();
-                                        GameManager.Instance.NoteHit();
+                                        GameManager.Instance.NoteHit(TouchInputType);
                                         Debug.Log("NoteObject : TouchPosition _ Swipe _ Left");
                                     }
                                 }
@@ -107,7 +108,7 @@ public class NoteObject : MonoBehaviour
                                     if (canBePressed)
                                     {
                                         DestroyImmediate(gameObject);
-                                        GameManager.Instance.NoteHit();
+                                        GameManager.Instance.NoteHit(TouchInputType);
                                         Debug.Log("NoteObject : TouchPosition _ Swipe _ Right");
                                     }
                                 }
@@ -124,6 +125,7 @@ public class NoteObject : MonoBehaviour
         if (other.tag == "Activator")
         {
             canBePressed = true;
+            GameManager.Instance.SetPressedButton(other.gameObject);
         } else if (other.CompareTag("DeadZone"))
         {
             Debug.Log("Destroied");
@@ -138,6 +140,7 @@ public class NoteObject : MonoBehaviour
             _gameManager.NoteMissed();
             canBePressed = false;
             isDeleted = true;
+            GameManager.Instance.SetPressedButton(null);
         }
     }
 }

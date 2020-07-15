@@ -63,6 +63,7 @@ public class MenuManger : MonoBehaviour
 
     public void MoveNextScene()
     {
+        // MainMenuAnimation 종료
         _sceneData.transform.GetComponentInChildren<AnimationManager>().enabled = false;
         if (EnableLoadingScreen)
         {
@@ -91,36 +92,33 @@ public class MenuManger : MonoBehaviour
     {
         switch (NextScene)
         {
-            case SceneList.LoadingScene:
-                sceneName = "Scenes/Loading_Scene";
-                break;
+            // Debug Scene
             case SceneList.TouchSwipe_Test_Mobile:
                 sceneName = "Scenes/TouchSwipe_Test_Mobile";
                 break;
             case SceneList.RhythmGame_Test_PC:
                 sceneName = "Scenes/RhythmGame_Test_PC";
                 break;
-            case SceneList.StoneAge:
-                sceneName = "Scenes/Stage_StoneAge";
-                break;
             case SceneList.Touch_Test:
                 sceneName = "Scenes/TouchTset";
+                break;
+            // Ingame MenuScene
+            case SceneList.Start_Scene:
+                sceneName = "Scenes/Start_Scene";
                 break;
             case SceneList.Main_Scene:
                 sceneName = "Scenes/Main_Scene";
                 break;
-            case SceneList.Start_Scene:
-                sceneName = "Scenes/Start_Scene";
+            case SceneList.LoadingScene:
+                sceneName = "Scenes/Loading_Scene";
+                break;
+            // Ingame StageScene
+            case SceneList.StoneAge:
+                sceneName = "Scenes/Stage_StoneAge";
                 break;
             case SceneList.MiddleAge :
-                sceneName = "Scenes/Start_Scene";
-                break;
             case SceneList.ModernAge :
-                sceneName = "Scenes/Start_Scene";
-                break;
             case SceneList.SciFi :
-                sceneName = "Scenes/Start_Scene";
-                break;
             default:
                 sceneName = "Scenes/Start_Scene";
                 break;

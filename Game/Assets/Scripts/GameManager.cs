@@ -5,6 +5,7 @@ using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Debug = UnityEngine.Debug;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,13 +16,18 @@ public class GameManager : MonoBehaviour
     private IngameMusicManager _ingameMusic;
     private IngameSFXManager _ingameSFX;
 
-    public bool startPlaying;
-    public bool moveNextLevel = true;
     public SceneList NextScene = SceneList.NULL;
+    public IsPuased GameStatus = IsPuased.Playing;
+    public bool EnableLoadingScreen = true;
+    public float MinLoadTime;
+    public float MaxLoadTime;
 
+    private bool startPlaying;
     private int hitCount = 0;
     private string sceneName;
     private bool isNotPlaying = false;
+    private bool isSceneChange = false;
+    private GameObject PressedButton;
     
     private void Start()
     {
@@ -65,7 +71,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         // 게임이 시작되지 않았을 경우 실행하게 만듦
-        if (!startPlaying)
+        if (!startPlaying && !isSceneChange)
         {
             startPlaying = true;
             _beatScroller.setStart(true);
@@ -73,17 +79,28 @@ public class GameManager : MonoBehaviour
             _ingameMusic.PlayBGM();
         }
         
-        if (!_ingameMusic.AudioSource.isPlaying)
+        // if (!_ingameMusic.AudioSource.isPlaying)
         
         CheckHitNotes();
     }
 
     // 노트가 적중할 경우 NoteObject에서 호출
-    public void NoteHit()
+    public void NoteHit(TouchInputType type)
     {
         // 게임을 플레이 하고 있을 경우에만 카운트
         if (!isNotPlaying)
         {
+            switch (type)
+            {
+                case TouchInputType.Tab :
+                    if (PressedButton != null)
+                    {
+                        PressedButton.GetComponent<ButtonController>().SelectTextType();
+                    }
+                    break;
+                case TouchInputType.Swipe :
+                    break;
+            }
             hitCount++;
             Debug.Log("Hit On Time");   
         }
@@ -121,43 +138,86 @@ public class GameManager : MonoBehaviour
 
     public void MoveNextScene()
     {
-        isNotPlaying = true;
-        _loading.StartLoad();
-        SelecteScene();
-        _sceneData.SetNextSceneName(sceneName);
-        moveNextLevel = false;
+        isSceneChange = true;
+        if (EnableLoadingScreen)
+        {
+            isNotPlaying = true;
+            _loading.StartLoad();
+            SelecteScene();
+            _sceneData.SetNextSceneName(sceneName);
+        }
+        else
+        {
+            SelecteScene();
+            StartCoroutine(EndTansition());
+        }
     }
     
     private void SelecteScene()
     {
         switch (NextScene)
         {
-            case SceneList.LoadingScene:
-                sceneName = "Scenes/Loading_Scene";
-                break;
+            // Debug Scene
             case SceneList.TouchSwipe_Test_Mobile:
                 sceneName = "Scenes/TouchSwipe_Test_Mobile";
                 break;
             case SceneList.RhythmGame_Test_PC:
                 sceneName = "Scenes/RhythmGame_Test_PC";
                 break;
-            case SceneList.StoneAge:
-                sceneName = "Scenes/Stage_StoneAge";
-                break;
             case SceneList.Touch_Test:
                 sceneName = "Scenes/TouchTset";
+                break;
+            // Ingame MenuScene
+            case SceneList.Start_Scene:
+                sceneName = "Scenes/Start_Scene";
                 break;
             case SceneList.Main_Scene:
                 sceneName = "Scenes/Main_Scene";
                 break;
-            case SceneList.Start_Scene:
-                sceneName = "Scenes/Start_Scene";
+            case SceneList.LoadingScene:
+                sceneName = "Scenes/Loading_Scene";
                 break;
+            // Ingame StageScene
+            case SceneList.StoneAge:
+                sceneName = "Scenes/Stage_StoneAge";
+                break;
+            case SceneList.MiddleAge :
+            case SceneList.ModernAge :
+            case SceneList.SciFi :
             default:
                 sceneName = "Scenes/Start_Scene";
                 break;
         }
     }
+
+    public void GamePause()
+    {
+        GameStatus = IsPuased.Paused;
+        Time.timeScale = 0.0f;
+    }
+
+    public void GameUnPause()
+    {
+        GameStatus = IsPuased.Playing;
+        Time.timeScale = 1.0f;
+    }
+
+    public void SetPressedButton(GameObject obj)
+    {
+        PressedButton = obj;
+    }
+
+    IEnumerator EndTansition()
+    {
+        SceneAnimationManager.Instance.EndTransition();
+        yield return new WaitForSeconds((Random.Range(MinLoadTime, MaxLoadTime)));
+        SceneManager.LoadScene(sceneName);
+    }
+}
+
+public enum IsPuased
+{
+    Paused, Playing
 }
 
 public enum SceneList
@@ -171,3 +231,4 @@ public enum SceneList
     // 예외처리
     NULL
 }
+

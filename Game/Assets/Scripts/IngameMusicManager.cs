@@ -50,23 +50,25 @@ public class IngameMusicManager : MonoBehaviour
 
     public void PlayBGM()
     {
-        AudioSource.Play();
         TriggerActive = true;
+        AudioSource.Play();
     }
     
     public void StopBGM()
     {
-        AudioSource.Stop();
         TriggerActive = false;
+        AudioSource.Stop();
     }
     
     public void PauseBGM()
     {
+        TriggerActive = false;
         AudioSource.Pause();
     }
     
     public void UnPauseBGM()
     {
+        TriggerActive = true;
         AudioSource.UnPause();
     }
 
