@@ -1,7 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.UI;
+using Debug = UnityEngine.Debug;
 
 public class IngameUIManager : MonoBehaviour
 {
@@ -15,13 +18,13 @@ public class IngameUIManager : MonoBehaviour
 
     private bool isEnd = false;
     private bool isConfigOn = false;
-    public Vector3 TextEffectObject_Hit = new Vector3(-5, (float)-3.5);
-    public Vector3 TextEffectObject_Dodge = new Vector3(0, (float)-3.5);
 
     public float EndSceneOpenTime = 1.5f;
     public float TextEffectLiveTime = 0.6f;
     public GameObject TextEffect_Hit;
     public GameObject TextEffect_Dodge;
+    public Transform TextEffectTransform_Hit;
+    public Transform TextEffectTransform_Dodge;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +35,8 @@ public class IngameUIManager : MonoBehaviour
         _endScene = GameObject.Find("EndScene").GetComponent<Image>();
         _GM = GameObject.Find("Manager").GetComponent<GameManager>();
         _configWindow = GameObject.Find("Settings").transform.Find("ConfigWindow").gameObject;
+        TextEffectTransform_Hit = GameObject.Find("TextEffect_Hit_Position").GetComponent<Transform>();
+        TextEffectTransform_Dodge = GameObject.Find("TextEffect_Dodge_Position").GetComponent<Transform>();
 
         _progress.minValue = 0.0f;
         _progress.maxValue = _ingameMusic.GetAudioLength();
@@ -100,26 +105,48 @@ public class IngameUIManager : MonoBehaviour
         switch (type)
         {
             case TextPrintType.Hit :
-                StartCoroutine(TextEffect(TextEffectLiveTime, Instantiate(TextEffect_Hit)));
+                StartCoroutine(TextEffect(TextEffectLiveTime, 
+                    Instantiate(TextEffect_Hit, TextEffectTransform_Hit.position, TextEffectTransform_Hit.rotation.normalized, 
+                        GameObject.Find("TextEffect").GetComponent<Transform>()),
+                    type));
                 break;
             case TextPrintType.Dodge :
-                StartCoroutine(TextEffect(TextEffectLiveTime, Instantiate(TextEffect_Dodge)));
+                StartCoroutine(TextEffect(TextEffectLiveTime, 
+                    Instantiate(TextEffect_Dodge, TextEffectTransform_Dodge.position, TextEffectTransform_Dodge.rotation.normalized, 
+                        GameObject.Find("TextEffect").GetComponent<Transform>()),
+                    type));
                 break;
             default :
                 break;
         }
     }
 
-    IEnumerator TextEffect(float waitTime, GameObject obj)
+    IEnumerator TextEffect(float waitTime, GameObject obj, TextPrintType type)
     {
-        float temp = 0.0f;
-
-        while (temp < waitTime)
+        Debug.Log("TextEffect");
+        while (true)
         {
-            temp = Time.deltaTime;
-            obj.transform.Translate(obj.transform.position.x, obj.transform.position.y + Time.deltaTime, obj.transform.position.z);
-            yield return null;
+            switch (type)
+            {
+                case TextPrintType.Hit :
+                    obj.transform.position = new Vector3(TextEffectTransform_Hit.position.x, TextEffectTransform_Hit.position.y + Time.deltaTime * 2.0f, 0);
+                    break;
+                case TextPrintType.Dodge :
+                    obj.transform.position = new Vector3(TextEffectTransform_Dodge.position.x, TextEffectTransform_Dodge.position.y + Time.deltaTime * 2.0f, 0);
+                    break;
+                default :
+                    break;
+            }
+            StartCoroutine(Timer(waitTime));
+            yield break;
         }
         Destroy(obj);
+        Debug.Log("End");
+    }
+
+    IEnumerator Timer(float waitTime)
+    {
+        Debug.Log("Timer");
+        yield return new WaitForSeconds(waitTime);
     }
 }
