@@ -9,13 +9,24 @@ public class SceneData : MonoBehaviour
 
     public string str;
     public MenuAnimationState MenuAnimation = MenuAnimationState.Enabled;
+    public TextEffectEnable TextEffect = TextEffectEnable.NULL;
     
     private int cnt = 0;
     private bool[] checkList;
     private bool isAnimationOn;
+
+    private float BGM_Vol = -15;
+    private float SFX_Vol = -15;
     
     // Start is called before the first frame update
     void Start()
+    {
+        Initialize();
+        
+        // 바이너리로 된 설정 파일 불러오기
+    }
+
+    private void Initialize()
     {
         if (instance != null)
         {
@@ -26,11 +37,6 @@ public class SceneData : MonoBehaviour
         instance = this;
         DontDestroyOnLoad(gameObject);
         
-        Initialize();
-    }
-
-    private void Initialize()
-    {
         switch (MenuAnimation)
         {
             case MenuAnimationState.Enabled:
@@ -92,7 +98,27 @@ public class SceneData : MonoBehaviour
     {
         return isAnimationOn;
     }
-    
+
+    public void SaveBGMVol(float value)
+    {
+        BGM_Vol = value;
+    }
+
+    public float LoadBGMVol()
+    {
+        return BGM_Vol;
+    }
+
+    public void SaveSFXVol(float value)
+    {
+        SFX_Vol = value;
+    }
+
+    public float LoadSFXVol()
+    {
+        return SFX_Vol;
+    }
+
     public enum MenuAnimationState
     {
         Enabled, Disenabled

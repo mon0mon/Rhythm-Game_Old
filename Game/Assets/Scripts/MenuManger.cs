@@ -69,6 +69,8 @@ public class MenuManger : MonoBehaviour
         {
             _loading.enabled = true;
             SelecteScene();
+            SceneData.Instance.SaveBGMVol(GameObject.Find("MainMenuMusic").GetComponent<MusicManager>().GetBGMVol());
+            SceneData.Instance.SaveSFXVol(GameObject.Find("MainMenuMusic").GetComponent<MusicManager>().GetSFXVol());
             _sceneData.SetNextSceneName(sceneName);
         }
         else

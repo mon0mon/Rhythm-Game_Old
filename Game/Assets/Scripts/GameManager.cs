@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     private SceneData _sceneData;
     private IngameMusicManager _ingameMusic;
     private IngameSFXManager _ingameSFX;
+    private Ingame_TextEffect_Manager _textEffect;
 
     public SceneList NextScene = SceneList.NULL;
     public IsPuased GameStatus = IsPuased.Playing;
@@ -61,6 +62,7 @@ public class GameManager : MonoBehaviour
         _sceneData = GameObject.Find("SaveData").GetComponent<SceneData>();
         _ingameMusic = GameObject.Find("BGM").GetComponent<IngameMusicManager>();
         _ingameSFX = GameObject.Find("SFX").GetComponent<IngameSFXManager>();
+        _textEffect = gameObject.GetComponent<Ingame_TextEffect_Manager>();
         
         _sceneData.ClearSceneInfo();
         
@@ -93,12 +95,16 @@ public class GameManager : MonoBehaviour
             switch (type)
             {
                 case TouchInputType.Tab :
-                    if (PressedButton != null)
+                    if (PressedButton != null && _textEffect.TextEffect == TextEffectEnable.Enable)
                     {
                         PressedButton.GetComponent<ButtonController>().SelectTextType();
                     }
                     break;
                 case TouchInputType.Swipe :
+                    if (PressedButton != null && _textEffect.TextEffect == TextEffectEnable.Enable)
+                    {
+                        PressedButton.GetComponent<ButtonController>().SelectTextType();
+                    }
                     break;
             }
             hitCount++;
@@ -107,12 +113,33 @@ public class GameManager : MonoBehaviour
     }
 
     // 노트가 미스할 경우 NoteObject에서 호출
-    public void NoteMissed()
+    public void NoteMissed(TouchInputType inputType)
     {
         // 게임을 플레이 하고 있을 경우에만 호출
         if (!isNotPlaying)
-        { 
-            Debug.Log("Missed Note");
+        {
+            switch (inputType)
+            {
+                case TouchInputType.Tab :
+                    // 미스를 출력
+                    if (_textEffect.TextEffect == TextEffectEnable.Enable)
+                    {
+                        Debug.Log("TextPrintType.Miss");
+                        PressedButton.GetComponent<ButtonController>().SelectTextType(TextPrintType.Miss);
+                    }
+                    break;
+                case TouchInputType.Swipe :
+                    // 데스를 출력
+                    if (_textEffect.TextEffect == TextEffectEnable.Enable)
+                    {
+                        Debug.Log("TextPrintType.Death");
+                        PressedButton.GetComponent<ButtonController>().SelectTextType(TextPrintType.Death);
+                    }
+                    break;
+                case TouchInputType.NULL :
+                    break;
+                
+            }
         }
     }
 
@@ -144,11 +171,15 @@ public class GameManager : MonoBehaviour
             isNotPlaying = true;
             _loading.StartLoad();
             SelecteScene();
+            SceneData.Instance.SaveBGMVol(_ingameMusic.GetBGMVol());
+            SceneData.Instance.SaveSFXVol(_ingameSFX.GetSFXVol());
             _sceneData.SetNextSceneName(sceneName);
         }
         else
         {
             SelecteScene();
+            SceneData.Instance.SaveBGMVol(_ingameMusic.GetBGMVol());
+            SceneData.Instance.SaveSFXVol(_ingameSFX.GetSFXVol());
             StartCoroutine(EndTansition());
         }
     }
@@ -205,6 +236,20 @@ public class GameManager : MonoBehaviour
     public void SetPressedButton(GameObject obj)
     {
         PressedButton = obj;
+    }
+
+    public void ToggleTextEffect(bool check)
+    {
+        if (check)
+        {
+            _textEffect.TextEffect = TextEffectEnable.Enable;
+            SceneData.Instance.TextEffect = TextEffectEnable.Enable;
+        }
+        else
+        {
+            _textEffect.TextEffect = TextEffectEnable.Disenable;
+            SceneData.Instance.TextEffect = TextEffectEnable.Disenable;
+        }
     }
 
     IEnumerator EndTansition()

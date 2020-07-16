@@ -10,10 +10,15 @@ public class MusicManager : MonoBehaviour
     public AudioSource Music;
     public AudioMixer AudioMixer;
 
+    private float BGM_Vol = -15;
+    private float SFX_Vol = -15;
+
     private void Start()
     {
         Music = gameObject.GetComponent<AudioSource>();
         Music.Play();
+
+        // 씬데이터에서 볼륨 조절 설정 가져오기
     }
 
     private void Update()
@@ -51,11 +56,23 @@ public class MusicManager : MonoBehaviour
 
     public void VolChangeBGM(float value)
     {
+        BGM_Vol = value;
         AudioMixer.SetFloat("BGM_Vol", value);
     }
 
     public void VolChangeSFX(float value)
     {
+        SFX_Vol = value;
         AudioMixer.SetFloat("SFX_Vol", value);
+    }
+
+    public float GetBGMVol()
+    {
+        return BGM_Vol;
+    }
+
+    public float GetSFXVol()
+    {
+        return SFX_Vol;
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class ButtonController : MonoBehaviour
@@ -10,6 +11,7 @@ public class ButtonController : MonoBehaviour
     public Sprite TextHit;
     public Sprite TextDodge;
     public TextPrintType TextType;
+    public TouchInputType InputType;
 
     private GameObject _Manager;
 
@@ -42,11 +44,33 @@ public class ButtonController : MonoBehaviour
                 break;
         }
     }
+    
+    public void SelectTextType(TextPrintType tp)
+    {
+        switch (tp)
+        {
+            case TextPrintType.Miss :
+                _Manager.GetComponent<IngameUIManager>().PrintTextEffect(TextPrintType.Miss);
+                break;
+            case TextPrintType.Death :
+                _Manager.GetComponent<IngameUIManager>().PrintTextEffect(TextPrintType.Death);
+                break;
+            case TextPrintType.NULL :
+                break;
+        }
+    }
+}
+
+public enum NoteHitType
+{
+    Hit, NotHit
 }
 
 public enum TextPrintType
 {
     Hit, 
-    Dodge, 
+    Dodge,
+    Miss,
+    Death,
     NULL
 }

@@ -137,7 +137,7 @@ public class NoteObject : MonoBehaviour
     {
         if (other.CompareTag("Activator") && !isDeleted)
         {
-            _gameManager.NoteMissed();
+            _gameManager.NoteMissed(TouchInputType);
             canBePressed = false;
             isDeleted = true;
             GameManager.Instance.SetPressedButton(null);
@@ -155,5 +155,6 @@ public enum TouchPosition
 public enum TouchInputType 
 {
     Tab,
-    Swipe
+    Swipe,
+    NULL
 }

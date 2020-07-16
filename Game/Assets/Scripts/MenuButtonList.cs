@@ -17,6 +17,7 @@ public class MenuButtonList : MonoBehaviour
     
     private string selected_Scene;
     private bool isConfigOn = false;
+    private bool init_check = false;
 
     public SceneList SelectedScene = SceneList.NULL;
     public Sprite Default_Barbarian;
@@ -124,6 +125,12 @@ public class MenuButtonList : MonoBehaviour
             GameObject.Find("Config_Window").transform.GetChild(0).gameObject.SetActive(true);
             GameObject.Find("Background_Animation_Toggle").GetComponent<Toggle>().isOn = GameObject.Find("SaveData")
                 .transform.GetComponentInChildren<AnimationManager>().isMenuAnimationOn;
+            if (!init_check)
+            {
+                GameObject.Find("BGM_Slider").GetComponent<Slider>().value = SceneData.Instance.LoadBGMVol();
+                GameObject.Find("SFX_Slider").GetComponent<Slider>().value = SceneData.Instance.LoadSFXVol();
+                init_check = true;
+            }
             DeactiveButtons();
         }
         else

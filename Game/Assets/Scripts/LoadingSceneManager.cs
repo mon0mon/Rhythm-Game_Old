@@ -106,8 +106,6 @@ public class LoadingSceneManager : MonoBehaviour
                 }
                 StartCoroutine(TransitionAnimation(SceneTransition.End));
                 yield return new WaitForSeconds(2f);
-                // SceneAnimationManager.Instance.EndTransition();
-                // new WaitForSeconds(TransitionTime);
                 async.allowSceneActivation = true;
             }
         }

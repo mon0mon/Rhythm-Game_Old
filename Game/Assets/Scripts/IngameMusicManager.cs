@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 public class IngameMusicManager : MonoBehaviour
 {
+    public AudioMixer AudioMixer;
     public AudioSource AudioSource;
     public AudioClip Stone_Age;
     public AudioClip Middle_Age;
@@ -14,6 +16,7 @@ public class IngameMusicManager : MonoBehaviour
 
     private bool TriggerActive = false;
     private float EndSceneOpenTime = 1.5f;
+    private float BGM_Vol;
     
     // Start is called before the first frame update
     void Start()
@@ -36,6 +39,7 @@ public class IngameMusicManager : MonoBehaviour
 
         AudioSource.clip = Clip;
         EndSceneOpenTime = GameObject.Find("Manager").GetComponent<IngameUIManager>().EndSceneOpenTime;
+        AudioMixer.GetFloat("BGM_Vol", out BGM_Vol);
     }
 
     // Update is called once per frame
@@ -75,6 +79,17 @@ public class IngameMusicManager : MonoBehaviour
     public float GetPlayTime()
     {
         return AudioSource.time;
+    }
+
+    public void VolChangeBGM(float value)
+    {
+        BGM_Vol = value;
+        AudioMixer.SetFloat("BGM_Vol", value);
+    }
+
+    public float GetBGMVol()
+    {
+        return BGM_Vol;
     }
 
     public float GetAudioLength()

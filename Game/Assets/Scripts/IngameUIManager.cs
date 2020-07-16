@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEditorInternal;
@@ -8,35 +9,48 @@ using Debug = UnityEngine.Debug;
 
 public class IngameUIManager : MonoBehaviour
 {
+    private GameObject _saveData;
     private IngameMusicManager _ingameMusic;
     private GameManager _GM;
     private GameObject _configWindow;
+    private Ingame_TextEffect_Manager _textEffect;
+    private IngameMusicManager _BGM;
+    private IngameSFXManager _SFX;
+    private Slider _BGM_Slider;
+    private Slider _SFX_Slider;
         
     private Slider _progress;
     private Image _blackScreen;
     private Image _endScene;
+    private Toggle _toggleTextEffect;
 
     private bool isEnd = false;
     private bool isConfigOn = false;
+    private bool textEffectTrigger = true;
+    private float temp;
 
     public float EndSceneOpenTime = 1.5f;
-    public float TextEffectLiveTime = 0.6f;
-    public GameObject TextEffect_Hit;
-    public GameObject TextEffect_Dodge;
-    public Transform TextEffectTransform_Hit;
-    public Transform TextEffectTransform_Dodge;
 
     // Start is called before the first frame update
     void Start()
     {
+        _saveData = GameObject.Find("SavaData");
         _ingameMusic = GameObject.Find("BGM").GetComponent<IngameMusicManager>();
         _progress = GameObject.Find("ProgressBar").GetComponent<Slider>();
         _blackScreen = GameObject.Find("BlackScreen").GetComponent<Image>();
         _endScene = GameObject.Find("EndScene").GetComponent<Image>();
         _GM = GameObject.Find("Manager").GetComponent<GameManager>();
         _configWindow = GameObject.Find("Settings").transform.Find("ConfigWindow").gameObject;
-        TextEffectTransform_Hit = GameObject.Find("TextEffect_Hit_Position").GetComponent<Transform>();
-        TextEffectTransform_Dodge = GameObject.Find("TextEffect_Dodge_Position").GetComponent<Transform>();
+        _textEffect = gameObject.GetComponent<Ingame_TextEffect_Manager>();
+        _toggleTextEffect = _configWindow.transform.Find("TextEffect_Toggle").gameObject.GetComponent<Toggle>();
+        _BGM = GameObject.Find("BGM").GetComponent<IngameMusicManager>();
+        _SFX = GameObject.Find("SFX").GetComponent<IngameSFXManager>();
+        
+        _BGM_Slider = _configWindow.transform.Find("BGM_Slider").GetComponent<Slider>();
+        _SFX_Slider = _configWindow.transform.Find("SFX_Slider").GetComponent<Slider>();
+        
+        _BGM_Slider.value = GameObject.Find("MainMenuMusic").GetComponent<MusicManager>().GetBGMVol();
+        _SFX_Slider.value = GameObject.Find("MainMenuMusic").GetComponent<MusicManager>().GetSFXVol();
 
         _progress.minValue = 0.0f;
         _progress.maxValue = _ingameMusic.GetAudioLength();
@@ -70,10 +84,12 @@ public class IngameUIManager : MonoBehaviour
 
     public void EnableConfigWindow()
     {
+        Debug.Log("EnableConfigWindow");
         if (!isConfigOn)
         {
             _blackScreen.enabled = true;
             _configWindow.SetActive(true);
+
             _ingameMusic.PauseBGM();
             _GM.GamePause();
         }
@@ -97,7 +113,9 @@ public class IngameUIManager : MonoBehaviour
 
     public void RetrunToMainMenu()
     {
-        Debug.Log("ReturnToMainMenu");
+        _GM.NextScene = SceneList.Main_Scene;
+        _GM.EnableLoadingScreen = false;
+        _GM.MoveNextScene();
     }
 
     public void PrintTextEffect(TextPrintType type)
@@ -105,48 +123,35 @@ public class IngameUIManager : MonoBehaviour
         switch (type)
         {
             case TextPrintType.Hit :
-                StartCoroutine(TextEffect(TextEffectLiveTime, 
-                    Instantiate(TextEffect_Hit, TextEffectTransform_Hit.position, TextEffectTransform_Hit.rotation.normalized, 
-                        GameObject.Find("TextEffect").GetComponent<Transform>()),
-                    type));
+                _textEffect.PrintHitEffect();
                 break;
             case TextPrintType.Dodge :
-                StartCoroutine(TextEffect(TextEffectLiveTime, 
-                    Instantiate(TextEffect_Dodge, TextEffectTransform_Dodge.position, TextEffectTransform_Dodge.rotation.normalized, 
-                        GameObject.Find("TextEffect").GetComponent<Transform>()),
-                    type));
+                _textEffect.PrintDodgeEffect();
+                break;
+            case TextPrintType.Miss :
+                _textEffect.PrintMissEffect();
+                break;
+            case TextPrintType.Death :
+                _textEffect.PrintDeathEffect();
                 break;
             default :
                 break;
         }
     }
 
-    IEnumerator TextEffect(float waitTime, GameObject obj, TextPrintType type)
+    public void OnToggleTextEffect()
     {
-        Debug.Log("TextEffect");
-        while (true)
-        {
-            switch (type)
-            {
-                case TextPrintType.Hit :
-                    obj.transform.position = new Vector3(TextEffectTransform_Hit.position.x, TextEffectTransform_Hit.position.y + Time.deltaTime * 2.0f, 0);
-                    break;
-                case TextPrintType.Dodge :
-                    obj.transform.position = new Vector3(TextEffectTransform_Dodge.position.x, TextEffectTransform_Dodge.position.y + Time.deltaTime * 2.0f, 0);
-                    break;
-                default :
-                    break;
-            }
-            StartCoroutine(Timer(waitTime));
-            yield break;
-        }
-        Destroy(obj);
-        Debug.Log("End");
+        textEffectTrigger = _toggleTextEffect.isOn;
+        _GM.ToggleTextEffect(textEffectTrigger);
+    }
+    
+    public void OnBGMVolSlider()
+    {
+        _BGM.VolChangeBGM(_configWindow.transform.Find("BGM_Slider").GetComponent<Slider>().value);
     }
 
-    IEnumerator Timer(float waitTime)
+    public void OnSFXVolSlider()
     {
-        Debug.Log("Timer");
-        yield return new WaitForSeconds(waitTime);
+        _SFX.VolChangeSFX(_configWindow.transform.Find("SFX_Slider").GetComponent<Slider>().value);
     }
 }

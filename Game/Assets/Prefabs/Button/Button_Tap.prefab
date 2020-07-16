@@ -98,6 +98,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultImage: {fileID: 21300000, guid: c3c13b1f8baa5dd4a86d3dc186668178, type: 3}
   pressedImage: {fileID: 21300000, guid: 2d10ec486261df445b73774ff82f1b69, type: 3}
+  TextHit: {fileID: 0}
+  TextDodge: {fileID: 0}
+  TextType: 0
 --- !u!61 &6141786801300875641
 BoxCollider2D:
   m_ObjectHideFlags: 0
