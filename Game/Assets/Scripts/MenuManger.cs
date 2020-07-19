@@ -18,11 +18,17 @@ public class MenuManger : MonoBehaviour
     public bool EnableStartTransition = true;
     
     private string sceneName;
+    private bool loadingTrigger = false;
 
     // Start is called before the first frame update
     void Start()
     {
         Initialize();
+    }
+
+    private void OnEnable()
+    {
+        StartCoroutine(LateEnable(0.01f));
     }
 
     private void Initialize()
@@ -65,6 +71,7 @@ public class MenuManger : MonoBehaviour
     {
         // MainMenuAnimation 종료
         _sceneData.transform.GetComponentInChildren<AnimationManager>().enabled = false;
+        loadingTrigger = true;
         if (EnableLoadingScreen)
         {
             _loading.enabled = true;
@@ -138,5 +145,12 @@ public class MenuManger : MonoBehaviour
     {
         _sceneData.transform.GetComponentInChildren<AnimationManager>().enabled = true;
         yield return new WaitForSeconds(waitTime);
+    }
+
+    IEnumerator LateEnable(float waitTime)
+    {
+        new WaitForSeconds(waitTime);
+        GameObject.Find("MainMenuMusic").GetComponent<MusicManager>().CheckMusic(loadingTrigger);
+        yield return null;
     }
 }

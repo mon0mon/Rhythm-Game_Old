@@ -101,6 +101,7 @@ MonoBehaviour:
   TextHit: {fileID: 0}
   TextDodge: {fileID: 0}
   TextType: 0
+  InputType: 0
 --- !u!61 &6141786801300875641
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -6,13 +6,14 @@ using UnityEngine;
 public class Ingame_TextEffect_Controller : MonoBehaviour
 {
     public TextEffectType Type;
-    
+
     private Ingame_TextEffect_Manager _textEffectManager;
     private Transform _pivot;
     
     private bool isEnable = false;
+    private bool isPaused;
     private float initTime;
-    private float activeTime;
+    private float lifeTime;
     private float speed = 2.0f;
 
     void Start()
@@ -25,13 +26,17 @@ public class Ingame_TextEffect_Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isEnable && initTime + activeTime >= Time.deltaTime)
+        if (!isPaused)
         {
-            transform.Translate(Vector3.up * Time.deltaTime * speed);
-        }
-        else
-        {
-            ResetTextEffect();
+            if (isEnable && lifeTime >= initTime)
+            {
+                initTime += Time.deltaTime;
+                transform.Translate(Vector3.up * Time.deltaTime * speed);
+            }
+            else
+            {
+                ResetTextEffect();
+            }
         }
     }
 
@@ -42,7 +47,7 @@ public class Ingame_TextEffect_Controller : MonoBehaviour
             InitPosition();
             isEnable = true;
             initTime = Time.deltaTime;
-            this.activeTime = activeTime;
+            lifeTime = initTime + activeTime;
         }
         else
         {
@@ -62,7 +67,6 @@ public class Ingame_TextEffect_Controller : MonoBehaviour
             case TextEffectType.TextEffect_Death :
             case TextEffectType.TextEffect_Dodge :
                 _pivot = _textEffectManager.Get_Dodge_Pivot();
-                Debug.Log(_pivot.localPosition);
                 break;
             default:
                 break;
@@ -74,6 +78,11 @@ public class Ingame_TextEffect_Controller : MonoBehaviour
     {
         this.transform.localPosition = new Vector3(-1500, 0, 0);
         isEnable = false;
+    }
+
+    public void SetTextEffectStatus(bool check)
+    {
+        isPaused = check;
     }
 }
 

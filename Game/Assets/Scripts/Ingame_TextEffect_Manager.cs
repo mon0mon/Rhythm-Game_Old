@@ -9,20 +9,21 @@ public class Ingame_TextEffect_Manager : MonoBehaviour
     public GameObject[] TextEffect_Hit;
     public GameObject[] TextEffect_Dodge;
     public GameObject[] TextEffect_Miss;
-    public GameObject[] TextEffect_Death;
+    public GameObject[] TextEffect_Damaged;
     public Transform TextEffect_Hit_Pivot;
     public Transform TextEffect_Dodge_Pivot;
-    public float TextEffectLiveTime = 0.6f;
+    public float TextEffectLiveTime = 1.5f;
     public float TextEffectSpeed = 30.0f;
 
     private int _index_Hit = 0;
     private int _index_Dodge = 0;
     private int _index_Miss = 0;
-    private int _index_Death = 0;
+    private int _index_Damaged = 0;
+    private bool isPaused = false;
     private Ingame_TextEffect_Controller[] _hitController;
     private Ingame_TextEffect_Controller[] _dodgeController;
     private Ingame_TextEffect_Controller[] _missController;
-    private Ingame_TextEffect_Controller[] _deathController;
+    private Ingame_TextEffect_Controller[] _damagedController;
     
     private void Start()
     {
@@ -56,13 +57,13 @@ public class Ingame_TextEffect_Manager : MonoBehaviour
             }
         }
         
-        if (TextEffect_Death.Length != 0)
+        if (TextEffect_Damaged.Length != 0)
         {
-            _deathController = new Ingame_TextEffect_Controller[TextEffect_Death.Length];
-            for (int i = 0; i < TextEffect_Death.Length; i++)
+            _damagedController = new Ingame_TextEffect_Controller[TextEffect_Damaged.Length];
+            for (int i = 0; i < TextEffect_Damaged.Length; i++)
             {
-                TextEffect_Death[i].transform.localPosition = new Vector3(-1200, 0, 0);
-                _deathController[i] = TextEffect_Death[i].GetComponent<Ingame_TextEffect_Controller>();
+                TextEffect_Damaged[i].transform.localPosition = new Vector3(-1200, 0, 0);
+                _damagedController[i] = TextEffect_Damaged[i].GetComponent<Ingame_TextEffect_Controller>();
             }
         }
 
@@ -93,13 +94,13 @@ public class Ingame_TextEffect_Manager : MonoBehaviour
         _index_Miss++;
     }
     
-    public void PrintDeathEffect()
+    public void PrintDamagedEffect()
     {
-        if (_index_Death == TextEffect_Death.Length) ResetIndex(IndexType.TextEffect_Death);
+        if (_index_Damaged == TextEffect_Damaged.Length) ResetIndex(IndexType.TextEffect_Damaged);
 
-        Debug.Log("PrintDeathEffectIndex : " + _index_Death);
-        _deathController[_index_Death].EnableTextEffect(TextEffectLiveTime);
-        _index_Death++;
+        Debug.Log(_damagedController[_index_Damaged]);
+        _damagedController[_index_Damaged].EnableTextEffect(TextEffectLiveTime);
+        _index_Damaged++;
     }
 
     public void ResetIndex(IndexType type)
@@ -115,8 +116,8 @@ public class Ingame_TextEffect_Manager : MonoBehaviour
             case IndexType.TextEffect_Miss:
                 _index_Miss = 0;
                 break;
-            case IndexType.TextEffect_Death:
-                _index_Death = 0;
+            case IndexType.TextEffect_Damaged:
+                _index_Damaged = 0;
                 break;
         }
     }
@@ -129,6 +130,54 @@ public class Ingame_TextEffect_Manager : MonoBehaviour
     public Transform Get_Dodge_Pivot()
     {
         return TextEffect_Dodge_Pivot;
+    }
+    
+    public void ResetPosition()
+    {
+        for (int i = 0; i < TextEffect_Hit.Length; i++)
+        {
+            TextEffect_Hit[i].transform.localPosition = new Vector3(-1500, 0, 0);
+        }
+        
+        for (int i = 0; i < TextEffect_Dodge.Length; i++)
+        {
+            TextEffect_Dodge[i].transform.localPosition = new Vector3(-1400, 0, 0);
+        }
+
+        for (int i = 0; i < TextEffect_Miss.Length; i++)
+        {
+            TextEffect_Miss[i].transform.localPosition = new Vector3(-1300, 0, 0);
+        }
+
+        for (int i = 0; i < TextEffect_Damaged.Length; i++)
+        {
+            TextEffect_Damaged[i].transform.localPosition = new Vector3(-1200, 0, 0);
+        }
+    }
+
+    public void ToggleStatusTextEffect()
+    {
+        isPaused = !isPaused;
+        
+        for (int i = 0; i < TextEffect_Hit.Length; i++)
+        {
+            _hitController[i].SetTextEffectStatus(isPaused);
+        }
+        
+        for (int i = 0; i < TextEffect_Dodge.Length; i++)
+        {
+            _dodgeController[i].SetTextEffectStatus(isPaused);
+        }
+        
+        for (int i = 0; i < TextEffect_Miss.Length; i++)
+        {
+            _missController[i].SetTextEffectStatus(isPaused);
+        }
+        
+        for (int i = 0; i < TextEffect_Damaged.Length; i++)
+        {
+            _damagedController[i].SetTextEffectStatus(isPaused);
+        }
     }
 
     public float GetTextEffectSpeed()
@@ -159,5 +208,5 @@ public enum TextEffectEnable
 
 public enum IndexType
 {
-    TextEffect_Hit, TextEffect_Dodge, TextEffect_Miss, TextEffect_Death
+    TextEffect_Hit, TextEffect_Dodge, TextEffect_Miss, TextEffect_Damaged
 }

@@ -13,6 +13,7 @@ public class IngameUIManager : MonoBehaviour
     private IngameMusicManager _ingameMusic;
     private GameManager _GM;
     private GameObject _configWindow;
+    private GameObject _endScene;
     private Ingame_TextEffect_Manager _textEffect;
     private IngameMusicManager _BGM;
     private IngameSFXManager _SFX;
@@ -21,7 +22,6 @@ public class IngameUIManager : MonoBehaviour
         
     private Slider _progress;
     private Image _blackScreen;
-    private Image _endScene;
     private Toggle _toggleTextEffect;
 
     private bool isEnd = false;
@@ -38,7 +38,7 @@ public class IngameUIManager : MonoBehaviour
         _ingameMusic = GameObject.Find("BGM").GetComponent<IngameMusicManager>();
         _progress = GameObject.Find("ProgressBar").GetComponent<Slider>();
         _blackScreen = GameObject.Find("BlackScreen").GetComponent<Image>();
-        _endScene = GameObject.Find("EndScene").GetComponent<Image>();
+        _endScene = GameObject.Find("Ending").transform.Find("EndScene").gameObject;
         _GM = GameObject.Find("Manager").GetComponent<GameManager>();
         _configWindow = GameObject.Find("Settings").transform.Find("ConfigWindow").gameObject;
         _textEffect = gameObject.GetComponent<Ingame_TextEffect_Manager>();
@@ -79,17 +79,15 @@ public class IngameUIManager : MonoBehaviour
     public void EnableEndScene()
     {
         _blackScreen.enabled = true;
-        _endScene.enabled = true;
+        _endScene.SetActive(true);
     }
 
     public void EnableConfigWindow()
     {
-        Debug.Log("EnableConfigWindow");
         if (!isConfigOn)
         {
             _blackScreen.enabled = true;
             _configWindow.SetActive(true);
-
             _ingameMusic.PauseBGM();
             _GM.GamePause();
         }
@@ -101,6 +99,7 @@ public class IngameUIManager : MonoBehaviour
             _GM.GameUnPause();
         }
 
+        _textEffect.ToggleStatusTextEffect();
         isConfigOn = !isConfigOn;
     }
 
@@ -131,8 +130,8 @@ public class IngameUIManager : MonoBehaviour
             case TextPrintType.Miss :
                 _textEffect.PrintMissEffect();
                 break;
-            case TextPrintType.Death :
-                _textEffect.PrintDeathEffect();
+            case TextPrintType.Damaged :
+                _textEffect.PrintDamagedEffect();
                 break;
             default :
                 break;
@@ -142,6 +141,10 @@ public class IngameUIManager : MonoBehaviour
     public void OnToggleTextEffect()
     {
         textEffectTrigger = _toggleTextEffect.isOn;
+        if (!textEffectTrigger)
+        {
+            _textEffect.ResetPosition();
+        }
         _GM.ToggleTextEffect(textEffectTrigger);
     }
     

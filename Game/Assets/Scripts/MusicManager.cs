@@ -16,17 +16,21 @@ public class MusicManager : MonoBehaviour
     private void Start()
     {
         Music = gameObject.GetComponent<AudioSource>();
+        
         Music.Play();
-
         // 씬데이터에서 볼륨 조절 설정 가져오기
     }
 
-    private void Update()
+    public void CheckMusic(bool loadingTrigger)
     {
         switch (SceneManager.GetActiveScene().name)
         {
             case "Start_Scene" :
             case "Main_Scene" :
+                if (!Music.isPlaying && !loadingTrigger)
+                {
+                    Music.Play();
+                }
                 break;
             default:
                 Music.Stop();

@@ -52,8 +52,8 @@ public class ButtonController : MonoBehaviour
             case TextPrintType.Miss :
                 _Manager.GetComponent<IngameUIManager>().PrintTextEffect(TextPrintType.Miss);
                 break;
-            case TextPrintType.Death :
-                _Manager.GetComponent<IngameUIManager>().PrintTextEffect(TextPrintType.Death);
+            case TextPrintType.Damaged :
+                _Manager.GetComponent<IngameUIManager>().PrintTextEffect(TextPrintType.Damaged);
                 break;
             case TextPrintType.NULL :
                 break;
@@ -71,6 +71,6 @@ public enum TextPrintType
     Hit, 
     Dodge,
     Miss,
-    Death,
+    Damaged,
     NULL
 }
