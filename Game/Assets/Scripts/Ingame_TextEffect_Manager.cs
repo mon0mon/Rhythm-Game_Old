@@ -27,6 +27,8 @@ public class Ingame_TextEffect_Manager : MonoBehaviour
     
     private void Start()
     {
+        if (SceneData.Instance.TextEffect != TextEffectEnable.NULL) TextEffect = SceneData.Instance.TextEffect;
+        
         if (TextEffect_Hit.Length != 0)
         {
             _hitController = new Ingame_TextEffect_Controller[TextEffect_Hit.Length];

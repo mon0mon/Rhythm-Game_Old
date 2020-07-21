@@ -63,7 +63,7 @@ public class Ingame_TextEffect_Controller : MonoBehaviour
             case TextEffectType.TextEffect_Hit :
                 _pivot = _textEffectManager.Get_Hit_Pivot();
                 break;
-            case TextEffectType.TextEffect_Death :
+            case TextEffectType.TextEffect_Damaged :
             case TextEffectType.TextEffect_Dodge :
                 _pivot = _textEffectManager.Get_Dodge_Pivot();
                 break;
@@ -75,7 +75,23 @@ public class Ingame_TextEffect_Controller : MonoBehaviour
 
     public void ResetTextEffect()
     {
-        this.transform.localPosition = new Vector3(-1500, 0, 0);
+        switch (Type)
+        {
+            case TextEffectType.TextEffect_Hit :
+                this.transform.localPosition = new Vector3(-2000, 0, 0);
+                break;
+            case TextEffectType.TextEffect_Miss :
+                this.transform.localPosition = new Vector3(-2600,0, 0);
+                break;
+            case TextEffectType.TextEffect_Dodge :
+                this.transform.localPosition = new Vector3(-2200,0, 0);
+                break;
+            case TextEffectType.TextEffect_Damaged :
+                this.transform.localPosition = new Vector3(-2400,0, 0);
+                break;
+            default:
+                break;
+        }
         isEnable = false;
     }
 
@@ -87,6 +103,6 @@ public class Ingame_TextEffect_Controller : MonoBehaviour
 
 public enum TextEffectType
 {
-    TextEffect_Hit, TextEffect_Miss, TextEffect_Dodge, TextEffect_Death, 
+    TextEffect_Hit, TextEffect_Miss, TextEffect_Dodge, TextEffect_Damaged, 
     TNULL
 }

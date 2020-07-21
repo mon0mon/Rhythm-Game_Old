@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
     private float point;
     private bool gameEndTrigger = false;
     private float endSceneOpenTime = 1.5f;
+    private bool isConfigOn = false;
 
     private void Start()
     {
@@ -110,12 +111,12 @@ public class GameManager : MonoBehaviour
     public void NoteHit(TouchInputType type)
     {
         // 게임을 플레이 하고 있을 경우에만 카운트
-        if (!isNotPlaying && PressedButton != null && _textEffect.TextEffect == TextEffectEnable.Enable)
+        if (!isNotPlaying && PressedButton != null && !isConfigOn)
         {
             switch (type)
             {
                 case TouchInputType.Tab :
-                    PressedButton.GetComponent<ButtonController>().SelectTextType();
+                    if (_textEffect.TextEffect == TextEffectEnable.Enable) PressedButton.GetComponent<ButtonController>().SelectTextType();
                     _ingameAnimManager.GetAction(AnimState.PlayerAttack);
                     Debug.Log("Hit on Time");
                     hitCount++;
@@ -124,7 +125,7 @@ public class GameManager : MonoBehaviour
                     _ingameUI.OnBossHPChageListener();
                     break;
                 case TouchInputType.Swipe :
-                    PressedButton.GetComponent<ButtonController>().SelectTextType();
+                    if (_textEffect.TextEffect == TextEffectEnable.Enable) PressedButton.GetComponent<ButtonController>().SelectTextType();
                     _ingameAnimManager.GetAction(AnimState.PlayerDodge);
                     Debug.Log("Dodge On Time");
                     dodgeCount++;
@@ -137,14 +138,14 @@ public class GameManager : MonoBehaviour
     public void NoteMissed(TouchInputType inputType)
     {
         // 게임을 플레이 하고 있을 경우에만 호출
-        if (!isNotPlaying && _textEffect.TextEffect == TextEffectEnable.Enable)
+        if (!isNotPlaying)
         {
             switch (inputType)
             {
                 case TouchInputType.Tab :
                     // 미스를 출력
                     Debug.Log("TextPrintType.Miss");
-                    PressedButton.GetComponent<ButtonController>().SelectTextType(TextPrintType.Miss);
+                    if (_textEffect.TextEffect == TextEffectEnable.Enable) PressedButton.GetComponent<ButtonController>().SelectTextType(TextPrintType.Miss);
                     break;
                 case TouchInputType.Swipe :
                     // 데스를 출력
@@ -162,7 +163,7 @@ public class GameManager : MonoBehaviour
                     }
                     Debug.Log("TextPrintType.GotDamaged");
                     _ingameAnimManager.GetAction(AnimState.PlayerDamaged);
-                    PressedButton.GetComponent<ButtonController>().SelectTextType(TextPrintType.Damaged);
+                    if (_textEffect.TextEffect == TextEffectEnable.Enable) PressedButton.GetComponent<ButtonController>().SelectTextType(TextPrintType.Damaged);
                     _ingameUI.OnBossHPChageListener();
                     break;
                 case TouchInputType.NULL :
@@ -281,6 +282,7 @@ public class GameManager : MonoBehaviour
     public void GamePause()
     {
         GameStatus = IsPuased.Paused;
+        isConfigOn = true;
         tempBeat = GameObject.Find("NoteHolder").GetComponent<BeatScroller>().beatTempo;
         GameObject.Find("NoteHolder").GetComponent<BeatScroller>().beatTempo = 0;
         _ingameMusic.PauseBGM();
@@ -289,6 +291,7 @@ public class GameManager : MonoBehaviour
     public void GameUnPause()
     {
         GameStatus = IsPuased.Playing;
+        isConfigOn = false;
         GameObject.Find("NoteHolder").GetComponent<BeatScroller>().beatTempo = tempBeat;
         _ingameMusic.UnPauseBGM();
     }

@@ -63,6 +63,19 @@ public class IngameUIManager : MonoBehaviour
         
         _boss_HP_Indicator.maxValue = _GM.bossHP * 2;
         _boss_HP_Indicator.value = _GM.bossHP;
+
+        if (SceneData.Instance.TextEffect != TextEffectEnable.NULL)
+        {
+            switch (SceneData.Instance.TextEffect)
+            {
+                case TextEffectEnable.Enable :
+                    _toggleTextEffect.isOn = true;
+                    break;
+                case TextEffectEnable.Disenable :
+                    _toggleTextEffect.isOn = false;
+                    break;
+            }
+        }
     }
 
     // Update is called once per frame
@@ -159,6 +172,15 @@ public class IngameUIManager : MonoBehaviour
             _textEffect.ResetPosition();
         }
         _GM.ToggleTextEffect(textEffectTrigger);
+        switch (textEffectTrigger)
+        {
+            case true :
+                _textEffect.TextEffect = TextEffectEnable.Enable;
+                break;
+            case false :
+                _textEffect.TextEffect = TextEffectEnable.Disenable;
+                break;
+        }
     }
     
     public void OnBGMVolSlider()
