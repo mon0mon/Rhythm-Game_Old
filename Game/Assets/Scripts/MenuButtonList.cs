@@ -51,7 +51,7 @@ public class MenuButtonList : MonoBehaviour
             _gameStart = GameObject.Find("Game_Start").GetComponent<Button>();
             _gameStart.interactable = false;
         }
-        
+
         if (GameObject.Find("ConfigButton") != null)
         {
             _configBtn = GameObject.Find("ConfigButton").GetComponent<Button>();
@@ -210,7 +210,7 @@ public class MenuButtonList : MonoBehaviour
 
     private void SetButtonColorDeactive()
     {
-        _background.color = Color.gray;
+        GameObject.Find("Background").GetComponent<Image>().color = Color.gray;
         _gameStart.GetComponent<Image>().color = Color.gray;
     }
 

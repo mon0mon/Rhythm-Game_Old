@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
-using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
@@ -19,6 +18,7 @@ public class IngameUIManager : MonoBehaviour
     private IngameSFXManager _SFX;
     private Slider _BGM_Slider;
     private Slider _SFX_Slider;
+    private Slider _boss_HP_Indicator;
         
     private Slider _progress;
     private Image _blackScreen;
@@ -28,6 +28,9 @@ public class IngameUIManager : MonoBehaviour
     private bool isConfigOn = false;
     private bool textEffectTrigger = true;
     private float temp;
+    private string bossStatus;
+    private float bossHP;
+    private float clearPercentage;
 
     public float EndSceneOpenTime = 1.5f;
 
@@ -45,7 +48,8 @@ public class IngameUIManager : MonoBehaviour
         _toggleTextEffect = _configWindow.transform.Find("TextEffect_Toggle").gameObject.GetComponent<Toggle>();
         _BGM = GameObject.Find("BGM").GetComponent<IngameMusicManager>();
         _SFX = GameObject.Find("SFX").GetComponent<IngameSFXManager>();
-        
+        _boss_HP_Indicator = GameObject.Find("Boss_HP_Indicator").GetComponent<Slider>();
+
         _BGM_Slider = _configWindow.transform.Find("BGM_Slider").GetComponent<Slider>();
         _SFX_Slider = _configWindow.transform.Find("SFX_Slider").GetComponent<Slider>();
         
@@ -54,6 +58,9 @@ public class IngameUIManager : MonoBehaviour
 
         _progress.minValue = 0.0f;
         _progress.maxValue = _ingameMusic.GetAudioLength();
+        
+        _boss_HP_Indicator.maxValue = _GM.bossHP * 2;
+        _boss_HP_Indicator.value = _GM.bossHP;
     }
 
     // Update is called once per frame
@@ -80,6 +87,9 @@ public class IngameUIManager : MonoBehaviour
     {
         _blackScreen.enabled = true;
         _endScene.SetActive(true);
+
+        _endScene.transform.Find("ResultDisplay").GetComponent<Text>().text = bossStatus;
+        _endScene.transform.Find("Clear_Percentage_Display").GetComponent<Text>().text = "Clear : " + clearPercentage.ToString() + "%";
     }
 
     public void EnableConfigWindow()
@@ -156,5 +166,17 @@ public class IngameUIManager : MonoBehaviour
     public void OnSFXVolSlider()
     {
         _SFX.VolChangeSFX(_configWindow.transform.Find("SFX_Slider").GetComponent<Slider>().value);
+    }
+
+    public void GetGameResult(string bossStatus, float bossHP, float clearPercentage)
+    {
+        this.bossStatus = bossStatus;
+        this.bossHP = bossHP;
+        this.clearPercentage = clearPercentage;
+    }
+
+    public void OnBossHPChageListener()
+    {
+        _boss_HP_Indicator.value = _GM.bossHP;
     }
 }

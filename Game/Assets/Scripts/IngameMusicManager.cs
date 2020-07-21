@@ -45,11 +45,11 @@ public class IngameMusicManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!AudioSource.isPlaying && TriggerActive)
-        {
-            TriggerActive = false;
-            StartCoroutine(DelayTime(EndSceneOpenTime));
-        }
+        // if (!AudioSource.isPlaying && TriggerActive)
+        // {
+        //     TriggerActive = false;
+        //     StartCoroutine(DelayTime(EndSceneOpenTime));
+        // }
     }
 
     public void PlayBGM()
@@ -107,6 +107,11 @@ public class IngameMusicManager : MonoBehaviour
         }
 
         return 0f;
+    }
+
+    public bool CheckTrigger()
+    {
+        return TriggerActive;
     }
 
     IEnumerator DelayTime(float waitTime)

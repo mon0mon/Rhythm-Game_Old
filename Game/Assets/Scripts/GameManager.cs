@@ -5,6 +5,7 @@ using System.Diagnostics;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
@@ -17,12 +18,16 @@ public class GameManager : MonoBehaviour
     private IngameMusicManager _ingameMusic;
     private IngameSFXManager _ingameSFX;
     private Ingame_TextEffect_Manager _textEffect;
+    private IngameUIManager _ingameUI;
+
+    private GameObject PressedButton;
 
     public SceneList NextScene = SceneList.NULL;
     public IsPuased GameStatus = IsPuased.Playing;
     public bool EnableLoadingScreen = true;
     public float MinLoadTime;
     public float MaxLoadTime;
+    public float maxBossHP;
     public float bossHP = 280;
     public float atkDamage = 10;
     // Test
@@ -34,11 +39,10 @@ public class GameManager : MonoBehaviour
     private string sceneName;
     private bool isNotPlaying = false;
     private bool isSceneChange = false;
-    private GameObject PressedButton;
     private float tempBeat;
-    private float maxBossHP;
     private float point;
     private bool gameEndTrigger = false;
+    private float endSceneOpenTime = 1.5f;
 
     private void Start()
     {
@@ -73,7 +77,8 @@ public class GameManager : MonoBehaviour
         _ingameMusic = GameObject.Find("BGM").GetComponent<IngameMusicManager>();
         _ingameSFX = GameObject.Find("SFX").GetComponent<IngameSFXManager>();
         _textEffect = gameObject.GetComponent<Ingame_TextEffect_Manager>();
-        
+        _ingameUI = GameObject.Find("Manager").GetComponent<IngameUIManager>();
+
         _sceneData.ClearSceneInfo();
         SetTimeScale();
         
@@ -92,7 +97,7 @@ public class GameManager : MonoBehaviour
             _ingameMusic.PlayBGM();
         }
 
-        if (!_ingameMusic.AudioSource.isPlaying && !gameEndTrigger)
+        if (!_ingameMusic.AudioSource.isPlaying && !gameEndTrigger && _ingameMusic.CheckTrigger())
         {
             CheckHitNotes();
             gameEndTrigger = true;
@@ -113,6 +118,7 @@ public class GameManager : MonoBehaviour
                     hitCount++;
                     bossHP -= atkDamage;
                     point += atkDamage;
+                    _ingameUI.OnBossHPChageListener();
                     break;
                 case TouchInputType.Swipe :
                     PressedButton.GetComponent<ButtonController>().SelectTextType();
@@ -152,6 +158,7 @@ public class GameManager : MonoBehaviour
                     }
                     Debug.Log("TextPrintType.GotDamaged");
                     PressedButton.GetComponent<ButtonController>().SelectTextType(TextPrintType.Damaged);
+                    _ingameUI.OnBossHPChageListener();
                     break;
                 case TouchInputType.NULL :
                     break;
@@ -163,20 +170,27 @@ public class GameManager : MonoBehaviour
     // 일정 수 이상 노트를 적중 했을 경우 동작하는 메소드
     public void CheckHitNotes()
     {
+        String str = null;
+        
         if (bossHP == maxBossHP - (maxBossHP * 1.0))
         {
+            str = "Boss Die";
             Debug.Log("Boss Die");
         } else if (maxBossHP - (maxBossHP * 0.99) <= bossHP && bossHP <= maxBossHP - (maxBossHP * 0.70))
         {
+            str = "Boss Run";
             Debug.Log("Boss Run");
         }
         else
         {
+            str = "Player Failed";
             Debug.Log("Player Failed");
         }
         
         Debug.Log("Boss HP : " + bossHP);
         Debug.Log("Clear : " + Math.Round((point / maxBossHP) * 100));
+        gameObject.GetComponent<IngameUIManager>().GetGameResult(str, bossHP, (float)Math.Round((point / maxBossHP) * 100));
+        StartCoroutine(Timer(endSceneOpenTime));
     }
 
     public void ResetVariables()
@@ -295,6 +309,12 @@ public class GameManager : MonoBehaviour
         SceneAnimationManager.Instance.EndTransition();
         yield return new WaitForSeconds((Random.Range(MinLoadTime, MaxLoadTime)));
         SceneManager.LoadScene(sceneName);
+    }
+
+    IEnumerator Timer(float time)
+    {
+        yield return new WaitForSeconds(time);
+        gameObject.GetComponent<IngameUIManager>().EnableEndScene();
     }
 }
 
