@@ -8,6 +8,8 @@ ScriptsOnlyBuild:
     - IngameMusicManager
     - IngameSFXManager
     - IngameUIManager
+    - Ingame_Charactor_Animation_Controller
+    - Ingame_Charactor_Animation_Manager
     - Ingame_TextEffect_Controller
     - Ingame_TextEffect_Manager
     - LoadingSceneManager
@@ -32,9 +34,10 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimatorControllerTool
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
@@ -74,13 +77,13 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11566}
     - Class: 114
-      Script: {instanceID: 12318}
+      Script: {instanceID: 12320}
     - Class: 114
-      Script: {instanceID: 12738}
+      Script: {instanceID: 12740}
     - Class: 114
-      Script: {instanceID: 13966}
+      Script: {instanceID: 13968}
     - Class: 114
-      Script: {instanceID: 14664}
+      Script: {instanceID: 14668}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -133,27 +136,27 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11650}
     - Class: 114
-      Script: {instanceID: 12318}
+      Script: {instanceID: 12320}
     - Class: 114
-      Script: {instanceID: 12668}
+      Script: {instanceID: 12670}
     - Class: 114
-      Script: {instanceID: 12738}
+      Script: {instanceID: 12740}
     - Class: 114
-      Script: {instanceID: 12998}
+      Script: {instanceID: 13000}
     - Class: 114
-      Script: {instanceID: 13142}
+      Script: {instanceID: 13144}
     - Class: 114
-      Script: {instanceID: 13966}
+      Script: {instanceID: 13968}
     - Class: 114
-      Script: {instanceID: 14528}
+      Script: {instanceID: 14532}
     - Class: 114
-      Script: {instanceID: 14664}
+      Script: {instanceID: 14668}
     - Class: 114
-      Script: {instanceID: 14688}
+      Script: {instanceID: 14692}
     - Class: 114
-      Script: {instanceID: 14712}
+      Script: {instanceID: 14716}
     - Class: 114
-      Script: {instanceID: 14772}
+      Script: {instanceID: 14776}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -222,35 +225,39 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11580}
     - Class: 114
-      Script: {instanceID: 12318}
+      Script: {instanceID: 11822}
     - Class: 114
-      Script: {instanceID: 12550}
+      Script: {instanceID: 12320}
     - Class: 114
-      Script: {instanceID: 12668}
+      Script: {instanceID: 12552}
     - Class: 114
-      Script: {instanceID: 12738}
+      Script: {instanceID: 12670}
     - Class: 114
-      Script: {instanceID: 12986}
+      Script: {instanceID: 12740}
     - Class: 114
-      Script: {instanceID: 13142}
+      Script: {instanceID: 12988}
     - Class: 114
-      Script: {instanceID: 13888}
+      Script: {instanceID: 13144}
     - Class: 114
-      Script: {instanceID: 13966}
+      Script: {instanceID: 13890}
     - Class: 114
-      Script: {instanceID: 14060}
+      Script: {instanceID: 13968}
     - Class: 114
-      Script: {instanceID: 14528}
+      Script: {instanceID: 14062}
     - Class: 114
-      Script: {instanceID: 14596}
+      Script: {instanceID: 14200}
     - Class: 114
-      Script: {instanceID: 14664}
+      Script: {instanceID: 14532}
     - Class: 114
-      Script: {instanceID: 14688}
+      Script: {instanceID: 14600}
     - Class: 114
-      Script: {instanceID: 14712}
+      Script: {instanceID: 14668}
     - Class: 114
-      Script: {instanceID: 14772}
+      Script: {instanceID: 14692}
+    - Class: 114
+      Script: {instanceID: 14716}
+    - Class: 114
+      Script: {instanceID: 14776}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -321,25 +328,25 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11650}
     - Class: 114
-      Script: {instanceID: 12318}
+      Script: {instanceID: 12320}
     - Class: 114
-      Script: {instanceID: 12668}
+      Script: {instanceID: 12670}
     - Class: 114
-      Script: {instanceID: 12738}
-    - Class: 114
-      Script: {instanceID: 12998}
+      Script: {instanceID: 12740}
     - Class: 114
       Script: {instanceID: 13000}
     - Class: 114
-      Script: {instanceID: 13142}
+      Script: {instanceID: 13002}
     - Class: 114
-      Script: {instanceID: 13966}
+      Script: {instanceID: 13144}
     - Class: 114
-      Script: {instanceID: 14528}
+      Script: {instanceID: 13968}
     - Class: 114
-      Script: {instanceID: 14664}
+      Script: {instanceID: 14532}
     - Class: 114
-      Script: {instanceID: 14772}
+      Script: {instanceID: 14668}
+    - Class: 114
+      Script: {instanceID: 14776}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -523,6 +530,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.EventSystems
     className: PhysicsRaycaster
+  - hash:
+      serializedVersion: 2
+      Hash: edf015156fc7196eb79a5f1b683aa83e
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Ingame_Charactor_Animation_Manager
   - hash:
       serializedVersion: 2
       Hash: bd3cf68c8964d3c66d1c43f4f98508c9
@@ -819,6 +832,12 @@ ScriptsOnlyBuild:
     className: Ingame_TextEffect_Manager
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Ingame_Charactor_Animation_Controller
+  - hash:
+      serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
@@ -949,4 +968,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/Main_Scene.unity
   - Assets/Scenes/Loading_Scene.unity
   - Assets/Scenes/Stage_StoneAge.unity
-  playerPath: D:/Study/GitHub/Projects/Team Project/Rhythm-Game/Game/test_1.apk
+  playerPath: D:/Study/GitHub/Projects/Team Project/Rhythm-Game/Game/apk/test_2.apk

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4904458027388330699}
   - component: {fileID: 2533596272521858441}
   - component: {fileID: 4904458027388330703}
+  - component: {fileID: 1265126427549570884}
   - component: {fileID: -8366068425673357040}
   m_Layer: 0
   m_Name: Manager
@@ -52,6 +53,10 @@ MonoBehaviour:
   EnableLoadingScreen: 1
   MinLoadTime: 2
   MaxLoadTime: 3
+  maxBossHP: 0
+  bossHP: 280
+  atkDamage: 10
+  TimeScale: 0
 --- !u!114 &2533596272521858441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83,6 +88,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EndSceneOpenTime: 1.5
+--- !u!114 &1265126427549570884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4904458027388330700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9be01ed204662d8459bf88fd0d08fcdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animators:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &-8366068425673357040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,6 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 955b4fbc11154db4faa9b853096031de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TextEffect: 0
   TextEffect_Hit:
   - {fileID: 0}
   - {fileID: 0}
@@ -107,11 +128,14 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  TextEffectLiveTime: 0.6
+  TextEffect_Miss: []
+  TextEffect_Damaged: []
   TextEffect_Hit_Pivot: {fileID: 2037885739918581648, guid: d4922c23f6e0a1a4bbfba9c624b09e4e,
     type: 3}
   TextEffect_Dodge_Pivot: {fileID: 8995436927467860399, guid: 7f3bd934f8367104cb270bcf7e6fa140,
     type: 3}
+  TextEffectLiveTime: 0.6
+  TextEffectSpeed: 30
 --- !u!1 &5515190002214617340
 GameObject:
   m_ObjectHideFlags: 0
@@ -188,6 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26da870845800914cb520ff9dd8c31e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AudioMixer: {fileID: 0}
   AudioSource: {fileID: 5515190002253670986}
   Stone_Age: {fileID: 8300000, guid: 3c104d53aa2001145a7f71905a319cdb, type: 3}
   Middle_Age: {fileID: 0}
@@ -335,6 +360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c71eb515ad6e874ab47537fe102ad24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AudioMixer: {fileID: 0}
 --- !u!82 &5515190003805260961
 AudioSource:
   m_ObjectHideFlags: 0

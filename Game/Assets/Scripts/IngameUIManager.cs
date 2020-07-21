@@ -28,6 +28,8 @@ public class IngameUIManager : MonoBehaviour
     private bool isConfigOn = false;
     private bool textEffectTrigger = true;
     private float temp;
+
+    private ResultState resultState;
     private string bossStatus;
     private float bossHP;
     private float clearPercentage;
@@ -88,6 +90,7 @@ public class IngameUIManager : MonoBehaviour
         _blackScreen.enabled = true;
         _endScene.SetActive(true);
 
+        // ResultState 상태에 따라 이미지 변경
         _endScene.transform.Find("ResultDisplay").GetComponent<Text>().text = bossStatus;
         _endScene.transform.Find("Clear_Percentage_Display").GetComponent<Text>().text = "Clear : " + clearPercentage.ToString() + "%";
     }
@@ -168,8 +171,9 @@ public class IngameUIManager : MonoBehaviour
         _SFX.VolChangeSFX(_configWindow.transform.Find("SFX_Slider").GetComponent<Slider>().value);
     }
 
-    public void GetGameResult(string bossStatus, float bossHP, float clearPercentage)
+    public void GetGameResult(ResultState state, string bossStatus, float bossHP, float clearPercentage)
     {
+        this.resultState = state;
         this.bossStatus = bossStatus;
         this.bossHP = bossHP;
         this.clearPercentage = clearPercentage;

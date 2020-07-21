@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     private IngameSFXManager _ingameSFX;
     private Ingame_TextEffect_Manager _textEffect;
     private IngameUIManager _ingameUI;
+    private Ingame_Charactor_Animation_Manager _ingameAnimManager;
 
     private GameObject PressedButton;
 
@@ -78,6 +79,7 @@ public class GameManager : MonoBehaviour
         _ingameSFX = GameObject.Find("SFX").GetComponent<IngameSFXManager>();
         _textEffect = gameObject.GetComponent<Ingame_TextEffect_Manager>();
         _ingameUI = GameObject.Find("Manager").GetComponent<IngameUIManager>();
+        _ingameAnimManager = gameObject.GetComponent<Ingame_Charactor_Animation_Manager>();
 
         _sceneData.ClearSceneInfo();
         SetTimeScale();
@@ -114,6 +116,7 @@ public class GameManager : MonoBehaviour
             {
                 case TouchInputType.Tab :
                     PressedButton.GetComponent<ButtonController>().SelectTextType();
+                    _ingameAnimManager.GetAction(AnimState.PlayerAttack);
                     Debug.Log("Hit on Time");
                     hitCount++;
                     bossHP -= atkDamage;
@@ -122,6 +125,7 @@ public class GameManager : MonoBehaviour
                     break;
                 case TouchInputType.Swipe :
                     PressedButton.GetComponent<ButtonController>().SelectTextType();
+                    _ingameAnimManager.GetAction(AnimState.PlayerDodge);
                     Debug.Log("Dodge On Time");
                     dodgeCount++;
                     break;
@@ -157,6 +161,7 @@ public class GameManager : MonoBehaviour
                         point -= atkDamage;
                     }
                     Debug.Log("TextPrintType.GotDamaged");
+                    _ingameAnimManager.GetAction(AnimState.PlayerDamaged);
                     PressedButton.GetComponent<ButtonController>().SelectTextType(TextPrintType.Damaged);
                     _ingameUI.OnBossHPChageListener();
                     break;
@@ -171,25 +176,34 @@ public class GameManager : MonoBehaviour
     public void CheckHitNotes()
     {
         String str = null;
+        ResultState state = ResultState.NULL;
         
         if (bossHP == maxBossHP - (maxBossHP * 1.0))
         {
-            str = "Boss Die";
-            Debug.Log("Boss Die");
-        } else if (maxBossHP - (maxBossHP * 0.99) <= bossHP && bossHP <= maxBossHP - (maxBossHP * 0.70))
+            state = ResultState.BossDead;
+            str = "Boss Dead";
+            Debug.Log("Boss Dead");
+        } else if (maxBossHP - (maxBossHP * 0.99) <= bossHP && bossHP < maxBossHP - (maxBossHP * 0.70))
         {
+            state = ResultState.BossRun;
             str = "Boss Run";
             Debug.Log("Boss Run");
+        } else if (maxBossHP - (maxBossHP * 0.40) <= bossHP && bossHP <= maxBossHP - (maxBossHP * 0.70))
+        {
+            state = ResultState.PlayerRun;
+            str = "Player Run";
+            Debug.Log("Player Run");
         }
         else
         {
+            state = ResultState.PlayerFail;
             str = "Player Failed";
             Debug.Log("Player Failed");
         }
         
         Debug.Log("Boss HP : " + bossHP);
         Debug.Log("Clear : " + Math.Round((point / maxBossHP) * 100));
-        gameObject.GetComponent<IngameUIManager>().GetGameResult(str, bossHP, (float)Math.Round((point / maxBossHP) * 100));
+        gameObject.GetComponent<IngameUIManager>().GetGameResult(state, str, bossHP, (float)Math.Round((point / maxBossHP) * 100));
         StartCoroutine(Timer(endSceneOpenTime));
     }
 
@@ -316,6 +330,11 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(time);
         gameObject.GetComponent<IngameUIManager>().EnableEndScene();
     }
+}
+
+public enum ResultState
+{
+    BossDead, BossRun, PlayerRun, PlayerFail, NULL
 }
 
 public enum IsPuased
