@@ -19,11 +19,22 @@ public class Ingame_Charactor_Animation_Controller : MonoBehaviour
 
     public void TriggerAttack()
     {
+        _animator.SetBool("isReady", false);
         _animator.SetTrigger("Attack");
     }
 
     public void TriggerDodge()
     {
         _animator.SetTrigger("Dodge");
+    }
+
+    public void SetAttackReady()
+    {
+        _animator.SetBool("isReady", true);
+    }
+
+    public void SetDefault()
+    {
+        _animator.SetBool("isReady", false);
     }
 }

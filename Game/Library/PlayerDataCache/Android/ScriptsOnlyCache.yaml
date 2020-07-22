@@ -28,6 +28,8 @@ ScriptsOnlyBuild:
     - UnityEditor.Tilemaps.GridPalettes
     - UnityEditor.Tilemaps.SceneViewGridManager
     - UnityEditor.Tilemaps.TileDragAndDropManager
+    Unity.DeviceSimulator.Editor.dll:
+    - Unity.DeviceSimulator.SimulatorWindow
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.RiderScriptEditorData
     - Packages.Rider.Editor.UnitTesting.CallbackData
@@ -961,4 +963,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/Main_Scene.unity
   - Assets/Scenes/Loading_Scene.unity
   - Assets/Scenes/Stage_StoneAge.unity
-  playerPath: D:/Study/GitHub/Projects/Team Project/Rhythm-Game/Game/apk/07-21_22-49.apk
+  playerPath: D:/Study/GitHub/Projects/Team Project/Rhythm-Game/Game/apk/07-22_12-00.apk

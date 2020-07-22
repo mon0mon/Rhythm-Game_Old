@@ -8,6 +8,7 @@ TagManager:
   - Note
   - DeadZone
   - TextEffect
+  - Trigger
   layers:
   - Default
   - TransparentFX

@@ -7,7 +7,7 @@ using Debug = UnityEngine.Debug;
 
 public class NoteObject : MonoBehaviour
 {
-    private GameManager _gameManager;
+    private GameManager _GM;
     private CircleCollider2D _collider2D;
     private GameObject PressedButton;
     
@@ -20,7 +20,7 @@ public class NoteObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _gameManager = GameObject.Find("Manager").GetComponent<GameManager>();
+        _GM = GameObject.Find("Manager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -122,7 +122,7 @@ public class NoteObject : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Activator")
+        if (other.CompareTag("Activator"))
         {
             canBePressed = true;
             GameManager.Instance.SetPressedButton(other.gameObject);
@@ -130,6 +130,23 @@ public class NoteObject : MonoBehaviour
         {
             Debug.Log("Destroied");
             Destroy(gameObject);
+        } else if (other.CompareTag("Trigger"))
+        {
+            // 원시인 공격 준비 동작 및 맘모스 공격 준비 동작
+            switch (other.name)
+            {
+                case "Trigger_Tab" :
+                    Debug.Log("Trigger_Tab");
+                    _GM.GetComponent<Ingame_Charactor_Animation_Manager>().Actor_Player.SetAttackReady();
+                    break;
+                case "Trigger_Swipe" :
+                    Debug.Log("Trigger_Swipe");
+                    _GM.GetComponent<Ingame_Charactor_Animation_Manager>().Actor_NonPlayer.SetAttackReady();
+                    break;
+                default :
+                    Debug.LogWarning("NoteObject - OnTriggerEnter2D - Trigger Handling : Uncategorized Exception");
+                    break;
+            }
         }
     }
 
@@ -137,10 +154,15 @@ public class NoteObject : MonoBehaviour
     {
         if (other.CompareTag("Activator") && !isDeleted)
         {
-            _gameManager.NoteMissed(TouchInputType);
+            _GM.NoteMissed(TouchInputType);
             canBePressed = false;
             isDeleted = true;
             GameManager.Instance.SetPressedButton(null);
+        } else if (other.name == "Trigger_Swipe")
+        {
+            Debug.Log("Trigger_Swip TriggerAttack");
+            _GM.GetComponent<Ingame_Charactor_Animation_Manager>().Actor_NonPlayer.SetDefault();
+            _GM.GetComponent<Ingame_Charactor_Animation_Manager>().Actor_NonPlayer.TriggerAttack();
         }
     }
 }

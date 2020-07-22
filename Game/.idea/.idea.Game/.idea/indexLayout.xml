@@ -25,6 +25,7 @@
     </explicitIncludes>
     <explicitExcludes>
       <Path>.idea</Path>
+      <Path>Library</Path>
       <Path>Logs</Path>
       <Path>UserSettings</Path>
       <Path>apk</Path>

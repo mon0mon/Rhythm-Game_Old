@@ -116,19 +116,19 @@ public class GameManager : MonoBehaviour
             switch (type)
             {
                 case TouchInputType.Tab :
-                    if (_textEffect.TextEffect == TextEffectEnable.Enable) PressedButton.GetComponent<ButtonController>().SelectTextType();
-                    _ingameAnimManager.GetAction(AnimState.PlayerAttack);
                     Debug.Log("Hit on Time");
+                    _ingameAnimManager.GetAction(AnimState.PlayerAttack);
                     hitCount++;
                     bossHP -= atkDamage;
                     point += atkDamage;
                     _ingameUI.OnBossHPChageListener();
+                    if (_textEffect.TextEffect == TextEffectEnable.Enable) PressedButton.GetComponent<ButtonController>().SelectTextType();
                     break;
                 case TouchInputType.Swipe :
-                    if (_textEffect.TextEffect == TextEffectEnable.Enable) PressedButton.GetComponent<ButtonController>().SelectTextType();
                     _ingameAnimManager.GetAction(AnimState.PlayerDodge);
                     Debug.Log("Dodge On Time");
                     dodgeCount++;
+                    if (_textEffect.TextEffect == TextEffectEnable.Enable) PressedButton.GetComponent<ButtonController>().SelectTextType();
                     break;
             }
         }
@@ -144,11 +144,13 @@ public class GameManager : MonoBehaviour
             {
                 case TouchInputType.Tab :
                     // 미스를 출력
-                    Debug.Log("TextPrintType.Miss");
+                    _ingameAnimManager.GetAction(AnimState.PlayerMiss);
                     if (_textEffect.TextEffect == TextEffectEnable.Enable) PressedButton.GetComponent<ButtonController>().SelectTextType(TextPrintType.Miss);
                     break;
                 case TouchInputType.Swipe :
-                    // 데스를 출력
+                    // 플레이어 피격 모션 출력
+                    _ingameAnimManager.GetAction(AnimState.PlayerDamaged);
+                    // 데미지를 출력
                     if (bossHP < maxBossHP)
                     {
                         if (bossHP >= maxBossHP - atkDamage)
@@ -161,10 +163,8 @@ public class GameManager : MonoBehaviour
                         }
                         point -= atkDamage;
                     }
-                    Debug.Log("TextPrintType.GotDamaged");
-                    _ingameAnimManager.GetAction(AnimState.PlayerDamaged);
-                    if (_textEffect.TextEffect == TextEffectEnable.Enable) PressedButton.GetComponent<ButtonController>().SelectTextType(TextPrintType.Damaged);
                     _ingameUI.OnBossHPChageListener();
+                    if (_textEffect.TextEffect == TextEffectEnable.Enable) PressedButton.GetComponent<ButtonController>().SelectTextType(TextPrintType.Damaged);
                     break;
                 case TouchInputType.NULL :
                     break;

@@ -10,35 +10,31 @@ public class Ingame_Charactor_Animation_Manager : MonoBehaviour
     public AnimState CntAnimState = AnimState.NULL;
     public SceneList ActiveScene = SceneList.NULL;
 
+    public Ingame_Charactor_Animation_Controller Actor_Player;
+    public Ingame_Charactor_Animation_Controller Actor_NonPlayer;
+
     private Ingame_Charactor_Animation_Controller Mammoth;
     private Ingame_Charactor_Animation_Controller Babarian;
     
     // Start is called before the first frame update
     void Start()
     {
-        foreach (var VARIABLE in Animators)
-        {
-            Debug.Log(VARIABLE.name);
-        }
-
         switch (SceneManager.GetActiveScene().name)
         {
             case "Stage_StoneAge" :
-                Debug.Log("Stage_StoneAge");
                 ActiveScene = SceneList.StoneAge;
                 Mammoth = GameObject.Find("Mammoth").GetComponent<Ingame_Charactor_Animation_Controller>();
                 Babarian = GameObject.Find("Babarian").GetComponent<Ingame_Charactor_Animation_Controller>();
+                Actor_Player = Babarian;
+                Actor_NonPlayer = Mammoth;
                 break;
             case "Stage_MiddleAge" :
-                Debug.Log("Stage_MiddleAge");
                 ActiveScene = SceneList.MiddleAge;
                 break;
             case "Stage_ModernAge" :
-                Debug.Log("Stage_MordenAge");
                 ActiveScene = SceneList.ModernAge;
                 break;
             case "Stage_SciFi" :
-                Debug.Log("Stage_SciFi");
                 ActiveScene = SceneList.SciFi;
                 break;
             default :
@@ -68,7 +64,6 @@ public class Ingame_Charactor_Animation_Manager : MonoBehaviour
                     case SceneList.NULL :
                         break;
                 }
-
                 break;
             
             case AnimState.PlayerDodge :
@@ -87,7 +82,6 @@ public class Ingame_Charactor_Animation_Manager : MonoBehaviour
                     case SceneList.NULL :
                         break;
                 }
-                
                 break;
             
             case AnimState.PlayerDamaged :
@@ -106,8 +100,45 @@ public class Ingame_Charactor_Animation_Manager : MonoBehaviour
                     case SceneList.NULL :
                         break;
                 }
+                break;
+            
+            case AnimState.PlayerMiss :
+                
+                switch (ActiveScene)
+                {
+                    case SceneList.StoneAge :
+                        CntAnimState = AnimState.PlayerMiss;
+                        break;
+                    case SceneList.MiddleAge :
+                        break;
+                    case SceneList.ModernAge :
+                        break;
+                    case SceneList.SciFi :
+                        break;
+                    case SceneList.NULL :
+                        break;
+                }
+                break;
+
+            case AnimState.Default :
+                
+                switch (ActiveScene)
+                {
+                    case SceneList.StoneAge :
+                        CntAnimState = AnimState.Default;
+                        break;
+                    case SceneList.MiddleAge :
+                        break;
+                    case SceneList.ModernAge :
+                        break;
+                    case SceneList.SciFi :
+                        break;
+                    case SceneList.NULL :
+                        break;
+                }
                 
                 break;
+            
             default :
                 Debug.Log("ingame_Chrarctor_Animation_Manager - GetAction : UnExpected Value");
                 return;
@@ -139,7 +170,7 @@ public class Ingame_Charactor_Animation_Manager : MonoBehaviour
                         if (Mammoth != null && Babarian != null)
                         {
                             Babarian.TriggerDodge();
-                            Mammoth.TriggerAttack();
+                            Mammoth.SetDefault();
                         }
                         else
                         {
@@ -150,12 +181,17 @@ public class Ingame_Charactor_Animation_Manager : MonoBehaviour
                         if (Mammoth != null && Babarian != null)
                         {
                             Babarian.TriggerDamage();
-                            Mammoth.TriggerAttack();
                         }
                         else
                         {
                             Debug.Log("Mammoth or Babarian not Assigned");
                         }
+                        break;
+                    case AnimState.PlayerMiss :
+                        Babarian.SetDefault();
+                        break;
+                    case AnimState.Default :
+                        Babarian.SetDefault();
                         break;
                 }
                 break;
@@ -173,5 +209,6 @@ public class Ingame_Charactor_Animation_Manager : MonoBehaviour
 
 public enum AnimState
 {
-    NULL, PlayerAttack, PlayerDamaged, PlayerDodge
+    NULL, 
+    PlayerAttack, PlayerDamaged, PlayerDodge, PlayerMiss, Default
 }

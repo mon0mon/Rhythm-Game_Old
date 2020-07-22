@@ -103,6 +103,8 @@ MonoBehaviour:
   Animators:
   - {fileID: 0}
   - {fileID: 0}
+  CntAnimState: 0
+  ActiveScene: 10
 --- !u!114 &-8366068425673357040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,14 +130,18 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  TextEffect_Miss: []
-  TextEffect_Damaged: []
+  TextEffect_Miss:
+  - {fileID: 0}
+  - {fileID: 0}
+  TextEffect_Damaged:
+  - {fileID: 0}
+  - {fileID: 0}
   TextEffect_Hit_Pivot: {fileID: 2037885739918581648, guid: d4922c23f6e0a1a4bbfba9c624b09e4e,
     type: 3}
   TextEffect_Dodge_Pivot: {fileID: 8995436927467860399, guid: 7f3bd934f8367104cb270bcf7e6fa140,
     type: 3}
-  TextEffectLiveTime: 0.6
-  TextEffectSpeed: 30
+  TextEffectLiveTime: 1.3
+  TextEffectSpeed: 170
 --- !u!1 &5515190002214617340
 GameObject:
   m_ObjectHideFlags: 0

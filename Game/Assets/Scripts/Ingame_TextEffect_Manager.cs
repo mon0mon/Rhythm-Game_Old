@@ -34,7 +34,7 @@ public class Ingame_TextEffect_Manager : MonoBehaviour
             _hitController = new Ingame_TextEffect_Controller[TextEffect_Hit.Length];
             for (int i = 0; i < TextEffect_Hit.Length; i++)
             {
-                TextEffect_Hit[i].transform.localPosition = new Vector3(-1500, 0, 0);
+                TextEffect_Hit[i].transform.localPosition = new Vector3(-2000, 0, 0);
                 _hitController[i] = TextEffect_Hit[i].GetComponent<Ingame_TextEffect_Controller>();
             }
         }
@@ -44,7 +44,7 @@ public class Ingame_TextEffect_Manager : MonoBehaviour
             _dodgeController = new Ingame_TextEffect_Controller[TextEffect_Dodge.Length];
             for (int i = 0; i < TextEffect_Dodge.Length; i++)
             {
-                TextEffect_Dodge[i].transform.localPosition = new Vector3(-1400, 0, 0);
+                TextEffect_Dodge[i].transform.localPosition = new Vector3(-2200, 0, 0);
                 _dodgeController[i] = TextEffect_Dodge[i].GetComponent<Ingame_TextEffect_Controller>();
             }
         }
@@ -54,7 +54,7 @@ public class Ingame_TextEffect_Manager : MonoBehaviour
             _missController = new Ingame_TextEffect_Controller[TextEffect_Miss.Length];
             for (int i = 0; i < TextEffect_Miss.Length; i++)
             {
-                TextEffect_Miss[i].transform.localPosition = new Vector3(-1300, 0, 0);
+                TextEffect_Miss[i].transform.localPosition = new Vector3(-2600, 0, 0);
                 _missController[i] = TextEffect_Miss[i].GetComponent<Ingame_TextEffect_Controller>();
             }
         }
@@ -64,7 +64,7 @@ public class Ingame_TextEffect_Manager : MonoBehaviour
             _damagedController = new Ingame_TextEffect_Controller[TextEffect_Damaged.Length];
             for (int i = 0; i < TextEffect_Damaged.Length; i++)
             {
-                TextEffect_Damaged[i].transform.localPosition = new Vector3(-1200, 0, 0);
+                TextEffect_Damaged[i].transform.localPosition = new Vector3(-2400, 0, 0);
                 _damagedController[i] = TextEffect_Damaged[i].GetComponent<Ingame_TextEffect_Controller>();
             }
         }
@@ -100,7 +100,6 @@ public class Ingame_TextEffect_Manager : MonoBehaviour
     {
         if (_index_Damaged == TextEffect_Damaged.Length) ResetIndex(IndexType.TextEffect_Damaged);
 
-        Debug.Log(_damagedController[_index_Damaged]);
         _damagedController[_index_Damaged].EnableTextEffect(TextEffectLiveTime);
         _index_Damaged++;
     }
@@ -138,22 +137,22 @@ public class Ingame_TextEffect_Manager : MonoBehaviour
     {
         for (int i = 0; i < TextEffect_Hit.Length; i++)
         {
-            TextEffect_Hit[i].transform.localPosition = new Vector3(-1500, 0, 0);
+            TextEffect_Hit[i].transform.localPosition = new Vector3(-2000, 0, 0);
         }
         
         for (int i = 0; i < TextEffect_Dodge.Length; i++)
         {
-            TextEffect_Dodge[i].transform.localPosition = new Vector3(-1400, 0, 0);
+            TextEffect_Dodge[i].transform.localPosition = new Vector3(-2200, 0, 0);
         }
 
         for (int i = 0; i < TextEffect_Miss.Length; i++)
         {
-            TextEffect_Miss[i].transform.localPosition = new Vector3(-1300, 0, 0);
+            TextEffect_Miss[i].transform.localPosition = new Vector3(-2600, 0, 0);
         }
 
         for (int i = 0; i < TextEffect_Damaged.Length; i++)
         {
-            TextEffect_Damaged[i].transform.localPosition = new Vector3(-1200, 0, 0);
+            TextEffect_Damaged[i].transform.localPosition = new Vector3(-2400, 0, 0);
         }
     }
 
