@@ -12,6 +12,7 @@ ScriptsOnlyBuild:
     - Ingame_Charactor_Animation_Manager
     - Ingame_TextEffect_Controller
     - Ingame_TextEffect_Manager
+    - Ingame_Warnning_Indicator_Controller
     - LoadingSceneManager
     - MenuButtonList
     - MenuManger
@@ -30,9 +31,17 @@ ScriptsOnlyBuild:
     - UnityEditor.Tilemaps.TileDragAndDropManager
     Unity.DeviceSimulator.Editor.dll:
     - Unity.DeviceSimulator.SimulatorWindow
+    Unity.Mobile.AndroidLogcat.Editor.dll:
+    - Unity.Android.Logcat.AndroidLogcatManager
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.RiderScriptEditorData
     - Packages.Rider.Editor.UnitTesting.CallbackData
+    UnityEditor.Graphs.dll:
+    - UnityEditor.Graphs.AnimationBlendTree.Graph
+    - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.Graph
+    - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
@@ -253,6 +262,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 14716}
     - Class: 114
       Script: {instanceID: 14776}
+    - Class: 114
+      Script: {instanceID: 24576}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -527,7 +538,7 @@ ScriptsOnlyBuild:
     className: PhysicsRaycaster
   - hash:
       serializedVersion: 2
-      Hash: edf015156fc7196eb79a5f1b683aa83e
+      Hash: 5084a96dbdbe3329623b939421b7325c
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Ingame_Charactor_Animation_Manager
@@ -957,10 +968,16 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 6b704c3f237ca806897436d057fc654b
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Ingame_Warnning_Indicator_Controller
   platform: 13
   scenePathNames:
   - Assets/Scenes/Start_Scene.unity
   - Assets/Scenes/Main_Scene.unity
   - Assets/Scenes/Loading_Scene.unity
   - Assets/Scenes/Stage_StoneAge.unity
-  playerPath: D:/Study/GitHub/Projects/Team Project/Rhythm-Game/Game/apk/07-22_12-00.apk
+  playerPath: D:/Study/GitHub/Projects/Team Project/Rhythm-Game/Game/apk/07-22_17-44.apk

@@ -10,6 +10,7 @@ public class NoteObject : MonoBehaviour
     private GameManager _GM;
     private CircleCollider2D _collider2D;
     private GameObject PressedButton;
+    private Ingame_Warnning_Indicator_Controller _warnning_Controller;
     
     private bool isDeleted = false;
     private bool canBePressed;
@@ -21,6 +22,7 @@ public class NoteObject : MonoBehaviour
     void Start()
     {
         _GM = GameObject.Find("Manager").GetComponent<GameManager>();
+        _warnning_Controller = GameObject.Find("Warnning_Indicator").GetComponent<Ingame_Warnning_Indicator_Controller>();
     }
 
     // Update is called once per frame
@@ -138,10 +140,12 @@ public class NoteObject : MonoBehaviour
                 case "Trigger_Tab" :
                     Debug.Log("Trigger_Tab");
                     _GM.GetComponent<Ingame_Charactor_Animation_Manager>().Actor_Player.SetAttackReady();
+                    _warnning_Controller.OnEnableAttackSign();
                     break;
                 case "Trigger_Swipe" :
                     Debug.Log("Trigger_Swipe");
                     _GM.GetComponent<Ingame_Charactor_Animation_Manager>().Actor_NonPlayer.SetAttackReady();
+                    _warnning_Controller.OnEnableDodgeSign();
                     break;
                 default :
                     Debug.LogWarning("NoteObject - OnTriggerEnter2D - Trigger Handling : Uncategorized Exception");

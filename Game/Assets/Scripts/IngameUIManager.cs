@@ -33,6 +33,7 @@ public class IngameUIManager : MonoBehaviour
     private string bossStatus;
     private float bossHP;
     private float clearPercentage;
+    private bool isEnableBackground;
 
     public float EndSceneOpenTime = 1.5f;
 
@@ -204,5 +205,11 @@ public class IngameUIManager : MonoBehaviour
     public void OnBossHPChageListener()
     {
         _boss_HP_Indicator.value = _GM.bossHP;
+    }
+
+    public void OnToggleBackgroundImg()
+    {
+        isEnableBackground = GameObject.Find("Background_Toggle").GetComponent<Toggle>().isOn;
+        GameObject.Find("BaseCanvas").GetComponent<Image>().enabled = isEnableBackground;
     }
 }

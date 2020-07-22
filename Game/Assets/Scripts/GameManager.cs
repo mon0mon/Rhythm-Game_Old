@@ -151,18 +151,8 @@ public class GameManager : MonoBehaviour
                     // 플레이어 피격 모션 출력
                     _ingameAnimManager.GetAction(AnimState.PlayerDamaged);
                     // 데미지를 출력
-                    if (bossHP < maxBossHP)
-                    {
-                        if (bossHP >= maxBossHP - atkDamage)
-                        {
-                            bossHP = maxBossHP;
-                        }
-                        else
-                        {
-                            bossHP += atkDamage;
-                        }
-                        point -= atkDamage;
-                    }
+                    bossHP += (atkDamage * 2);
+                    point -= (atkDamage * 2);
                     _ingameUI.OnBossHPChageListener();
                     if (_textEffect.TextEffect == TextEffectEnable.Enable) PressedButton.GetComponent<ButtonController>().SelectTextType(TextPrintType.Damaged);
                     break;
@@ -204,7 +194,8 @@ public class GameManager : MonoBehaviour
         
         Debug.Log("Boss HP : " + bossHP);
         Debug.Log("Clear : " + Math.Round((point / maxBossHP) * 100));
-        gameObject.GetComponent<IngameUIManager>().GetGameResult(state, str, bossHP, (float)Math.Round((point / maxBossHP) * 100));
+        if (bossHP >= maxBossHP) gameObject.GetComponent<IngameUIManager>().GetGameResult(state, str, bossHP, 0.0f);
+        else gameObject.GetComponent<IngameUIManager>().GetGameResult(state, str, bossHP, (float)Math.Round((point / maxBossHP) * 100));
         StartCoroutine(Timer(endSceneOpenTime));
     }
 
