@@ -47,6 +47,11 @@ public class SceneData : MonoBehaviour
                 break;
         }
 
+        Screen.orientation = ScreenOrientation.AutoRotation;
+        Screen.autorotateToPortrait = false;
+        Screen.autorotateToPortraitUpsideDown = false;
+        Screen.autorotateToLandscapeLeft = true;
+        Screen.autorotateToLandscapeRight = true;
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
 
         Camera camera = GameObject.Find("Main Camera").GetComponent<Camera>();

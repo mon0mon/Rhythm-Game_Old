@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     public float atkDamage = 10;
     // Test
     public float TimeScale;
+    public float TextEffectDelayTime = 0.03f;
 
     private bool startPlaying;
     private int hitCount = 0;
@@ -122,13 +123,15 @@ public class GameManager : MonoBehaviour
                     bossHP -= atkDamage;
                     point += atkDamage;
                     _ingameUI.OnBossHPChageListener();
-                    if (_textEffect.TextEffect == TextEffectEnable.Enable) PressedButton.GetComponent<ButtonController>().SelectTextType();
+                    if (_textEffect.TextEffect == TextEffectEnable.Enable)
+                        PressedButton.GetComponent<ButtonController>().SelectTextType();
                     break;
                 case TouchInputType.Swipe :
                     _ingameAnimManager.GetAction(AnimState.PlayerDodge);
                     Debug.Log("Dodge On Time");
                     dodgeCount++;
-                    if (_textEffect.TextEffect == TextEffectEnable.Enable) PressedButton.GetComponent<ButtonController>().SelectTextType();
+                    if (_textEffect.TextEffect == TextEffectEnable.Enable)
+                        PressedButton.GetComponent<ButtonController>().SelectTextType();
                     break;
             }
         }
@@ -145,7 +148,8 @@ public class GameManager : MonoBehaviour
                 case TouchInputType.Tab :
                     // 미스를 출력
                     _ingameAnimManager.GetAction(AnimState.PlayerMiss);
-                    if (_textEffect.TextEffect == TextEffectEnable.Enable) PressedButton.GetComponent<ButtonController>().SelectTextType(TextPrintType.Miss);
+                    if (_textEffect.TextEffect == TextEffectEnable.Enable)
+                        PressedButton.GetComponent<ButtonController>().SelectTextType(TextPrintType.Miss);
                     break;
                 case TouchInputType.Swipe :
                     // 플레이어 피격 모션 출력
@@ -154,7 +158,8 @@ public class GameManager : MonoBehaviour
                     bossHP += (atkDamage * 2);
                     point -= (atkDamage * 2);
                     _ingameUI.OnBossHPChageListener();
-                    if (_textEffect.TextEffect == TextEffectEnable.Enable) PressedButton.GetComponent<ButtonController>().SelectTextType(TextPrintType.Damaged);
+                    if (_textEffect.TextEffect == TextEffectEnable.Enable)
+                        PressedButton.GetComponent<ButtonController>().SelectTextType(TextPrintType.Damaged);
                     break;
                 case TouchInputType.NULL :
                     break;
@@ -289,6 +294,7 @@ public class GameManager : MonoBehaviour
 
     public void SetPressedButton(GameObject obj)
     {
+        Debug.Log("SetPressedButton : " + obj);
         PressedButton = obj;
     }
 
@@ -323,6 +329,23 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         gameObject.GetComponent<IngameUIManager>().EnableEndScene();
+    }
+
+    IEnumerator PrintText(float waitTime, TextPrintType tp)
+    {
+        yield return new WaitForSeconds(waitTime);
+        switch (tp)
+        {
+            case TextPrintType.Hit :
+            case TextPrintType.Dodge :
+                Debug.Log("Hit or Dodge : " + PressedButton);
+                PressedButton.GetComponent<ButtonController>().SelectTextType();
+                break;
+            default :
+                Debug.Log("Default : " + PressedButton);
+                PressedButton.GetComponent<ButtonController>().SelectTextType(tp);
+                break;
+        }
     }
 }
 

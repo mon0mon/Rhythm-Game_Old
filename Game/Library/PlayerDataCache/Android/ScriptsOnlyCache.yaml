@@ -85,9 +85,9 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12740}
     - Class: 114
-      Script: {instanceID: 13968}
+      Script: {instanceID: 13970}
     - Class: 114
-      Script: {instanceID: 14668}
+      Script: {instanceID: 14670}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -150,17 +150,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13144}
     - Class: 114
-      Script: {instanceID: 13968}
+      Script: {instanceID: 13970}
     - Class: 114
-      Script: {instanceID: 14532}
+      Script: {instanceID: 14534}
     - Class: 114
-      Script: {instanceID: 14668}
+      Script: {instanceID: 14670}
     - Class: 114
-      Script: {instanceID: 14692}
+      Script: {instanceID: 14694}
     - Class: 114
-      Script: {instanceID: 14716}
+      Script: {instanceID: 14718}
     - Class: 114
-      Script: {instanceID: 14776}
+      Script: {instanceID: 14778}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -243,27 +243,27 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13144}
     - Class: 114
-      Script: {instanceID: 13890}
+      Script: {instanceID: 13426}
     - Class: 114
-      Script: {instanceID: 13968}
+      Script: {instanceID: 13892}
     - Class: 114
-      Script: {instanceID: 14062}
+      Script: {instanceID: 13970}
     - Class: 114
-      Script: {instanceID: 14200}
+      Script: {instanceID: 14064}
     - Class: 114
-      Script: {instanceID: 14532}
+      Script: {instanceID: 14202}
     - Class: 114
-      Script: {instanceID: 14600}
+      Script: {instanceID: 14534}
     - Class: 114
-      Script: {instanceID: 14668}
+      Script: {instanceID: 14602}
     - Class: 114
-      Script: {instanceID: 14692}
+      Script: {instanceID: 14670}
     - Class: 114
-      Script: {instanceID: 14716}
+      Script: {instanceID: 14694}
     - Class: 114
-      Script: {instanceID: 14776}
+      Script: {instanceID: 14718}
     - Class: 114
-      Script: {instanceID: 24576}
+      Script: {instanceID: 14778}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -346,13 +346,13 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13144}
     - Class: 114
-      Script: {instanceID: 13968}
+      Script: {instanceID: 13970}
     - Class: 114
-      Script: {instanceID: 14532}
+      Script: {instanceID: 14534}
     - Class: 114
-      Script: {instanceID: 14668}
+      Script: {instanceID: 14670}
     - Class: 114
-      Script: {instanceID: 14776}
+      Script: {instanceID: 14778}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -742,6 +742,12 @@ ScriptsOnlyBuild:
     className: VerticalLayoutGroup
   - hash:
       serializedVersion: 2
+      Hash: 6b704c3f237ca806897436d057fc654b
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Ingame_Warnning_Indicator_Controller
+  - hash:
+      serializedVersion: 2
       Hash: 98bf293cd34a2f7168fb0675fad19457
     assemblyName: Unity.2D.Animation.Runtime.dll
     namespaceName: UnityEngine.U2D.Animation
@@ -968,12 +974,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: 6b704c3f237ca806897436d057fc654b
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: Ingame_Warnning_Indicator_Controller
   platform: 13
   scenePathNames:
   - Assets/Scenes/Start_Scene.unity

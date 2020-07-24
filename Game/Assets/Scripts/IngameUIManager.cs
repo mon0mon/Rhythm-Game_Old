@@ -28,6 +28,7 @@ public class IngameUIManager : MonoBehaviour
     private bool isConfigOn = false;
     private bool textEffectTrigger = true;
     private float temp;
+    private bool btnTriggerOn;
 
     private ResultState resultState;
     private string bossStatus;
@@ -132,16 +133,24 @@ public class IngameUIManager : MonoBehaviour
 
     public void RestartLevel()
     {
-        _GM.NextScene = SceneList.StoneAge;
-        _GM.EnableLoadingScreen = false;
-        _GM.MoveNextScene();
+        if (!btnTriggerOn)
+        {
+            _GM.NextScene = SceneList.StoneAge;
+            _GM.EnableLoadingScreen = false;
+            _GM.MoveNextScene();
+            btnTriggerOn = true;
+        }
     }
 
     public void RetrunToMainMenu()
     {
-        _GM.NextScene = SceneList.Main_Scene;
-        _GM.EnableLoadingScreen = false;
-        _GM.MoveNextScene();
+        if (!btnTriggerOn)
+        {
+            _GM.NextScene = SceneList.Main_Scene;
+            _GM.EnableLoadingScreen = false;
+            _GM.MoveNextScene();
+            btnTriggerOn = true;
+        }
     }
 
     public void PrintTextEffect(TextPrintType type)
