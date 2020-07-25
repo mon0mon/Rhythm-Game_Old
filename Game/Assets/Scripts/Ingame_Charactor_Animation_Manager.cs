@@ -119,7 +119,26 @@ public class Ingame_Charactor_Animation_Manager : MonoBehaviour
                         break;
                 }
                 break;
-
+            
+            case AnimState.BossDie :
+                
+                switch (ActiveScene)
+                {
+                    case SceneList.StoneAge :
+                        CntAnimState = AnimState.BossDie;
+                        break;
+                    case SceneList.MiddleAge :
+                        break;
+                    case SceneList.ModernAge :
+                        break;
+                    case SceneList.SciFi :
+                        break;
+                    case SceneList.NULL :
+                        break;
+                }
+                
+                break;
+                
             case AnimState.Default :
                 
                 switch (ActiveScene)
@@ -190,6 +209,9 @@ public class Ingame_Charactor_Animation_Manager : MonoBehaviour
                     case AnimState.PlayerMiss :
                         Babarian.SetDefault();
                         break;
+                    case AnimState.BossDie :
+                        Mammoth.TriggerDie();
+                        break;
                     case AnimState.Default :
                         Babarian.SetDefault();
                         break;
@@ -210,5 +232,5 @@ public class Ingame_Charactor_Animation_Manager : MonoBehaviour
 public enum AnimState
 {
     NULL, 
-    PlayerAttack, PlayerDamaged, PlayerDodge, PlayerMiss, Default
+    PlayerAttack, PlayerDamaged, PlayerDodge, PlayerMiss, BossDie, Default
 }

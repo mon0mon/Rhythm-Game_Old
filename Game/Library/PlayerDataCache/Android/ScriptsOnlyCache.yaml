@@ -39,8 +39,10 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -51,11 +53,17 @@ ScriptsOnlyBuild:
     - UnityEngine.EventSystems.StandaloneInputModule
     - UnityEngine.UI.Button
     - UnityEngine.UI.CanvasScaler
+    - UnityEngine.UI.Dropdown
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
+    - UnityEngine.UI.Mask
+    - UnityEngine.UI.ScrollRect
+    - UnityEngine.UI.Scrollbar
     - UnityEngine.UI.Slider
     - UnityEngine.UI.Text
     - UnityEngine.UI.Toggle
+    com.unity.quicksearch.dll:
+    - Unity.QuickSearch.SearchDatabase
   sceneClasses:
     Assets/Scenes/Loading_Scene.unity:
     - Class: 1
@@ -225,17 +233,23 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11504}
     - Class: 114
+      Script: {instanceID: 11510}
+    - Class: 114
       Script: {instanceID: 11566}
     - Class: 114
       Script: {instanceID: 11580}
     - Class: 114
       Script: {instanceID: 11822}
     - Class: 114
+      Script: {instanceID: 12128}
+    - Class: 114
       Script: {instanceID: 12320}
     - Class: 114
       Script: {instanceID: 12552}
     - Class: 114
       Script: {instanceID: 12670}
+    - Class: 114
+      Script: {instanceID: 12722}
     - Class: 114
       Script: {instanceID: 12740}
     - Class: 114
@@ -256,6 +270,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 14534}
     - Class: 114
       Script: {instanceID: 14602}
+    - Class: 114
+      Script: {instanceID: 14628}
     - Class: 114
       Script: {instanceID: 14670}
     - Class: 114
@@ -742,7 +758,7 @@ ScriptsOnlyBuild:
     className: VerticalLayoutGroup
   - hash:
       serializedVersion: 2
-      Hash: 6b704c3f237ca806897436d057fc654b
+      Hash: 139d5aa640022af2f90e93d492d73952
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Ingame_Warnning_Indicator_Controller
@@ -910,7 +926,7 @@ ScriptsOnlyBuild:
     className: TMP_SubMesh
   - hash:
       serializedVersion: 2
-      Hash: 790d97a4cfbaa8fdcf653afa7a6e2688
+      Hash: 01bfd2c4dfe3b4ed7963fa663e9f16dd
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager

@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
     public float maxScore;
     public float score = 100;
     public float AddScoreAmount = 10;
-    public int DodgeFailPenalty = 3;
+    public int DodgeFailPenaltyMul = 3;
     
     // Test
     public float TimeScale;
@@ -161,7 +161,7 @@ public class GameManager : MonoBehaviour
                     // 플레이어 피격 모션 출력
                     _ingameAnimManager.GetAction(AnimState.PlayerDamaged);
                     // 데미지를 출력
-                    score -= (AddScoreAmount * DodgeFailPenalty);
+                    score -= (AddScoreAmount * DodgeFailPenaltyMul);
                     _ingameUI.OnBossHPChageListener();
                     if (_textEffect.TextEffect == TextEffectEnable.Enable)
                         StartCoroutine(PrintText(TextEffectDelayFrame, TextPrintType.Damaged,
@@ -180,18 +180,24 @@ public class GameManager : MonoBehaviour
     {
         String str = null;
         ResultState state = ResultState.NULL;
+        float cntClear = (float)Math.Round(score / maxScore * 100);
+        Debug.Log(cntClear);
+
+        if (score <= 0) score = 0;
         
-        if (score >= maxScore - (maxScore * 1))
+        // 맘모스와 원시인 그로기 상태 확정되면 그때 추가하기
+        if (cntClear >= 100)
         {
+            _ingameAnimManager.GetAction(AnimState.BossDie);
             state = ResultState.BossDead;
             str = "Boss Dead";
             Debug.Log("Boss Dead");
-        } else if (maxScore - (maxScore * 0.99) <= score && score < maxScore - (maxScore * 0.70))
+        } else if (0f <= cntClear && cntClear < 100f)
         {
             state = ResultState.BossRun;
             str = "Boss Run";
             Debug.Log("Boss Run");
-        } else if (maxScore - (maxScore * 0.40) <= score && score <= maxScore - (maxScore * 0.70))
+        } else if (-100.0f < cntClear && cntClear < 0f)
         {
             state = ResultState.PlayerRun;
             str = "Player Run";
@@ -204,10 +210,10 @@ public class GameManager : MonoBehaviour
             Debug.Log("Player Failed");
         }
         
-        Debug.Log("Boss HP : " + score);
-        Debug.Log("Clear : " + Math.Round((score / maxScore) * 100));
-        if (score >= maxScore) gameObject.GetComponent<IngameUIManager>().GetGameResult(state, str, score, 0.0f);
-        else gameObject.GetComponent<IngameUIManager>().GetGameResult(state, str, score, (float)Math.Round((score / maxScore) * 100));
+        Debug.Log("Score : " + score);
+        Debug.Log("Clear : " + Math.Round(((score / maxScore) * 100)) + "%");
+        if (score >= maxScore) gameObject.GetComponent<IngameUIManager>().GetGameResult(state, str, score, (float)Math.Round(((score / maxScore) * 100)));
+        else gameObject.GetComponent<IngameUIManager>().GetGameResult(state, str, score, (float)Math.Round(((score / maxScore) * 100)));
         StartCoroutine(Timer(endSceneOpenTime));
     }
 
@@ -217,8 +223,6 @@ public class GameManager : MonoBehaviour
         dodgeCount = 0;
         sceneName= null;
         isNotPlaying = false;
-
-        maxScore = score;
         
         GameObject.Find("SaveData").GetComponent<SceneData>().SetNextSceneName(null);
     }

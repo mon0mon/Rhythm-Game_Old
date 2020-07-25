@@ -53,10 +53,12 @@ MonoBehaviour:
   EnableLoadingScreen: 1
   MinLoadTime: 2
   MaxLoadTime: 3
-  maxBossHP: 0
-  bossHP: 280
-  atkDamage: 10
-  TimeScale: 0
+  maxScore: 200
+  score: 100
+  AddScoreAmount: 3.57
+  DodgeFailPenaltyMul: 3
+  TimeScale: 1
+  TextEffectDelayFrame: 10
 --- !u!114 &2533596272521858441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,6 +107,8 @@ MonoBehaviour:
   - {fileID: 0}
   CntAnimState: 0
   ActiveScene: 10
+  Actor_Player: {fileID: 0}
+  Actor_NonPlayer: {fileID: 0}
 --- !u!114 &-8366068425673357040
 MonoBehaviour:
   m_ObjectHideFlags: 0

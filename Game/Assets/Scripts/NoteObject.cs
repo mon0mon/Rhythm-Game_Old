@@ -142,7 +142,7 @@ public class NoteObject : MonoBehaviour
                 case "Trigger_Tab" :
                     Debug.Log("Trigger_Tab");
                     _GM.GetComponent<Ingame_Charactor_Animation_Manager>().Actor_Player.SetAttackReady();
-                    _player_Warnning_Controller.OnEnableSign();
+                    // _player_Warnning_Controller.OnEnableSign();
                     break;
                 case "Trigger_Swipe" :
                     Debug.Log("Trigger_Swipe");
@@ -164,12 +164,24 @@ public class NoteObject : MonoBehaviour
             canBePressed = false;
             isDeleted = true;
             GameManager.Instance.SetPressedButton(null);
-        } else if (other.name == "Trigger_Swipe")
+        } else if (other.CompareTag("Trigger"))
         {
-            Debug.Log("Trigger_Swip TriggerAttack");
-            _GM.GetComponent<Ingame_Charactor_Animation_Manager>().Actor_NonPlayer.SetDefault();
-            _GM.GetComponent<Ingame_Charactor_Animation_Manager>().Actor_NonPlayer.TriggerAttack();
-        }
+            switch (other.name)
+            {
+                case "Trigger_Tab" :
+                    _player_Warnning_Controller.OnEnableSign();
+                    break;
+                case "Trigger_Swipe" :
+                    Debug.Log("Trigger_Swipe");
+                    Debug.Log("Trigger_Swip TriggerAttack");
+                    _GM.GetComponent<Ingame_Charactor_Animation_Manager>().Actor_NonPlayer.SetDefault();
+                    _GM.GetComponent<Ingame_Charactor_Animation_Manager>().Actor_NonPlayer.TriggerAttack();
+                    break;
+                default :
+                    Debug.LogWarning("NoteObject - OnTriggerEnter2D - Trigger Handling : Uncategorized Exception");
+                    break;
+            }
+        } 
     }
 }
 

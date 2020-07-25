@@ -24,6 +24,7 @@ public class IngameUIManager : MonoBehaviour
     private Slider _progress;
     private Image _blackScreen;
     private Toggle _toggleTextEffect;
+    private Dropdown _timeDropDown;
 
     private bool isEnd = false;
     private bool isConfigOn = false;
@@ -33,7 +34,7 @@ public class IngameUIManager : MonoBehaviour
 
     private ResultState resultState;
     private string bossStatus;
-    private float bossHP;
+    private float score;
     private float clearPercentage;
     private bool isEnableBackground;
 
@@ -62,6 +63,8 @@ public class IngameUIManager : MonoBehaviour
         _SFX_Slider.value = GameObject.Find("MainMenuMusic").GetComponent<MusicManager>().GetSFXVol();
 
         _SongInfo = GameObject.Find("Song_Info").GetComponent<Text>();
+
+        _timeDropDown = _configWindow.transform.Find("Time").gameObject.GetComponent<Dropdown>();
 
         _progress.minValue = 0.0f;
         _progress.maxValue = _ingameMusic.GetAudioLength();
@@ -207,11 +210,11 @@ public class IngameUIManager : MonoBehaviour
         _SFX.VolChangeSFX(_configWindow.transform.Find("SFX_Slider").GetComponent<Slider>().value);
     }
 
-    public void GetGameResult(ResultState state, string bossStatus, float bossHP, float clearPercentage)
+    public void GetGameResult(ResultState state, string bossStatus, float score, float clearPercentage)
     {
         this.resultState = state;
         this.bossStatus = bossStatus;
-        this.bossHP = bossHP;
+        this.score = score;
         this.clearPercentage = clearPercentage;
     }
 
@@ -229,5 +232,57 @@ public class IngameUIManager : MonoBehaviour
     public void SetSongInfo(string str)
     {
         _SongInfo.text = str;
+    }
+
+    public void OnChangeTimeListener()
+    {
+        _timeDropDown.onValueChanged.AddListener(delegate { DropDownValueChanged(_timeDropDown); });
+    }
+
+    void DropDownValueChanged(Dropdown change)
+    {
+        float time = 1f;
+        
+        switch (change.value)
+        {
+            case 0 :
+                _GM.TimeScale = -3f;
+                time = -3f;
+                break;
+            case 1 :
+                _GM.TimeScale = -2f;
+                time = -2f;
+                break;
+            case 2 :
+                _GM.TimeScale = -1f;
+                time = -1f;
+                break;
+            case 3 :
+                _GM.TimeScale = 0f;
+                time = 0f;
+                break;
+            case 4 :
+                _GM.TimeScale = 0.25f;
+                time = 0.25f;
+                break;
+            case 5 :
+                _GM.TimeScale = 0.5f;
+                time = 0.5f;
+                break;
+            case 6 :
+                _GM.TimeScale = 1f;
+                time = 1f;
+                break;
+            case 7 :
+                _GM.TimeScale = 2f;
+                time = 2f;
+                break;
+            case 8 :
+                _GM.TimeScale = 3f;
+                time = 3f;
+                break;
+        }
+
+        Time.timeScale = time;
     }
 }

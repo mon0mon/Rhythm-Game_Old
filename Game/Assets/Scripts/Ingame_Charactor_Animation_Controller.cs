@@ -37,4 +37,9 @@ public class Ingame_Charactor_Animation_Controller : MonoBehaviour
     {
         _animator.SetBool("isReady", false);
     }
+
+    public void TriggerDie()
+    {
+        _animator.SetTrigger("isDead");
+    }
 }
