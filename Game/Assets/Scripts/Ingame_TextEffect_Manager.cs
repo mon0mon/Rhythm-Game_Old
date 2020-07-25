@@ -27,7 +27,7 @@ public class Ingame_TextEffect_Manager : MonoBehaviour
     
     private void Start()
     {
-        if (SceneData.Instance.TextEffect != TextEffectEnable.NULL) TextEffect = SceneData.Instance.TextEffect;
+        if (SceneData.Instance.TextEffect != TextEffectEnable.NULL && GameObject.Find("SaveData") != null) TextEffect = SceneData.Instance.TextEffect;
         
         if (TextEffect_Hit.Length != 0)
         {

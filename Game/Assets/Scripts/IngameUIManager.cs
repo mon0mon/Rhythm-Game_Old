@@ -18,7 +18,8 @@ public class IngameUIManager : MonoBehaviour
     private IngameSFXManager _SFX;
     private Slider _BGM_Slider;
     private Slider _SFX_Slider;
-    private Slider _boss_HP_Indicator;
+    private Slider _Score_Indicator;
+    private Text _SongInfo;
         
     private Slider _progress;
     private Image _blackScreen;
@@ -52,7 +53,7 @@ public class IngameUIManager : MonoBehaviour
         _toggleTextEffect = _configWindow.transform.Find("TextEffect_Toggle").gameObject.GetComponent<Toggle>();
         _BGM = GameObject.Find("BGM").GetComponent<IngameMusicManager>();
         _SFX = GameObject.Find("SFX").GetComponent<IngameSFXManager>();
-        _boss_HP_Indicator = GameObject.Find("Boss_HP_Indicator").GetComponent<Slider>();
+        _Score_Indicator = GameObject.Find("Boss_HP_Indicator").GetComponent<Slider>();
 
         _BGM_Slider = _configWindow.transform.Find("BGM_Slider").GetComponent<Slider>();
         _SFX_Slider = _configWindow.transform.Find("SFX_Slider").GetComponent<Slider>();
@@ -60,11 +61,14 @@ public class IngameUIManager : MonoBehaviour
         _BGM_Slider.value = GameObject.Find("MainMenuMusic").GetComponent<MusicManager>().GetBGMVol();
         _SFX_Slider.value = GameObject.Find("MainMenuMusic").GetComponent<MusicManager>().GetSFXVol();
 
+        _SongInfo = GameObject.Find("Song_Info").GetComponent<Text>();
+
         _progress.minValue = 0.0f;
         _progress.maxValue = _ingameMusic.GetAudioLength();
         
-        _boss_HP_Indicator.maxValue = _GM.bossHP * 2;
-        _boss_HP_Indicator.value = _GM.bossHP;
+        _Score_Indicator.maxValue = 200;
+        _Score_Indicator.minValue = 0;
+        _Score_Indicator.value = 100;
 
         if (SceneData.Instance.TextEffect != TextEffectEnable.NULL)
         {
@@ -213,12 +217,17 @@ public class IngameUIManager : MonoBehaviour
 
     public void OnBossHPChageListener()
     {
-        _boss_HP_Indicator.value = _GM.bossHP;
+        _Score_Indicator.value = _GM.score;
     }
 
     public void OnToggleBackgroundImg()
     {
         isEnableBackground = GameObject.Find("Background_Toggle").GetComponent<Toggle>().isOn;
         GameObject.Find("BaseCanvas").GetComponent<Image>().enabled = isEnableBackground;
+    }
+
+    public void SetSongInfo(string str)
+    {
+        _SongInfo.text = str;
     }
 }

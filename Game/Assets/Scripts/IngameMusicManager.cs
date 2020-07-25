@@ -13,10 +13,11 @@ public class IngameMusicManager : MonoBehaviour
     public AudioClip Modern_Age;
     public AudioClip SciFi_Age;
     public AudioClip Clip;
-
+    
     private bool TriggerActive = false;
     private float EndSceneOpenTime = 1.5f;
     private float BGM_Vol;
+    private string _songInfo;
     
     // Start is called before the first frame update
     void Start()
@@ -25,21 +26,27 @@ public class IngameMusicManager : MonoBehaviour
         {
             case "Stage_StoneAge" :
                 Clip = Stone_Age;
+                _songInfo = "Jungle Run - SoundJay";
                 break;
             case "Stage_MiddleAge" :
                 Clip = Middle_Age;
+                _songInfo = "SongName - Artist";
                 break;
             case "Stage_ModernAge" :
                 Clip = Modern_Age;
+                _songInfo = "SongName - Artist";
                 break;
             case "Stage_SciFiAge" :
                 Clip = SciFi_Age;
+                _songInfo = "뿅뿅뿅울렐레레렐 - SellBuyMusic";
                 break;
         }
 
         AudioSource.clip = Clip;
         EndSceneOpenTime = GameObject.Find("Manager").GetComponent<IngameUIManager>().EndSceneOpenTime;
         AudioMixer.GetFloat("BGM_Vol", out BGM_Vol);
+
+        StartCoroutine(LateStart(0.01f));
     }
 
     // Update is called once per frame
@@ -114,9 +121,9 @@ public class IngameMusicManager : MonoBehaviour
         return TriggerActive;
     }
 
-    IEnumerator DelayTime(float waitTime)
+    IEnumerator LateStart(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
-        GameObject.Find("Manager").GetComponent<IngameUIManager>().EnableEndScene();
+        GameObject.Find("Manager").GetComponent<IngameUIManager>().SetSongInfo(_songInfo);
     }
 }

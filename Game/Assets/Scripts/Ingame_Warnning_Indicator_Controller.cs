@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class Ingame_Warnning_Indicator_Controller : MonoBehaviour
 {
-    public Sprite AttackSign;
-    public Sprite DodgeSign;
     public float IndicatorLiveTime = 0.2f;
 
     private Image _image;
@@ -17,16 +15,8 @@ public class Ingame_Warnning_Indicator_Controller : MonoBehaviour
         _image = gameObject.GetComponent<Image>();
     }
 
-    public void OnEnableAttackSign()
+    public void OnEnableSign()
     {
-        _image.sprite = AttackSign;
-        _image.enabled = true;
-        StartCoroutine(DisenableImage(IndicatorLiveTime));
-    }
-
-    public void OnEnableDodgeSign()
-    {
-        _image.sprite = DodgeSign;
         _image.enabled = true;
         StartCoroutine(DisenableImage(IndicatorLiveTime));
     }

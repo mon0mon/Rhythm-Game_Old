@@ -28,12 +28,14 @@ public class GameManager : MonoBehaviour
     public bool EnableLoadingScreen = true;
     public float MinLoadTime;
     public float MaxLoadTime;
-    public float maxBossHP;
-    public float bossHP = 280;
-    public float atkDamage = 10;
+    public float maxScore;
+    public float score = 100;
+    public float AddScoreAmount = 10;
+    public int DodgeFailPenalty = 3;
+    
     // Test
     public float TimeScale;
-    public float TextEffectDelayTime = 0.03f;
+    public int TextEffectDelayFrame = 5;
 
     private bool startPlaying;
     private int hitCount = 0;
@@ -42,7 +44,6 @@ public class GameManager : MonoBehaviour
     private bool isNotPlaying = false;
     private bool isSceneChange = false;
     private float tempBeat;
-    private float point;
     private bool gameEndTrigger = false;
     private float endSceneOpenTime = 1.5f;
     private bool isConfigOn = false;
@@ -120,18 +121,21 @@ public class GameManager : MonoBehaviour
                     Debug.Log("Hit on Time");
                     _ingameAnimManager.GetAction(AnimState.PlayerAttack);
                     hitCount++;
-                    bossHP -= atkDamage;
-                    point += atkDamage;
+                    score += AddScoreAmount;
                     _ingameUI.OnBossHPChageListener();
                     if (_textEffect.TextEffect == TextEffectEnable.Enable)
-                        PressedButton.GetComponent<ButtonController>().SelectTextType();
+                        StartCoroutine(PrintText(TextEffectDelayFrame, TextPrintType.Hit,
+                            PressedButton.GetComponent<ButtonController>()));
+                        // PressedButton.GetComponent<ButtonController>().SelectTextType();
                     break;
                 case TouchInputType.Swipe :
                     _ingameAnimManager.GetAction(AnimState.PlayerDodge);
                     Debug.Log("Dodge On Time");
                     dodgeCount++;
                     if (_textEffect.TextEffect == TextEffectEnable.Enable)
-                        PressedButton.GetComponent<ButtonController>().SelectTextType();
+                        StartCoroutine(PrintText(TextEffectDelayFrame, TextPrintType.Dodge,
+                            PressedButton.GetComponent<ButtonController>()));
+                        // PressedButton.GetComponent<ButtonController>().SelectTextType();
                     break;
             }
         }
@@ -149,17 +153,20 @@ public class GameManager : MonoBehaviour
                     // 미스를 출력
                     _ingameAnimManager.GetAction(AnimState.PlayerMiss);
                     if (_textEffect.TextEffect == TextEffectEnable.Enable)
-                        PressedButton.GetComponent<ButtonController>().SelectTextType(TextPrintType.Miss);
+                        StartCoroutine(PrintText(TextEffectDelayFrame, TextPrintType.Miss,
+                            PressedButton.GetComponent<ButtonController>()));
+                        // PressedButton.GetComponent<ButtonController>().SelectTextType(TextPrintType.Miss);
                     break;
                 case TouchInputType.Swipe :
                     // 플레이어 피격 모션 출력
                     _ingameAnimManager.GetAction(AnimState.PlayerDamaged);
                     // 데미지를 출력
-                    bossHP += (atkDamage * 2);
-                    point -= (atkDamage * 2);
+                    score -= (AddScoreAmount * DodgeFailPenalty);
                     _ingameUI.OnBossHPChageListener();
                     if (_textEffect.TextEffect == TextEffectEnable.Enable)
-                        PressedButton.GetComponent<ButtonController>().SelectTextType(TextPrintType.Damaged);
+                        StartCoroutine(PrintText(TextEffectDelayFrame, TextPrintType.Damaged,
+                            PressedButton.GetComponent<ButtonController>()));
+                        // PressedButton.GetComponent<ButtonController>().SelectTextType(TextPrintType.Damaged);
                     break;
                 case TouchInputType.NULL :
                     break;
@@ -174,17 +181,17 @@ public class GameManager : MonoBehaviour
         String str = null;
         ResultState state = ResultState.NULL;
         
-        if (bossHP == maxBossHP - (maxBossHP * 1.0))
+        if (score >= maxScore - (maxScore * 1))
         {
             state = ResultState.BossDead;
             str = "Boss Dead";
             Debug.Log("Boss Dead");
-        } else if (maxBossHP - (maxBossHP * 0.99) <= bossHP && bossHP < maxBossHP - (maxBossHP * 0.70))
+        } else if (maxScore - (maxScore * 0.99) <= score && score < maxScore - (maxScore * 0.70))
         {
             state = ResultState.BossRun;
             str = "Boss Run";
             Debug.Log("Boss Run");
-        } else if (maxBossHP - (maxBossHP * 0.40) <= bossHP && bossHP <= maxBossHP - (maxBossHP * 0.70))
+        } else if (maxScore - (maxScore * 0.40) <= score && score <= maxScore - (maxScore * 0.70))
         {
             state = ResultState.PlayerRun;
             str = "Player Run";
@@ -197,10 +204,10 @@ public class GameManager : MonoBehaviour
             Debug.Log("Player Failed");
         }
         
-        Debug.Log("Boss HP : " + bossHP);
-        Debug.Log("Clear : " + Math.Round((point / maxBossHP) * 100));
-        if (bossHP >= maxBossHP) gameObject.GetComponent<IngameUIManager>().GetGameResult(state, str, bossHP, 0.0f);
-        else gameObject.GetComponent<IngameUIManager>().GetGameResult(state, str, bossHP, (float)Math.Round((point / maxBossHP) * 100));
+        Debug.Log("Boss HP : " + score);
+        Debug.Log("Clear : " + Math.Round((score / maxScore) * 100));
+        if (score >= maxScore) gameObject.GetComponent<IngameUIManager>().GetGameResult(state, str, score, 0.0f);
+        else gameObject.GetComponent<IngameUIManager>().GetGameResult(state, str, score, (float)Math.Round((score / maxScore) * 100));
         StartCoroutine(Timer(endSceneOpenTime));
     }
 
@@ -208,11 +215,10 @@ public class GameManager : MonoBehaviour
     {
         hitCount = 0;
         dodgeCount = 0;
-        point = 0;
         sceneName= null;
         isNotPlaying = false;
 
-        maxBossHP = bossHP;
+        maxScore = score;
         
         GameObject.Find("SaveData").GetComponent<SceneData>().SetNextSceneName(null);
     }
@@ -294,7 +300,6 @@ public class GameManager : MonoBehaviour
 
     public void SetPressedButton(GameObject obj)
     {
-        Debug.Log("SetPressedButton : " + obj);
         PressedButton = obj;
     }
 
@@ -331,19 +336,17 @@ public class GameManager : MonoBehaviour
         gameObject.GetComponent<IngameUIManager>().EnableEndScene();
     }
 
-    IEnumerator PrintText(float waitTime, TextPrintType tp)
+    IEnumerator PrintText(int waitTime, TextPrintType tp, ButtonController btnController)
     {
-        yield return new WaitForSeconds(waitTime);
+        yield return new WaitForSeconds(waitTime * 0.016f);
         switch (tp)
         {
             case TextPrintType.Hit :
             case TextPrintType.Dodge :
-                Debug.Log("Hit or Dodge : " + PressedButton);
-                PressedButton.GetComponent<ButtonController>().SelectTextType();
+                btnController.SelectTextType();
                 break;
             default :
-                Debug.Log("Default : " + PressedButton);
-                PressedButton.GetComponent<ButtonController>().SelectTextType(tp);
+                btnController.SelectTextType(tp);
                 break;
         }
     }
