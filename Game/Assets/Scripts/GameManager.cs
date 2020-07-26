@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour
     public float score = 100;
     public float AddScoreAmount = 10;
     public int DodgeFailPenaltyMul = 3;
+    public float Touch_Exploit_tolerance_Time = 0.3f;
+    public float Touch_Exploit_Punish_Time = 0.8f;
     
     // Test
     public float TimeScale;
@@ -97,14 +99,24 @@ public class GameManager : MonoBehaviour
         if (!startPlaying && !isSceneChange)
         {
             startPlaying = true;
-            _beatScroller.setStart(true);
+            _beatScroller.SetStart(true);
             // 음악 메소드인 IngameMusicManager 호출로 변경
             _ingameMusic.PlayBGM();
         }
 
+        // 음악이 끝났을 경우 종료 화면 출력
         if (!_ingameMusic.AudioSource.isPlaying && !gameEndTrigger && _ingameMusic.CheckTrigger())
         {
             CheckHitNotes();
+            gameEndTrigger = true;
+        }
+
+        // 인게임 체력바가 0 밑으로 떨어질 경우 게임 오버
+        if (score <= 0 && !gameEndTrigger)
+        {
+            CheckHitNotes();
+            _ingameMusic.StopBGM();
+            GameObject.Find("NoteHolder").GetComponent<BeatScroller>().SetStop(true);
             gameEndTrigger = true;
         }
     }
@@ -170,7 +182,6 @@ public class GameManager : MonoBehaviour
                     break;
                 case TouchInputType.NULL :
                     break;
-                
             }
         }
     }
@@ -186,24 +197,24 @@ public class GameManager : MonoBehaviour
         if (score <= 0) score = 0;
         
         // 맘모스와 원시인 그로기 상태 확정되면 그때 추가하기
+        // 클리어 퍼센트에 따른 엔딩 분기 조절
         if (cntClear >= 100)
         {
             _ingameAnimManager.GetAction(AnimState.BossDie);
             state = ResultState.BossDead;
             str = "Boss Dead";
             Debug.Log("Boss Dead");
-        } else if (0f <= cntClear && cntClear < 100f)
+        } else if (50 <= cntClear && cntClear < 100)
         {
             state = ResultState.BossRun;
             str = "Boss Run";
             Debug.Log("Boss Run");
-        } else if (-100.0f < cntClear && cntClear < 0f)
+        } else if (0 < cntClear && cntClear < 50)
         {
             state = ResultState.PlayerRun;
             str = "Player Run";
             Debug.Log("Player Run");
-        }
-        else
+        } else
         {
             state = ResultState.PlayerFail;
             str = "Player Failed";

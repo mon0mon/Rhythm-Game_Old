@@ -45,6 +45,7 @@ public class IngameMusicManager : MonoBehaviour
         AudioSource.clip = Clip;
         EndSceneOpenTime = GameObject.Find("Manager").GetComponent<IngameUIManager>().EndSceneOpenTime;
         AudioMixer.GetFloat("BGM_Vol", out BGM_Vol);
+        AudioMixer.SetFloat("BGM_Speed", 1f);
 
         StartCoroutine(LateStart(0.01f));
     }

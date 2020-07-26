@@ -56,9 +56,11 @@ MonoBehaviour:
   maxScore: 200
   score: 100
   AddScoreAmount: 3.57
-  DodgeFailPenaltyMul: 3
+  DodgeFailPenaltyMul: 10
+  Touch_Exploit_tolerance_Time: 0.3
+  Touch_Exploit_Punish_Time: 0.8
   TimeScale: 1
-  TextEffectDelayFrame: 10
+  TextEffectDelayFrame: 5
 --- !u!114 &2533596272521858441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,7 +78,7 @@ MonoBehaviour:
   MaxLoadingTime: 6
   TransitionTime: 1
   StartTransitionOn: 1
-  TurnOnOnlyMainScene: 0
+  TurnOnOnlyInMainScene: 0
 --- !u!114 &4904458027388330703
 MonoBehaviour:
   m_ObjectHideFlags: 0

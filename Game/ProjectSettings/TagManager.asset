@@ -9,6 +9,7 @@ TagManager:
   - DeadZone
   - TextEffect
   - Trigger
+  - Dectect_Exploit_Input
   layers:
   - Default
   - TransparentFX

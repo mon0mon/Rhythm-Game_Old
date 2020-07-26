@@ -65,6 +65,7 @@ public class IngameUIManager : MonoBehaviour
         _SongInfo = GameObject.Find("Song_Info").GetComponent<Text>();
 
         _timeDropDown = _configWindow.transform.Find("Time").gameObject.GetComponent<Dropdown>();
+        _timeDropDown.value = 3;
 
         _progress.minValue = 0.0f;
         _progress.maxValue = _ingameMusic.GetAudioLength();
@@ -246,40 +247,34 @@ public class IngameUIManager : MonoBehaviour
         switch (change.value)
         {
             case 0 :
-                _GM.TimeScale = -3f;
-                time = -3f;
-                break;
-            case 1 :
-                _GM.TimeScale = -2f;
-                time = -2f;
-                break;
-            case 2 :
-                _GM.TimeScale = -1f;
-                time = -1f;
-                break;
-            case 3 :
                 _GM.TimeScale = 0f;
                 time = 0f;
+                _ingameMusic.AudioMixer.SetFloat("BGM_Speed", 0f);
                 break;
-            case 4 :
+            case 1 :
                 _GM.TimeScale = 0.25f;
                 time = 0.25f;
+                _ingameMusic.AudioMixer.SetFloat("BGM_Speed", 0.25f);
                 break;
-            case 5 :
+            case 2 :
                 _GM.TimeScale = 0.5f;
                 time = 0.5f;
+                _ingameMusic.AudioMixer.SetFloat("BGM_Speed", 0.5f);
                 break;
-            case 6 :
+            case 3 :
                 _GM.TimeScale = 1f;
                 time = 1f;
+                _ingameMusic.AudioMixer.SetFloat("BGM_Speed", 1f);
                 break;
-            case 7 :
+            case 4 :
                 _GM.TimeScale = 2f;
                 time = 2f;
+                _ingameMusic.AudioMixer.SetFloat("BGM_Speed", 2f);
                 break;
-            case 8 :
+            case 5 :
                 _GM.TimeScale = 3f;
                 time = 3f;
+                _ingameMusic.AudioMixer.SetFloat("BGM_Speed", 3f);
                 break;
         }
 

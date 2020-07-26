@@ -3860,7 +3860,7 @@ MonoBehaviour:
   MaxLoadingTime: 3
   TransitionTime: 1
   StartTransitionOn: 0
-  TurnOnOnlyMainScene: 1
+  TurnOnOnlyInMainScene: 1
 --- !u!114 &6438316102613736620
 MonoBehaviour:
   m_ObjectHideFlags: 0
