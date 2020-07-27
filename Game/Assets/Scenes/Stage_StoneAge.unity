@@ -7780,6 +7780,16 @@ PrefabInstance:
       propertyPath: Animators.Array.data[1]
       value: 
       objectReference: {fileID: 1046915094}
+    - target: {fileID: 1265126427549570884, guid: c3be1f4be0abe8b4fb711d2829f304a3,
+        type: 3}
+      propertyPath: Actor_Player
+      value: 
+      objectReference: {fileID: 1046915095}
+    - target: {fileID: 1265126427549570884, guid: c3be1f4be0abe8b4fb711d2829f304a3,
+        type: 3}
+      propertyPath: Actor_NonPlayer
+      value: 
+      objectReference: {fileID: 456952488}
     - target: {fileID: 4904458027388330698, guid: c3be1f4be0abe8b4fb711d2829f304a3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13047,7 +13057,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 46789e5fb8854404caed13a330918528, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7e5683d376873444a99c611367685587, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -13701,7 +13711,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 46789e5fb8854404caed13a330918528, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7e5683d376873444a99c611367685587, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

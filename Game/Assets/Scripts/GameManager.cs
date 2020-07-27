@@ -103,6 +103,12 @@ public class GameManager : MonoBehaviour
             // 음악 메소드인 IngameMusicManager 호출로 변경
             _ingameMusic.PlayBGM();
         }
+        
+        // 점수가 맥스를 넘겼을 경우 보스 사망 애니메이션 출력
+        if (score >= 200)
+        {
+            _ingameAnimManager.GetAction(AnimState.BossDie);
+        }
 
         // 음악이 끝났을 경우 종료 화면 출력
         if (!_ingameMusic.AudioSource.isPlaying && !gameEndTrigger && _ingameMusic.CheckTrigger())
@@ -198,29 +204,51 @@ public class GameManager : MonoBehaviour
         
         // 맘모스와 원시인 그로기 상태 확정되면 그때 추가하기
         // 클리어 퍼센트에 따른 엔딩 분기 조절
-        if (cntClear >= 100)
+        switch (SceneManager.GetActiveScene().name)
         {
-            _ingameAnimManager.GetAction(AnimState.BossDie);
-            state = ResultState.BossDead;
-            str = "Boss Dead";
-            Debug.Log("Boss Dead");
-        } else if (50 <= cntClear && cntClear < 100)
-        {
-            state = ResultState.BossRun;
-            str = "Boss Run";
-            Debug.Log("Boss Run");
-        } else if (0 < cntClear && cntClear < 50)
-        {
-            state = ResultState.PlayerRun;
-            str = "Player Run";
-            Debug.Log("Player Run");
-        } else
-        {
-            state = ResultState.PlayerFail;
-            str = "Player Failed";
-            Debug.Log("Player Failed");
+            case "Stage_StoneAge" :
+                
+                if (cntClear >= 100)
+                {
+                    state = ResultState.BossDead;
+                    str = "Boss Dead";
+                    Debug.Log("Boss Dead");
+                } else if (85 <= cntClear && cntClear < 100)
+                {
+                    state = ResultState.BossGroggy;
+                    str = "Boss Groggy";
+                    Debug.Log("Boss Groggy");
+                } else if (50 <= cntClear && cntClear < 85)
+                {
+                    state = ResultState.BossRun;
+                    str = "Boss Run";
+                    Debug.Log("Boss Run");
+                } else if (0 < cntClear && cntClear < 50)
+                {
+                    state = ResultState.PlayerRun;
+                    str = "Player Run";
+                    Debug.Log("Player Run");
+                }
+                else
+                {
+                    state = ResultState.PlayerFail;
+                    str = "Player Failed";
+                    Debug.Log("Player Failed");
+                }
+                
+                break;
+            case "Stage_MiddleAge" :
+                break;
+            case "Stage_MordernAge" :
+                break;
+            case "Stage_SciFi" :
+                break;
+            default:
+                // 잘못된 씬 이름을 적용했을 경우
+                Debug.Log("GameManager - CheckHitNotes - GetActiveSceneName : Unexcpected Value");
+                break;
         }
-        
+
         Debug.Log("Score : " + score);
         Debug.Log("Clear : " + Math.Round(((score / maxScore) * 100)) + "%");
         if (score >= maxScore) gameObject.GetComponent<IngameUIManager>().GetGameResult(state, str, score, (float)Math.Round(((score / maxScore) * 100)));
@@ -369,7 +397,7 @@ public class GameManager : MonoBehaviour
 
 public enum ResultState
 {
-    BossDead, BossRun, PlayerRun, PlayerFail, NULL
+    BossDead, BossRun, BossGroggy, PlayerRun, PlayerFail, NULL
 }
 
 public enum IsPuased

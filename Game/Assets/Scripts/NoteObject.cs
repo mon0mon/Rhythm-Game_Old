@@ -133,7 +133,6 @@ public class NoteObject : MonoBehaviour
                 }
                 break;
         }
-        Debug.Log("detectExploitInput : " + detectExploitInput);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

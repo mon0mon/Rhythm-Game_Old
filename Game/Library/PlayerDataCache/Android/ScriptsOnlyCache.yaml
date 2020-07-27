@@ -25,8 +25,6 @@ ScriptsOnlyBuild:
     - UnityEditor.U2D.Animation.BoneGizmo
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridPaintingState
-    - UnityEditor.Tilemaps.GridPaletteBrushes
-    - UnityEditor.Tilemaps.GridPalettes
     - UnityEditor.Tilemaps.SceneViewGridManager
     - UnityEditor.Tilemaps.TileDragAndDropManager
     Unity.DeviceSimulator.Editor.dll:
@@ -39,10 +37,8 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -62,8 +58,6 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Slider
     - UnityEngine.UI.Text
     - UnityEngine.UI.Toggle
-    com.unity.quicksearch.dll:
-    - Unity.QuickSearch.SearchDatabase
   sceneClasses:
     Assets/Scenes/Loading_Scene.unity:
     - Class: 1
@@ -674,7 +668,7 @@ ScriptsOnlyBuild:
     className: TMP_Asset
   - hash:
       serializedVersion: 2
-      Hash: 81fa69f2e6231bf738ae276d48fc247f
+      Hash: d30e1abc74c4dccf8611fe5f074afbd7
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: TouchManager
@@ -686,7 +680,7 @@ ScriptsOnlyBuild:
     className: ScrollRect
   - hash:
       serializedVersion: 2
-      Hash: dc701c834ba59dbcce9f71952f2587d5
+      Hash: 9ed05f4e4af19382d27b47820dd3103f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: LoadingSceneManager
@@ -926,7 +920,7 @@ ScriptsOnlyBuild:
     className: TMP_SubMesh
   - hash:
       serializedVersion: 2
-      Hash: 01bfd2c4dfe3b4ed7963fa663e9f16dd
+      Hash: 026182a9e0e3e78e32292aca20c9dc2e
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
@@ -996,4 +990,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/Main_Scene.unity
   - Assets/Scenes/Loading_Scene.unity
   - Assets/Scenes/Stage_StoneAge.unity
-  playerPath: D:/Study/GitHub/Projects/Team Project/Rhythm-Game/Game/apk/07-22_17-44.apk
+  playerPath: D:/Study/GitHub/Projects/Team Project/Rhythm-Game/Game/apk/07-26_17_11.apk
