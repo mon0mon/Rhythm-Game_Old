@@ -14,10 +14,12 @@ public class MenuButtonList : MonoBehaviour
     private Button _screen;
     private GameObject _configWindow;
     private MusicManager _MainMenuMusic;
+    private GameObject ButtonCheckImage;
     
     private string selected_Scene;
     private bool isConfigOn = false;
     private bool init_check = false;
+    private ButtonSelected _selectedButton = ButtonSelected.NULL;
 
     public SceneList SelectedScene = SceneList.NULL;
     public Sprite Default_Barbarian;
@@ -65,6 +67,13 @@ public class MenuButtonList : MonoBehaviour
         if (GameObject.Find("Screen") != null)
         {
             _screen = GameObject.Find("Screen").GetComponent<Button>();
+        }
+        
+        _selectedButton = ButtonSelected.NULL;
+        if (GameObject.Find("Config_Window") != null)
+        {
+            ButtonCheckImage = GameObject.Find("Config_Window").transform.Find("Config_Window_Image")
+                .Find("Check_Image").gameObject;
         }
     }
 
@@ -137,6 +146,7 @@ public class MenuButtonList : MonoBehaviour
         {
             ResetColor();
             ResetButtonSprite();
+            ButtonCheckImage.SetActive(false);
             GameObject.Find("Config_Window").transform.GetChild(0).gameObject.SetActive(false);
             ActiveButtons();
         }
@@ -166,13 +176,35 @@ public class MenuButtonList : MonoBehaviour
 
     public void OnClick_Exit()
     {
-        Application.Quit();
-        Debug.Log("Exit");
+        if (_selectedButton == ButtonSelected.OnClickExit)
+        {
+            Debug.Log("Exit");
+            Application.Quit();
+            return;
+        }
+        else
+        {
+            _selectedButton = ButtonSelected.OnClickExit;
+            ButtonCheckImage.transform.position = GameObject.Find("GameExit").transform.position;
+            ButtonCheckImage.SetActive(true);
+            return;
+        }
     }
-
+    
     public void OnClick_Credit()
     {
-        Debug.Log("Credit");
+        if (_selectedButton == ButtonSelected.OnClickCredit)
+        {
+            Debug.Log("Credit");
+            return;
+        } 
+        else
+        {
+            _selectedButton = ButtonSelected.OnClickCredit;
+            ButtonCheckImage.transform.position = GameObject.Find("Credit").transform.position;
+            ButtonCheckImage.SetActive(true);
+            return;
+        }
     }
 
     public void OnToggle_Animation()
@@ -247,5 +279,13 @@ public class MenuButtonList : MonoBehaviour
         GameObject.Find("Middle_Age").GetComponent<Button>().interactable = true;
         GameObject.Find("Modern_Age").GetComponent<Button>().interactable = true;
         GameObject.Find("Sci-Fi_Age").GetComponent<Button>().interactable = true;
+        _selectedButton = ButtonSelected.NULL;
+        ButtonCheckImage.SetActive(false);
     }
+}
+
+public enum ButtonSelected
+{
+    OnClickCredit, OnClickExit, OnClickRestart, OnClickMainMenu,
+    NULL
 }

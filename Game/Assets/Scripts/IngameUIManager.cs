@@ -25,6 +25,7 @@ public class IngameUIManager : MonoBehaviour
     private Image _blackScreen;
     private Toggle _toggleTextEffect;
     private Dropdown _timeDropDown;
+    private GameObject ButtonCheckImage;
 
     private bool isEnd = false;
     private bool isConfigOn = false;
@@ -37,6 +38,7 @@ public class IngameUIManager : MonoBehaviour
     private float score;
     private float clearPercentage;
     private bool isEnableBackground;
+    private ButtonSelected _selectedButton = ButtonSelected.NULL;
 
     public float EndSceneOpenTime = 1.5f;
 
@@ -73,6 +75,11 @@ public class IngameUIManager : MonoBehaviour
         _Score_Indicator.maxValue = 200;
         _Score_Indicator.minValue = 0;
         _Score_Indicator.value = 100;
+
+        if (_configWindow != null)
+        {
+            ButtonCheckImage = _configWindow.transform.Find("Check_Image").gameObject;
+        }
 
         if (SceneData.Instance.TextEffect != TextEffectEnable.NULL)
         {
@@ -129,6 +136,7 @@ public class IngameUIManager : MonoBehaviour
         }
         else
         {
+            ButtonCheckImage.SetActive(false);
             _blackScreen.enabled = false;
             _configWindow.SetActive(false);
             _ingameMusic.UnPauseBGM();
@@ -143,10 +151,20 @@ public class IngameUIManager : MonoBehaviour
     {
         if (!btnTriggerOn)
         {
-            _GM.NextScene = SceneList.StoneAge;
-            _GM.EnableLoadingScreen = false;
-            _GM.MoveNextScene();
-            btnTriggerOn = true;
+            if (_selectedButton == ButtonSelected.OnClickRestart)
+            {
+                Debug.Log("Restart");
+                _GM.NextScene = SceneList.StoneAge;
+                _GM.EnableLoadingScreen = false;
+                _GM.MoveNextScene();
+                btnTriggerOn = true;
+            } 
+            else
+            {
+                _selectedButton = ButtonSelected.OnClickRestart;
+                ButtonCheckImage.transform.position = GameObject.Find("Restart").transform.position;
+                ButtonCheckImage.SetActive(true);
+            }
         }
     }
 
@@ -154,10 +172,20 @@ public class IngameUIManager : MonoBehaviour
     {
         if (!btnTriggerOn)
         {
-            _GM.NextScene = SceneList.Main_Scene;
-            _GM.EnableLoadingScreen = false;
-            _GM.MoveNextScene();
-            btnTriggerOn = true;
+            if (_selectedButton == ButtonSelected.OnClickMainMenu)
+            {
+                Debug.Log("Restart");
+                _GM.NextScene = SceneList.Main_Scene;
+                _GM.EnableLoadingScreen = false;
+                _GM.MoveNextScene();
+                btnTriggerOn = true;
+            } 
+            else
+            {
+                _selectedButton = ButtonSelected.OnClickMainMenu;
+                ButtonCheckImage.transform.position = GameObject.Find("ToMainMenu").transform.position;
+                ButtonCheckImage.SetActive(true);
+            }
         }
     }
 

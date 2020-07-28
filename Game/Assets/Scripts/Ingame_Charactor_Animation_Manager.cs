@@ -15,6 +15,8 @@ public class Ingame_Charactor_Animation_Manager : MonoBehaviour
 
     private Ingame_Charactor_Animation_Controller Mammoth;
     private Ingame_Charactor_Animation_Controller Babarian;
+    private Ingame_Warnning_Indicator_Controller Player_Hit_Indicator;
+    private ScoreBarAnimController ScoreBarAnimController;
     
     // Start is called before the first frame update
     void Start()
@@ -25,8 +27,11 @@ public class Ingame_Charactor_Animation_Manager : MonoBehaviour
                 ActiveScene = SceneList.StoneAge;
                 Mammoth = GameObject.Find("Mammoth").GetComponent<Ingame_Charactor_Animation_Controller>();
                 Babarian = GameObject.Find("Babarian").GetComponent<Ingame_Charactor_Animation_Controller>();
+                Player_Hit_Indicator = GameObject.Find("Player_Warnning_Indicator")
+                    .GetComponent<Ingame_Warnning_Indicator_Controller>();
                 Actor_Player = Babarian;
                 Actor_NonPlayer = Mammoth;
+                ScoreBarAnimController = GameObject.Find("Boss_HP_Indicator").GetComponent<ScoreBarAnimController>();
                 break;
             case "Stage_MiddleAge" :
                 ActiveScene = SceneList.MiddleAge;
@@ -178,7 +183,9 @@ public class Ingame_Charactor_Animation_Manager : MonoBehaviour
                         if (Mammoth != null && Babarian != null)
                         {
                             Babarian.TriggerAttack();
+                            Player_Hit_Indicator.PlayHitAnim();
                             Mammoth.TriggerDamage();
+                            ScoreBarAnimController.PlayOnChangeScoreBar();
                         }
                         else
                         {
@@ -200,6 +207,7 @@ public class Ingame_Charactor_Animation_Manager : MonoBehaviour
                         if (Mammoth != null && Babarian != null)
                         {
                             Babarian.TriggerDamage();
+                            ScoreBarAnimController.PlayOnChangeScoreBar();
                         }
                         else
                         {

@@ -155,7 +155,7 @@ public class NoteObject : MonoBehaviour
             {
                 case "Trigger_Tap" :
                     _GM.GetComponent<Ingame_Charactor_Animation_Manager>().Actor_Player.SetAttackReady();
-                    // _player_Warnning_Controller.OnEnableSign();
+                    _player_Warnning_Controller.PlayInitAnim();
                     break;
                 case "Trigger_Swipe" :
                     _GM.GetComponent<Ingame_Charactor_Animation_Manager>().Actor_NonPlayer.SetAttackReady();
@@ -217,7 +217,7 @@ public class NoteObject : MonoBehaviour
             switch (other.name)
             {
                 case "Trigger_Tap" :
-                    _player_Warnning_Controller.OnEnableSign();
+                    // _player_Warnning_Controller.OnEnableSign();
                     break;
                 case "Trigger_Swipe" :
                     _GM.GetComponent<Ingame_Charactor_Animation_Manager>().Actor_NonPlayer.SetDefault();

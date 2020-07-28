@@ -31,6 +31,7 @@ public class TouchManager : MonoBehaviour
     public GameObject btnSwipe_Left;
 
     public ButtonPressed ButtonPressed;
+    public bool DebugingOption = false;
 
     void Start()
     {
@@ -89,7 +90,6 @@ public class TouchManager : MonoBehaviour
 
                 case TouchPhase.Moved:
                     time += Time.deltaTime;
-                    // Debug.Log("Time : " + time);
 
                     if (time >= 0.5f)
                     {
@@ -157,12 +157,12 @@ public class TouchManager : MonoBehaviour
                                 case 1:
                                     btnTap_Right.GetComponent<ButtonController>().ButtonPressedImage();
                                     ButtonPressed = ButtonPressed.Button_Tab_Right;
-                                    Debug.Log("ButtonPressed.Button_Tab_Right");
+                                    if (DebugingOption) Debug.Log("ButtonPressed.Button_Tab_Right");
                                     break;
                                 case -1:
                                     btnTap_Left.GetComponent<ButtonController>().ButtonPressedImage();
                                     ButtonPressed = ButtonPressed.Button_Tab_Left;
-                                    Debug.Log("ButtonPressed.Button_Tab_Left");
+                                    if (DebugingOption) Debug.Log("ButtonPressed.Button_Tab_Left");
                                     break;
                             }
                         }
@@ -171,7 +171,7 @@ public class TouchManager : MonoBehaviour
                         {
                             btnTap.GetComponent<ButtonController>().ButtonPressedImage();
                             ButtonPressed = ButtonPressed.Button_Tab;
-                            Debug.Log("ButtonPressed.Button_Tab");
+                            if (DebugingOption) Debug.Log("ButtonPressed.Button_Tab");
                         }
                         
                         // DisplayButtonDefault();
@@ -194,12 +194,12 @@ public class TouchManager : MonoBehaviour
                                 case 1:
                                     btnSwipe_Right.GetComponent<ButtonController>().ButtonPressedImage();
                                     ButtonPressed = ButtonPressed.Button_Swipe_Right;
-                                    Debug.Log("ButtonPressed.Button_Swipe_Right");
+                                    if (DebugingOption) Debug.Log("ButtonPressed.Button_Swipe_Right");
                                     break;
                                 case -1:
                                     btnSwipe_Left.GetComponent<ButtonController>().ButtonPressedImage();
                                     ButtonPressed = ButtonPressed.Button_Swipe_Left;
-                                    Debug.Log("ButtonPressed.Button_Swipe_Left");
+                                    if (DebugingOption) Debug.Log("ButtonPressed.Button_Swipe_Left");
                                     break;
                             }
                         }
@@ -208,7 +208,7 @@ public class TouchManager : MonoBehaviour
                             btnSwipe.GetComponent<ButtonController>().ButtonPressedImage();
                             ButtonPressed = ButtonPressed.Button_Swipe;
                             ResetButtonTapSprite();
-                            Debug.Log("ButtonPressed.Button_Swipe");
+                            if (DebugingOption) Debug.Log("ButtonPressed.Button_Swipe");
                         }
                         // DisplayButtonDefault();
                         isTap = false;
