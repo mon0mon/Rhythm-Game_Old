@@ -8,18 +8,21 @@ public class Ingame_TextEffect_Controller : MonoBehaviour
 
     private Ingame_TextEffect_Manager _textEffectManager;
     private Transform _pivot;
+    private Animator _animator;
     
     private bool isEnable = false;
     private bool isPaused;
     private float initTime;
     private float lifeTime;
     private float speed = 2.0f;
+    private bool isAnimPlay = false;
 
     void Start()
     {
         _textEffectManager = GameObject.Find("Manager").GetComponent<Ingame_TextEffect_Manager>();
 
         speed = _textEffectManager.GetTextEffectSpeed();
+        _animator = gameObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -27,10 +30,34 @@ public class Ingame_TextEffect_Controller : MonoBehaviour
     {
         if (!isPaused)
         {
-            if (isEnable && lifeTime >= initTime)
+            if (isEnable && lifeTime <= initTime)
             {
                 initTime += Time.deltaTime;
-                transform.Translate(Vector3.up * Time.deltaTime * speed);
+                Debug.Log("Left Time : " + (lifeTime - initTime));
+                
+                if (!isAnimPlay)
+                {
+                    _animator.SetTrigger("TrgAction");
+                    // switch (Type)
+                    // {
+                    //     case TextEffectType.TextEffect_Hit :
+                    //         _animator.SetTrigger("TrgHit");
+                    //         break;
+                    //     case TextEffectType.TextEffect_Dodge :
+                    //         _animator.SetTrigger("TrgDodge");
+                    //         break;
+                    //     case TextEffectType.TextEffect_Miss :
+                    //         _animator.SetTrigger("TrgMiss");
+                    //         break;
+                    //     case TextEffectType.TextEffect_Damaged :
+                    //         _animator.SetTrigger("TrgDamaged");
+                    //         break;
+                    //     default :
+                    //         Debug.Log("Ingame_TextEffect_Controller - Updata - Is Animation Switch : Unexpected Value Excpetion");
+                    //         break;
+                    // }
+                    isAnimPlay = true;
+                }
             }
             else
             {

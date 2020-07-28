@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7607663463806164294}
   - component: {fileID: 7607663463806164293}
   - component: {fileID: 7607663463806164292}
+  - component: {fileID: 8730102085252227325}
   m_Layer: 5
   m_Name: TextEffect_Miss
   m_TagString: TextEffect
@@ -87,3 +88,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 1
+--- !u!95 &8730102085252227325
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7607663463806164290}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e1fe210bd9c816d4f814753c52d6164a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

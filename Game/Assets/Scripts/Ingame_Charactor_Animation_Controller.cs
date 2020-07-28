@@ -19,8 +19,8 @@ public class Ingame_Charactor_Animation_Controller : MonoBehaviour
 
     public void TriggerAttack()
     {
-        _animator.SetBool("isReady", false);
         _animator.SetTrigger("Attack");
+        _animator.SetBool("isReady", false);
     }
 
     public void TriggerDodge()
