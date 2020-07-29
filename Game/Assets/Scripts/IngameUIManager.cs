@@ -78,7 +78,7 @@ public class IngameUIManager : MonoBehaviour
 
         if (_configWindow != null)
         {
-            ButtonCheckImage = _configWindow.transform.Find("Check_Image").gameObject;
+            ButtonCheckImage = GameObject.Find("Settings").transform.Find("Check_Image").gameObject;
         }
 
         if (SceneData.Instance.TextEffect != TextEffectEnable.NULL)

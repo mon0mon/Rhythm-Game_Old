@@ -3900,8 +3900,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NextScene: 8
   EnableLoadingScreen: 1
-  MinLoadTime: 1.5
-  MaxLoadTime: 2
+  MinLoadTime: 3.5
+  MaxLoadTime: 5
   EnableStartTransition: 1
 --- !u!4 &3289872817968355546
 Transform:
@@ -3935,6 +3935,7 @@ MonoBehaviour:
   TransitionTime: 1
   StartTransitionOn: 0
   TurnOnOnlyInMainScene: 1
+  TurnOnLoadingAnimation: 0
 --- !u!114 &6438316102613736620
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -67,6 +67,8 @@
      <Compile Include="Assets\Scripts\IngameUIManager.cs" />
      <Compile Include="Assets\Scripts\Ingame_Charactor_Animation_Controller.cs" />
      <Compile Include="Assets\Scripts\Ingame_Charactor_Animation_Manager.cs" />
+     <Compile Include="Assets\Scripts\Ingame_SFX_Controller.cs" />
+     <Compile Include="Assets\Scripts\Ingame_SFX_List.cs" />
      <Compile Include="Assets\Scripts\Ingame_TextEffect_Controller.cs" />
      <Compile Include="Assets\Scripts\Ingame_TextEffect_Manager.cs" />
      <Compile Include="Assets\Scripts\Ingame_Warnning_Indicator_Controller.cs" />
@@ -75,6 +77,7 @@
      <Compile Include="Assets\Scripts\MenuManger.cs" />
      <Compile Include="Assets\Scripts\MusicManager.cs" />
      <Compile Include="Assets\Scripts\NoteObject.cs" />
+     <Compile Include="Assets\Scripts\SFXManager.cs" />
      <Compile Include="Assets\Scripts\SceneAnimationManager.cs" />
      <Compile Include="Assets\Scripts\SceneData.cs" />
      <Compile Include="Assets\Scripts\ScoreBarAnimController.cs" />

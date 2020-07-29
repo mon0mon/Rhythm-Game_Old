@@ -13,6 +13,7 @@ public class LoadingSceneManager : MonoBehaviour
     public float TransitionTime = 1f;
     public bool StartTransitionOn = true;
     public bool TurnOnOnlyInMainScene = false;
+    public bool TurnOnLoadingAnimation = false;
 
     private static LoadingSceneManager instance = null;
 
@@ -22,6 +23,7 @@ public class LoadingSceneManager : MonoBehaviour
     private bool canOpen = true;
     private bool isSceneNameSet = false;
     private static string nextSceneName;
+    private GameObject LoadingScreen;
 
     public enum SceneList
     {
@@ -55,6 +57,30 @@ public class LoadingSceneManager : MonoBehaviour
         if (AutoLoading)
         {
             StartCoroutine("Load");
+        }
+
+        if (TurnOnLoadingAnimation)
+        {
+            if (GameObject.Find("LoadingAnimation").transform.Find("LoadingScreen").gameObject != null)
+            {
+                LoadingScreen = GameObject.Find("LoadingAnimation").transform.Find("LoadingScreen").gameObject;
+                LoadingScreen.SetActive(true);
+                string sceneName = null;
+                
+                switch (str)
+                {
+                    case "Scenes/Stage_StoneAge" :
+                        Debug.Log("str : " + str);
+                        sceneName = "StoneAge";
+                        break;
+                    default :
+                        Debug.Log("Default");
+                        Debug.Log("str : " + str);
+                        return;
+                }
+
+                StartCoroutine(LoadingScreenTimer(0.65f, sceneName));
+            }
         }
     }
 
@@ -126,6 +152,12 @@ public class LoadingSceneManager : MonoBehaviour
         }
 
         yield return null;
+    }
+
+    IEnumerator LoadingScreenTimer(float waitTime, string str)
+    {
+        yield return new WaitForSeconds(waitTime);
+        LoadingScreen.GetComponent<Animator>().SetTrigger(str);
     }
 
     public float RandomNumber(float a, float b)
