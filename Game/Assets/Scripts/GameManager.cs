@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     private Ingame_TextEffect_Manager _textEffect;
     private IngameUIManager _ingameUI;
     private Ingame_Charactor_Animation_Manager _ingameAnimManager;
+    private IngameSFXManager _SFXManager;
 
     private GameObject PressedButton;
 
@@ -138,6 +139,8 @@ public class GameManager : MonoBehaviour
                 case TouchInputType.Tab :
                     Debug.Log("Hit on Time");
                     _ingameAnimManager.GetAction(AnimState.PlayerAttack);
+                    _ingameSFX.PlayStoneAgeSFX(StoneAge_SFX.Babarian_Attack);
+                    _ingameSFX.PlayStoneAgeSFX(StoneAge_SFX.Mammoth_Damaged);
                     hitCount++;
                     score += AddScoreAmount;
                     _ingameUI.OnBossHPChageListener();
@@ -148,6 +151,7 @@ public class GameManager : MonoBehaviour
                     break;
                 case TouchInputType.Swipe :
                     _ingameAnimManager.GetAction(AnimState.PlayerDodge);
+                    _ingameSFX.PlayStoneAgeSFX(StoneAge_SFX.Babarian_Dodge);
                     Debug.Log("Dodge On Time");
                     dodgeCount++;
                     if (_textEffect.TextEffect == TextEffectEnable.Enable)
@@ -178,6 +182,7 @@ public class GameManager : MonoBehaviour
                 case TouchInputType.Swipe :
                     // 플레이어 피격 모션 출력
                     _ingameAnimManager.GetAction(AnimState.PlayerDamaged);
+                    _ingameSFX.PlayStoneAgeSFX(StoneAge_SFX.Mammoth_Attack);
                     // 데미지를 출력
                     score -= (AddScoreAmount * DodgeFailPenaltyMul);
                     _ingameUI.OnBossHPChageListener();

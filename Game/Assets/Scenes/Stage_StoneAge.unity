@@ -3660,7 +3660,7 @@ GameObject:
   - component: {fileID: 1059183131}
   - component: {fileID: 1059183132}
   m_Layer: 0
-  m_Name: Ingame_SFX_4
+  m_Name: Babarian_Dodge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3691,7 +3691,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 4930854594181936726, guid: 15f9ba3cfd1c3f74ab516d546e6ef7e4,
     type: 2}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: ca89329f9c871f1429c8443b3b552408, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -4088,7 +4088,7 @@ GameObject:
   - component: {fileID: 1154886782}
   - component: {fileID: 1154886783}
   m_Layer: 0
-  m_Name: Ingame_SFX_1
+  m_Name: Mammoth_Attack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4119,7 +4119,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 4930854594181936726, guid: 15f9ba3cfd1c3f74ab516d546e6ef7e4,
     type: 2}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 0f34a17a7062d934291eb64450354b1a, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -5786,7 +5786,7 @@ GameObject:
   - component: {fileID: 1632198667}
   - component: {fileID: 1632198668}
   m_Layer: 0
-  m_Name: Ingame_SFX_2
+  m_Name: Mammoth_Damaged
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5817,7 +5817,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 4930854594181936726, guid: 15f9ba3cfd1c3f74ab516d546e6ef7e4,
     type: 2}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 5c6be8af0c8235f44a84f064cc27b89b, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -5927,7 +5927,7 @@ GameObject:
   - component: {fileID: 1645546291}
   - component: {fileID: 1645546292}
   m_Layer: 0
-  m_Name: Ingame_SFX_3
+  m_Name: Babarian_Attack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5958,7 +5958,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 4930854594181936726, guid: 15f9ba3cfd1c3f74ab516d546e6ef7e4,
     type: 2}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 092ea76c091565a4f9e84447741af5d9, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -6603,7 +6603,7 @@ GameObject:
   - component: {fileID: 1786310303}
   - component: {fileID: 1786310304}
   m_Layer: 0
-  m_Name: Ingame_SFX_5
+  m_Name: Babarian_Aim
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6634,7 +6634,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 4930854594181936726, guid: 15f9ba3cfd1c3f74ab516d546e6ef7e4,
     type: 2}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: d0046727b98c8f341bbcdee7c7d9a57f, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

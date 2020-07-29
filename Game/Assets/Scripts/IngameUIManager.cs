@@ -16,6 +16,7 @@ public class IngameUIManager : MonoBehaviour
     private Ingame_TextEffect_Manager _textEffect;
     private IngameMusicManager _BGM;
     private IngameSFXManager _SFX;
+    private SFXManager _MenuSFX;
     private Slider _BGM_Slider;
     private Slider _SFX_Slider;
     private Slider _Score_Indicator;
@@ -56,6 +57,7 @@ public class IngameUIManager : MonoBehaviour
         _toggleTextEffect = _configWindow.transform.Find("TextEffect_Toggle").gameObject.GetComponent<Toggle>();
         _BGM = GameObject.Find("BGM").GetComponent<IngameMusicManager>();
         _SFX = GameObject.Find("SFX").GetComponent<IngameSFXManager>();
+        _MenuSFX = GameObject.Find("MainMenuSFX").GetComponent<SFXManager>();
         _Score_Indicator = GameObject.Find("Boss_HP_Indicator").GetComponent<Slider>();
 
         _BGM_Slider = _configWindow.transform.Find("BGM_Slider").GetComponent<Slider>();
@@ -158,12 +160,14 @@ public class IngameUIManager : MonoBehaviour
                 _GM.EnableLoadingScreen = false;
                 _GM.MoveNextScene();
                 btnTriggerOn = true;
+                _MenuSFX.PlayLoadingSFX();
             } 
             else
             {
                 _selectedButton = ButtonSelected.OnClickRestart;
                 ButtonCheckImage.transform.position = GameObject.Find("Restart").transform.position;
                 ButtonCheckImage.SetActive(true);
+                _MenuSFX.PlayButtonClickSFX();
             }
         }
     }
@@ -179,12 +183,14 @@ public class IngameUIManager : MonoBehaviour
                 _GM.EnableLoadingScreen = false;
                 _GM.MoveNextScene();
                 btnTriggerOn = true;
+                _MenuSFX.PlayLoadingSFX();
             } 
             else
             {
                 _selectedButton = ButtonSelected.OnClickMainMenu;
                 ButtonCheckImage.transform.position = GameObject.Find("ToMainMenu").transform.position;
                 ButtonCheckImage.SetActive(true);
+                _MenuSFX.PlayButtonClickSFX();
             }
         }
     }

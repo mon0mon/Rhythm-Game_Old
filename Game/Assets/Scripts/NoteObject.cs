@@ -14,6 +14,7 @@ public class NoteObject : MonoBehaviour
     private Ingame_Warnning_Indicator_Controller _player_Warnning_Controller;
     private Ingame_Warnning_Indicator_Controller _npc_Warnning_Controller;
     private TouchManager _touchManager;
+    private IngameSFXManager _SFXManager;
 
     private bool isDeleted = false;
     private bool canBePressed;
@@ -32,6 +33,7 @@ public class NoteObject : MonoBehaviour
         _player_Warnning_Controller = GameObject.Find("Player_Warnning_Indicator").GetComponent<Ingame_Warnning_Indicator_Controller>();
         _npc_Warnning_Controller = GameObject.Find("NPC_Warnning_Indicator").GetComponent<Ingame_Warnning_Indicator_Controller>();
         _touchManager = TouchManager.Instance;
+        _SFXManager = GameObject.Find("SFX").GetComponent<IngameSFXManager>();
         
         detectExploitInput = false;
         checkCount = 0;
@@ -156,6 +158,7 @@ public class NoteObject : MonoBehaviour
                 case "Trigger_Tap" :
                     _GM.GetComponent<Ingame_Charactor_Animation_Manager>().Actor_Player.SetAttackReady();
                     _player_Warnning_Controller.PlayInitAnim();
+                    _SFXManager.PlayStoneAgeSFX(StoneAge_SFX.Babarian_Aim);
                     break;
                 case "Trigger_Swipe" :
                     _GM.GetComponent<Ingame_Charactor_Animation_Manager>().Actor_NonPlayer.SetAttackReady();

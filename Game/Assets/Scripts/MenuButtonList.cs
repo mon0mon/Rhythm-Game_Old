@@ -20,6 +20,7 @@ public class MenuButtonList : MonoBehaviour
     private bool isConfigOn = false;
     private bool init_check = false;
     private ButtonSelected _selectedButton = ButtonSelected.NULL;
+    private SFXManager _MenuSFX;
 
     public SceneList SelectedScene = SceneList.NULL;
     public Sprite Default_Barbarian;
@@ -75,6 +76,11 @@ public class MenuButtonList : MonoBehaviour
             ButtonCheckImage = GameObject.Find("Config_Window").transform.Find("Config_Window_Image")
                 .Find("Check_Image").gameObject;
         }
+
+        if (GameObject.Find("MainMenuSFX").GetComponent<SFXManager>() != null)
+        {
+            _MenuSFX = GameObject.Find("MainMenuSFX").GetComponent<SFXManager>();
+        }
     }
 
     void Update()
@@ -91,6 +97,7 @@ public class MenuButtonList : MonoBehaviour
         _menuManger.NextScene = MenuManger.SceneList.StoneAge;
         SelectedScene = SceneList.StoneAge;
         ChangeButtonSprite();
+        _MenuSFX.PlayButtonClickSFX();
     }
     
     public void OnClick_MiddleAge()
@@ -99,6 +106,7 @@ public class MenuButtonList : MonoBehaviour
         _menuManger.NextScene = MenuManger.SceneList.MiddleAge;
         SelectedScene = SceneList.MiddleAge;
         ChangeButtonSprite();
+        _MenuSFX.PlayButtonClickSFX();
     }
     
     public void OnClick_ModernAge()
@@ -107,6 +115,7 @@ public class MenuButtonList : MonoBehaviour
         _menuManger.NextScene = MenuManger.SceneList.ModernAge;
         SelectedScene = SceneList.ModernAge;
         ChangeButtonSprite();
+        _MenuSFX.PlayButtonClickSFX();
     }
     
     public void OnClick_SciFi()
@@ -115,11 +124,13 @@ public class MenuButtonList : MonoBehaviour
         _menuManger.NextScene = MenuManger.SceneList.SciFi;
         SelectedScene = SceneList.SciFi;
         ChangeButtonSprite();
+        _MenuSFX.PlayButtonClickSFX();
     }
 
     public void OnClick_GameStart()
     {
         _menuManger.MoveNextScene();
+        _MenuSFX.PlayLoadingSFX();
         if (SelectedScene != SceneList.NULL)
         {
             GameObject.Find("MainMenuMusic").GetComponent<MusicManager>().StopMainMenuMusic();
@@ -180,6 +191,7 @@ public class MenuButtonList : MonoBehaviour
         {
             Debug.Log("Exit");
             Application.Quit();
+            _MenuSFX.PlayLoadingSFX();
             return;
         }
         else
@@ -187,6 +199,7 @@ public class MenuButtonList : MonoBehaviour
             _selectedButton = ButtonSelected.OnClickExit;
             ButtonCheckImage.transform.position = GameObject.Find("GameExit").transform.position;
             ButtonCheckImage.SetActive(true);
+            _MenuSFX.PlayButtonClickSFX();
             return;
         }
     }
@@ -203,6 +216,7 @@ public class MenuButtonList : MonoBehaviour
             _selectedButton = ButtonSelected.OnClickCredit;
             ButtonCheckImage.transform.position = GameObject.Find("Credit").transform.position;
             ButtonCheckImage.SetActive(true);
+            _MenuSFX.PlayButtonClickSFX();
             return;
         }
     }

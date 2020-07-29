@@ -70,7 +70,6 @@ public class LoadingSceneManager : MonoBehaviour
                 switch (str)
                 {
                     case "Scenes/Stage_StoneAge" :
-                        Debug.Log("str : " + str);
                         sceneName = "StoneAge";
                         break;
                     default :

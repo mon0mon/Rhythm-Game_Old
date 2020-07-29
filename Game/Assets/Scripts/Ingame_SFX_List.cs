@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Ingame_SFX_List : MonoBehaviour
 {
+    public AudioClip clip;
+    
     // Start is called before the first frame update
     void Start()
     {
