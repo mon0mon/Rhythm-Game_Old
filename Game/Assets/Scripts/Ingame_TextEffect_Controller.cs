@@ -120,6 +120,7 @@ public class Ingame_TextEffect_Controller : MonoBehaviour
                 break;
         }
         isEnable = false;
+        isAnimPlay = false;
     }
 
     public void SetTextEffectStatus(bool check)

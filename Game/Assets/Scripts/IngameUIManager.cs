@@ -129,6 +129,7 @@ public class IngameUIManager : MonoBehaviour
 
     public void EnableConfigWindow()
     {
+        _MenuSFX.PlayLoadingSFX();
         if (!isConfigOn)
         {
             _blackScreen.enabled = true;

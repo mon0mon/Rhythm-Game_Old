@@ -10,6 +10,7 @@ public class MenuManger : MonoBehaviour
     private static MenuManger instance = null;
     private SceneData _sceneData;
     private LoadingSceneManager _loading;
+    private SFXManager _SFXManager;
     
     public SceneList NextScene = SceneList.NULL;
     public bool EnableLoadingScreen = false;
@@ -44,6 +45,7 @@ public class MenuManger : MonoBehaviour
         _loading = gameObject.GetComponent<LoadingSceneManager>();
         _sceneData = GameObject.Find("SaveData").GetComponent<SceneData>();
         _sceneData.ClearSceneInfo();
+        _SFXManager = GameObject.Find("MainMenuSFX").GetComponent<SFXManager>();
         StartCoroutine(LateStart(0.01f));
         StopAllCoroutines();
 
@@ -70,6 +72,7 @@ public class MenuManger : MonoBehaviour
     public void MoveNextScene()
     {
         // MainMenuAnimation 종료
+        _SFXManager.PlayLoadingSFX();
         _sceneData.transform.GetComponentInChildren<AnimationManager>().enabled = false;
         loadingTrigger = true;
         if (EnableLoadingScreen)

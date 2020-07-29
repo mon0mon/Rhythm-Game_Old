@@ -141,6 +141,7 @@ public class MenuButtonList : MonoBehaviour
     {
         if (!isConfigOn)
         {
+            _MenuSFX.PlayLoadingSFX();
             SetButtonColorDeactive(); 
             GameObject.Find("Config_Window").transform.GetChild(0).gameObject.SetActive(true);
             GameObject.Find("Background_Animation_Toggle").GetComponent<Toggle>().isOn = GameObject.Find("SaveData")
@@ -155,6 +156,7 @@ public class MenuButtonList : MonoBehaviour
         }
         else
         {
+            _MenuSFX.PlayLoadingSFX();
             ResetColor();
             ResetButtonSprite();
             ButtonCheckImage.SetActive(false);
