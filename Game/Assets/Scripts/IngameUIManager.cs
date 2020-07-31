@@ -272,10 +272,10 @@ public class IngameUIManager : MonoBehaviour
     public void OnToggleTextEffect()
     {
         textEffectTrigger = _toggleTextEffect.isOn;
-        if (!textEffectTrigger)
-        {
-            _textEffect.ResetPosition();
-        }
+        // if (!textEffectTrigger)
+        // {
+        //     _textEffect.ResetPosition();
+        // }
         _GM.ToggleTextEffect(textEffectTrigger);
         switch (textEffectTrigger)
         {

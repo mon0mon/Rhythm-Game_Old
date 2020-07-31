@@ -58,55 +58,56 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\EditablePath\BezierUtility.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\EditablePath\ControlPoint.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\EditablePath\EditablePath.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\EditablePath\EditablePathController.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\EditablePath\EditablePathExtensions.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\EditablePath\EditablePathUtility.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\EditablePath\IEditablePath.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\EditablePath\IEditablePathController.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\EditablePath\ISnapping.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\EditablePath\IUndoObject.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\EditablePath\MultipleEditablePathController.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\EditablePath\Snapping.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\EditorTool\GenericScriptablePath.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\EditorTool\GenericScriptablePathInspector.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\EditorTool\PathComponentEditor.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\EditorTool\PathEditorTool.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\EditorTool\PathEditorToolExtensions.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\EditorTool\ScriptableData.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\EditorTool\ScriptablePath.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\EditorTool\ScriptablePathInspector.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\IMGUI\CreatePointAction.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\IMGUI\Drawer.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\IMGUI\GUIFramework\ClickAction.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\IMGUI\GUIFramework\CommandAction.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\IMGUI\GUIFramework\Control.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\IMGUI\GUIFramework\DefaultControl.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\IMGUI\GUIFramework\GUIAction.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\IMGUI\GUIFramework\GUIState.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\IMGUI\GUIFramework\GUISystem.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\IMGUI\GUIFramework\GenericControl.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\IMGUI\GUIFramework\GenericDefaultControl.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\IMGUI\GUIFramework\HoveredControlAction.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\IMGUI\GUIFramework\IGUIState.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\IMGUI\GUIFramework\LayoutData.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\IMGUI\GUIFramework\SliderAction.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\IMGUI\IDrawer.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\IMGUI\PathEditor.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\IMGUI\RectSelector.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\Selection\ISelectable.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\Selection\ISelection.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\Selection\ISelector.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\Selection\IndexedSelection.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\Selection\PointRectSelector.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\Selection\SerializableSelection.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\Shapes\IShape.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\Shapes\Polygon.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\Shapes\ShapeExtensions.cs" />
-     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\Shapes\Spline.cs" />
-     <None Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.4\Editor\Unity.2D.Path.Editor.asmdef" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\EditablePath\BezierUtility.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\EditablePath\ControlPoint.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\EditablePath\EditablePath.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\EditablePath\EditablePathController.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\EditablePath\EditablePathExtensions.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\EditablePath\EditablePathUtility.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\EditablePath\IEditablePath.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\EditablePath\IEditablePathController.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\EditablePath\ISnapping.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\EditablePath\IUndoObject.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\EditablePath\MultipleEditablePathController.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\EditablePath\Snapping.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\EditorTool\AssemblyInfo.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\EditorTool\GenericScriptablePath.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\EditorTool\GenericScriptablePathInspector.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\EditorTool\PathComponentEditor.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\EditorTool\PathEditorTool.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\EditorTool\PathEditorToolExtensions.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\EditorTool\ScriptableData.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\EditorTool\ScriptablePath.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\EditorTool\ScriptablePathInspector.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\IMGUI\CreatePointAction.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\IMGUI\Drawer.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\IMGUI\GUIFramework\ClickAction.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\IMGUI\GUIFramework\CommandAction.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\IMGUI\GUIFramework\Control.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\IMGUI\GUIFramework\DefaultControl.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\IMGUI\GUIFramework\GUIAction.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\IMGUI\GUIFramework\GUIState.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\IMGUI\GUIFramework\GUISystem.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\IMGUI\GUIFramework\GenericControl.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\IMGUI\GUIFramework\GenericDefaultControl.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\IMGUI\GUIFramework\HoveredControlAction.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\IMGUI\GUIFramework\IGUIState.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\IMGUI\GUIFramework\LayoutData.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\IMGUI\GUIFramework\SliderAction.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\IMGUI\IDrawer.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\IMGUI\PathEditor.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\IMGUI\RectSelector.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\Selection\ISelectable.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\Selection\ISelection.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\Selection\ISelector.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\Selection\IndexedSelection.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\Selection\PointRectSelector.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\Selection\SerializableSelection.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\Shapes\IShape.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\Shapes\Polygon.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\Shapes\ShapeExtensions.cs" />
+     <Compile Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\Shapes\Spline.cs" />
+     <None Include="D:\Study\GitHub\Projects\Team Project\Rhythm-Game\Game\Library\PackageCache\com.unity.2d.path@2.0.5\Editor\Unity.2D.Path.Editor.asmdef" />
  <Reference Include="UnityEngine.AIModule">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.8f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
  </Reference>
@@ -301,6 +302,9 @@
  </Reference>
  <Reference Include="UnityEditor.UWP.Extensions">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.8f1/Editor/Data/PlaybackEngines/MetroSupport/UnityEditor.UWP.Extensions.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.Advertisements">
+ <HintPath>D:/Study/GitHub/Projects/Team Project/Rhythm-Game/Game/Library/PackageCache/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>
  </Reference>
  <Reference Include="nunit.framework">
  <HintPath>D:/Study/GitHub/Projects/Team Project/Rhythm-Game/Game/Library/PackageCache/com.unity.ext.nunit@1.0.0/net35/unity-custom/nunit.framework.dll</HintPath>
