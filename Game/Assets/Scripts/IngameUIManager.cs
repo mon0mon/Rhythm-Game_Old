@@ -2,8 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
-using TMPro;
-using UnityEditor.AnimatedValues;
 using UnityEngine;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
@@ -50,7 +48,6 @@ public class IngameUIManager : MonoBehaviour
     private ButtonSelected _selectedButton = ButtonSelected.NULL;
 
     public float EndSceneOpenTime = 1.5f;
-    public TMP_FontAsset BazziFont;
 
     // Start is called before the first frame update
     void Start()
