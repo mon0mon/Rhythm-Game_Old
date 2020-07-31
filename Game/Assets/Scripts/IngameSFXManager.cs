@@ -16,7 +16,6 @@ public class IngameSFXManager : MonoBehaviour
     private AudioSource Babarian_Aim;
 
     private int _max_SFX_count;
-    private int index = 0;
 
     private float SFX_Vol;
     // Start is called before the first frame update

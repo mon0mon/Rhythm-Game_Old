@@ -15,6 +15,10 @@ public class MenuButtonList : MonoBehaviour
     private GameObject _configWindow;
     private MusicManager _MainMenuMusic;
     private GameObject ButtonCheckImage;
+    private GameObject Lock_StoneAge;
+    private GameObject Lock_MiddleAge;
+    private GameObject Lock_ModernAge;
+    private GameObject Lock_SciFi;
     
     private string selected_Scene;
     private bool isConfigOn = false;
@@ -23,6 +27,10 @@ public class MenuButtonList : MonoBehaviour
     private SFXManager _MenuSFX;
 
     public SceneList SelectedScene = SceneList.NULL;
+    public bool StoneAge_Enable = true;
+    public bool MiddleAge_Enable = true;
+    public bool ModernAge_Enable = true;
+    public bool SciFi_Enable = true;
     public Sprite Default_Barbarian;
     public Sprite Default_Knight;
     public Sprite Default_Worker;
@@ -73,13 +81,53 @@ public class MenuButtonList : MonoBehaviour
         _selectedButton = ButtonSelected.NULL;
         if (GameObject.Find("Config_Window") != null)
         {
-            ButtonCheckImage = GameObject.Find("Config_Window").transform.Find("Config_Window_Image")
-                .Find("Check_Image").gameObject;
+            ButtonCheckImage = GameObject.Find("Config_Window").transform.Find("Check_Image").gameObject;
         }
 
         if (GameObject.Find("MainMenuSFX").GetComponent<SFXManager>() != null)
         {
             _MenuSFX = GameObject.Find("MainMenuSFX").GetComponent<SFXManager>();
+        }
+
+        // 메인 화면인지 체크하고 변수 초기화
+        if (GameObject.Find("Stone_Age") != null || GameObject.Find("Middle_Age") != null ||
+            GameObject.Find("Modern_Age") != null || GameObject.Find("Sci-Fi_Age") != null)
+        {
+            if (GameObject.Find("Stone_Age").transform.Find("Lock_StoneAge") != null)
+            {
+                Lock_StoneAge = GameObject.Find("Stone_Age").transform.Find("Lock_StoneAge").gameObject;
+                if (!StoneAge_Enable)
+                {
+                    Lock_StoneAge.SetActive(true);
+                }
+            }
+        
+            if (GameObject.Find("Middle_Age").transform.Find("Lock_MiddleAge") != null)
+            {
+                Lock_MiddleAge = GameObject.Find("Middle_Age").transform.Find("Lock_MiddleAge").gameObject;
+                if (!MiddleAge_Enable)
+                {
+                    Lock_MiddleAge.SetActive(true);
+                }
+            }
+        
+            if (GameObject.Find("Modern_Age").transform.Find("Lock_ModernAge") != null)
+            {
+                Lock_ModernAge = GameObject.Find("Modern_Age").transform.Find("Lock_ModernAge").gameObject;
+                if (!ModernAge_Enable)
+                {
+                    Lock_ModernAge.SetActive(true);
+                }
+            }
+        
+            if (GameObject.Find("Sci-Fi_Age").transform.Find("Lock_SciFi") != null)
+            {
+                Lock_SciFi = GameObject.Find("Sci-Fi_Age").transform.Find("Lock_SciFi").gameObject;
+                if (!SciFi_Enable)
+                {
+                    Lock_SciFi.SetActive(true);
+                }
+            }
         }
     }
 
@@ -93,47 +141,70 @@ public class MenuButtonList : MonoBehaviour
 
     public void OnClick_StoneAge()
     {
-        _gameStart.interactable = true;
-        _menuManger.NextScene = MenuManger.SceneList.StoneAge;
-        SelectedScene = SceneList.StoneAge;
-        ChangeButtonSprite();
-        _MenuSFX.PlayButtonClickSFX();
+        if (StoneAge_Enable)
+        {
+            _gameStart.interactable = true;
+            _menuManger.NextScene = MenuManger.SceneList.StoneAge;
+            SelectedScene = SceneList.StoneAge;
+            ChangeButtonSprite();
+            _MenuSFX.PlayButtonClickSFX();
+        }
     }
     
     public void OnClick_MiddleAge()
     {
-        _gameStart.interactable = true;
-        _menuManger.NextScene = MenuManger.SceneList.MiddleAge;
-        SelectedScene = SceneList.MiddleAge;
-        ChangeButtonSprite();
-        _MenuSFX.PlayButtonClickSFX();
+        if (MiddleAge_Enable)
+        {
+            _gameStart.interactable = true;
+            _menuManger.NextScene = MenuManger.SceneList.MiddleAge;
+            SelectedScene = SceneList.MiddleAge;
+            ChangeButtonSprite();
+            _MenuSFX.PlayButtonClickSFX();
+        }
     }
     
     public void OnClick_ModernAge()
     {
-        _gameStart.interactable = true;
-        _menuManger.NextScene = MenuManger.SceneList.ModernAge;
-        SelectedScene = SceneList.ModernAge;
-        ChangeButtonSprite();
-        _MenuSFX.PlayButtonClickSFX();
+        if (ModernAge_Enable)
+        {
+            _gameStart.interactable = true;
+            _menuManger.NextScene = MenuManger.SceneList.ModernAge;
+            SelectedScene = SceneList.ModernAge;
+            ChangeButtonSprite();
+            _MenuSFX.PlayButtonClickSFX();
+        }
     }
     
     public void OnClick_SciFi()
     {
-        _gameStart.interactable = true;
-        _menuManger.NextScene = MenuManger.SceneList.SciFi;
-        SelectedScene = SceneList.SciFi;
-        ChangeButtonSprite();
-        _MenuSFX.PlayButtonClickSFX();
+        if (SciFi_Enable)
+        {
+            _gameStart.interactable = true;
+            _menuManger.NextScene = MenuManger.SceneList.SciFi;
+            SelectedScene = SceneList.SciFi;
+            ChangeButtonSprite();
+            _MenuSFX.PlayButtonClickSFX();
+        }
     }
 
     public void OnClick_GameStart()
     {
-        _menuManger.MoveNextScene();
-        _MenuSFX.PlayLoadingSFX();
-        if (SelectedScene != SceneList.NULL)
+        if (_selectedButton == ButtonSelected.OnClickGameStart)
         {
-            GameObject.Find("MainMenuMusic").GetComponent<MusicManager>().StopMainMenuMusic();
+            _menuManger.MoveNextScene();
+            _MenuSFX.PlayLoadingSFX();
+            if (SelectedScene != SceneList.NULL)
+            {
+                GameObject.Find("MainMenuMusic").GetComponent<MusicManager>().StopMainMenuMusic();
+            }
+            return;
+        }
+        else
+        {
+            _selectedButton = ButtonSelected.OnClickGameStart;
+            _MenuSFX.PlayButtonClickSFX();
+            ButtonCheckImage.transform.localPosition = new Vector3(0.0f, -370.0f, 0.0f);
+            ButtonCheckImage.SetActive(true);
         }
     }
 
@@ -153,6 +224,8 @@ public class MenuButtonList : MonoBehaviour
                 init_check = true;
             }
             DeactiveButtons();
+            ButtonCheckImage.SetActive(false);
+            _selectedButton = ButtonSelected.NULL;
         }
         else
         {
@@ -162,6 +235,8 @@ public class MenuButtonList : MonoBehaviour
             ButtonCheckImage.SetActive(false);
             GameObject.Find("Config_Window").transform.GetChild(0).gameObject.SetActive(false);
             ActiveButtons();
+            ButtonCheckImage.SetActive(false);
+            _selectedButton = ButtonSelected.NULL;
         }
         isConfigOn = !isConfigOn;
     }
@@ -175,6 +250,10 @@ public class MenuButtonList : MonoBehaviour
             OnClick_Config();
         }
         SelectedScene = SceneList.NULL;
+        
+        // 선택된 체크 이미지 삭제
+        ButtonCheckImage.SetActive(false);
+        _selectedButton = ButtonSelected.NULL;
     }
 
     public void OnBGMVolSlider()
@@ -302,6 +381,6 @@ public class MenuButtonList : MonoBehaviour
 
 public enum ButtonSelected
 {
-    OnClickCredit, OnClickExit, OnClickRestart, OnClickMainMenu,
+    OnClickCredit, OnClickExit, OnClickRestart, OnClickMainMenu, OnClickGameStart,
     NULL
 }

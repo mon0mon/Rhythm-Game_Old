@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using TMPro;
+using UnityEditor.AnimatedValues;
 using UnityEngine;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
@@ -13,6 +15,7 @@ public class IngameUIManager : MonoBehaviour
     private GameManager _GM;
     private GameObject _configWindow;
     private GameObject _endScene;
+    private GameObject _endSceneLayout;
     private Ingame_TextEffect_Manager _textEffect;
     private IngameMusicManager _BGM;
     private IngameSFXManager _SFX;
@@ -33,6 +36,11 @@ public class IngameUIManager : MonoBehaviour
     private bool textEffectTrigger = true;
     private float temp;
     private bool btnTriggerOn;
+    private int hitCount = 0;
+    private int dodgeCount = 0;
+    private int missCount = 0;
+    private int badCount = 0;
+    private string resText = null;
 
     private ResultState resultState;
     private string bossStatus;
@@ -42,6 +50,7 @@ public class IngameUIManager : MonoBehaviour
     private ButtonSelected _selectedButton = ButtonSelected.NULL;
 
     public float EndSceneOpenTime = 1.5f;
+    public TMP_FontAsset BazziFont;
 
     // Start is called before the first frame update
     void Start()
@@ -51,6 +60,7 @@ public class IngameUIManager : MonoBehaviour
         _progress = GameObject.Find("ProgressBar").GetComponent<Slider>();
         _blackScreen = GameObject.Find("BlackScreen").GetComponent<Image>();
         _endScene = GameObject.Find("Ending").transform.Find("EndScene").gameObject;
+        _endSceneLayout = GameObject.Find("Ending").transform.Find("EndScene").Find("Ending_Layout").gameObject;
         _GM = GameObject.Find("Manager").GetComponent<GameManager>();
         _configWindow = GameObject.Find("Settings").transform.Find("ConfigWindow").gameObject;
         _textEffect = gameObject.GetComponent<Ingame_TextEffect_Manager>();
@@ -95,6 +105,8 @@ public class IngameUIManager : MonoBehaviour
                     break;
             }
         }
+
+        hitCount = dodgeCount = missCount = badCount = 0;
     }
 
     // Update is called once per frame
@@ -119,12 +131,40 @@ public class IngameUIManager : MonoBehaviour
 
     public void EnableEndScene()
     {
+        string temp = null;
         _blackScreen.enabled = true;
         _endScene.SetActive(true);
 
+        switch (resultState)
+        {
+            case ResultState.BossDead :
+                temp = "TrgBossDie";
+                break;
+            case ResultState.BossGroggy :
+                temp = "TrgBossGroggy";
+                break;
+            case ResultState.BossRun :
+                temp = "TrgBossRun";
+                break;
+            case ResultState.PlayerRun :
+                temp = "TrgPlayerRun";
+                break;
+            case ResultState.PlayerFail :
+                temp = "TrgPlayerFail";
+                break;
+            
+        }
+        Debug.Log(temp);
+        // 현재 디버깅 용으로 Buttons 애니메이터에서 ResultState의 모든 상황을 TrgBossDie로 만듦
+        // 추후 이미지 추가될시 반드시 변경할 것
+        _endScene.transform.Find("Buttons").GetComponent<Animator>().SetTrigger(temp);
+
         // ResultState 상태에 따라 이미지 변경
-        _endScene.transform.Find("ResultDisplay").GetComponent<Text>().text = bossStatus;
-        _endScene.transform.Find("Clear_Percentage_Display").GetComponent<Text>().text = "Clear : " + clearPercentage.ToString() + "%";
+        GameObject.Find("Result_Text").GetComponent<Text>().text = resText;
+        GameObject.Find("Hit_Count").GetComponent<Text>().text = hitCount.ToString();
+        GameObject.Find("Nice_Count").GetComponent<Text>().text = dodgeCount.ToString();
+        GameObject.Find("Miss_Count").GetComponent<Text>().text = missCount.ToString();
+        GameObject.Find("Bad_Count").GetComponent<Text>().text = badCount.ToString();
     }
 
     public void EnableConfigWindow()
@@ -157,6 +197,12 @@ public class IngameUIManager : MonoBehaviour
             if (_selectedButton == ButtonSelected.OnClickRestart)
             {
                 Debug.Log("Restart");
+                
+                // 디버깅용 시간 초기화
+                _GM.TimeScale = 1f;
+                _ingameMusic.AudioMixer.SetFloat("BGM_Speed", 1f);
+                _SFX.AudioMixer.SetFloat("SFX_Speed", 1f);
+                
                 _GM.NextScene = SceneList.StoneAge;
                 _GM.EnableLoadingScreen = false;
                 _GM.MoveNextScene();
@@ -180,6 +226,12 @@ public class IngameUIManager : MonoBehaviour
             if (_selectedButton == ButtonSelected.OnClickMainMenu)
             {
                 Debug.Log("Restart");
+                
+                // 디버깅용 시간 초기화
+                _GM.TimeScale = 1f;
+                _ingameMusic.AudioMixer.SetFloat("BGM_Speed", 1f);
+                _SFX.AudioMixer.SetFloat("SFX_Speed", 1f);
+                
                 _GM.NextScene = SceneList.Main_Scene;
                 _GM.EnableLoadingScreen = false;
                 _GM.MoveNextScene();
@@ -246,12 +298,35 @@ public class IngameUIManager : MonoBehaviour
         _SFX.VolChangeSFX(_configWindow.transform.Find("SFX_Slider").GetComponent<Slider>().value);
     }
 
-    public void GetGameResult(ResultState state, string bossStatus, float score, float clearPercentage)
+    public void GetGameResult(ResultState state, string bossStatus, float score, float clearPercentage, int[] stats)
     {
+        switch (state)
+        {
+            case ResultState.BossDead :
+                resText = "PERFECT";
+                break;
+            case ResultState.BossGroggy :
+                resText = "GREAT";
+                break;
+            case ResultState.BossRun :
+                resText = "GOOD";
+                break;
+            case ResultState.PlayerRun :
+                resText = "BAD";
+                break;
+            case ResultState.PlayerFail :
+                resText = "FAILED";
+                break;
+        }
         this.resultState = state;
         this.bossStatus = bossStatus;
         this.score = score;
         this.clearPercentage = clearPercentage;
+
+        hitCount = stats[0];
+        dodgeCount = stats[1];
+        missCount = stats[2];
+        badCount = stats[3];
     }
 
     public void OnBossHPChageListener()
@@ -285,31 +360,37 @@ public class IngameUIManager : MonoBehaviour
                 _GM.TimeScale = 0f;
                 time = 0f;
                 _ingameMusic.AudioMixer.SetFloat("BGM_Speed", 0f);
+                _SFX.AudioMixer.SetFloat("SFX_Speed", 0f);
                 break;
             case 1 :
                 _GM.TimeScale = 0.25f;
                 time = 0.25f;
                 _ingameMusic.AudioMixer.SetFloat("BGM_Speed", 0.25f);
+                _SFX.AudioMixer.SetFloat("SFX_Speed", 0.25f);
                 break;
             case 2 :
                 _GM.TimeScale = 0.5f;
                 time = 0.5f;
                 _ingameMusic.AudioMixer.SetFloat("BGM_Speed", 0.5f);
+                _SFX.AudioMixer.SetFloat("SFX_Speed", 0.5f);
                 break;
             case 3 :
                 _GM.TimeScale = 1f;
                 time = 1f;
                 _ingameMusic.AudioMixer.SetFloat("BGM_Speed", 1f);
+                _SFX.AudioMixer.SetFloat("SFX_Speed", 1f);
                 break;
             case 4 :
                 _GM.TimeScale = 2f;
                 time = 2f;
                 _ingameMusic.AudioMixer.SetFloat("BGM_Speed", 2f);
+                _SFX.AudioMixer.SetFloat("SFX_Speed", 2f);
                 break;
             case 5 :
                 _GM.TimeScale = 3f;
                 time = 3f;
                 _ingameMusic.AudioMixer.SetFloat("BGM_Speed", 3f);
+                _SFX.AudioMixer.SetFloat("SFX_Speed", 3f);
                 break;
         }
 

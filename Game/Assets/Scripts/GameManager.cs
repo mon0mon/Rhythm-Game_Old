@@ -43,6 +43,8 @@ public class GameManager : MonoBehaviour
     private bool startPlaying;
     private int hitCount = 0;
     private int dodgeCount = 0;
+    private int missCount = 0;
+    private int badCount = 0;
     private string sceneName;
     private bool isNotPlaying = false;
     private bool isSceneChange = false;
@@ -178,6 +180,7 @@ public class GameManager : MonoBehaviour
                         StartCoroutine(PrintText(TextEffectDelayFrame, TextPrintType.Miss,
                             PressedButton.GetComponent<ButtonController>()));
                         // PressedButton.GetComponent<ButtonController>().SelectTextType(TextPrintType.Miss);
+                    missCount++;
                     break;
                 case TouchInputType.Swipe :
                     // 플레이어 피격 모션 출력
@@ -186,6 +189,7 @@ public class GameManager : MonoBehaviour
                     // 데미지를 출력
                     score -= (AddScoreAmount * DodgeFailPenaltyMul);
                     _ingameUI.OnBossHPChageListener();
+                    badCount++;
                     if (_textEffect.TextEffect == TextEffectEnable.Enable)
                         StartCoroutine(PrintText(TextEffectDelayFrame, TextPrintType.Damaged,
                             PressedButton.GetComponent<ButtonController>()));
@@ -256,8 +260,10 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("Score : " + score);
         Debug.Log("Clear : " + Math.Round(((score / maxScore) * 100)) + "%");
-        if (score >= maxScore) gameObject.GetComponent<IngameUIManager>().GetGameResult(state, str, score, (float)Math.Round(((score / maxScore) * 100)));
-        else gameObject.GetComponent<IngameUIManager>().GetGameResult(state, str, score, (float)Math.Round(((score / maxScore) * 100)));
+        if (score >= maxScore) gameObject.GetComponent<IngameUIManager>().GetGameResult(state, str, score, 
+            (float)Math.Round(((score / maxScore) * 100)), new int[4] {hitCount, dodgeCount, missCount, badCount});
+        else gameObject.GetComponent<IngameUIManager>().GetGameResult(state, str, score, 
+            (float)Math.Round(((score / maxScore) * 100)), new int[4] {hitCount, dodgeCount, missCount, badCount});
         StartCoroutine(Timer(endSceneOpenTime));
     }
 
@@ -265,6 +271,8 @@ public class GameManager : MonoBehaviour
     {
         hitCount = 0;
         dodgeCount = 0;
+        missCount = 0;
+        badCount = 0;
         sceneName= null;
         isNotPlaying = false;
         

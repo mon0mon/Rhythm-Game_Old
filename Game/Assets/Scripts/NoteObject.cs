@@ -232,7 +232,6 @@ public class NoteObject : MonoBehaviour
             }
         } else if (other.CompareTag("Dectect_Exploit_Input"))
         {
-            Debug.Log("OnTriggerExit2D");
             checkCount = 0;
             checkTime = 0;
         }
