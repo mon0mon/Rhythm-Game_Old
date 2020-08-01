@@ -28,8 +28,6 @@ ScriptsOnlyBuild:
     - UnityEditor.U2D.Animation.BoneGizmo
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridPaintingState
-    - UnityEditor.Tilemaps.GridPaletteBrushes
-    - UnityEditor.Tilemaps.GridPalettes
     - UnityEditor.Tilemaps.SceneViewGridManager
     - UnityEditor.Tilemaps.TileDragAndDropManager
     Unity.DeviceSimulator.Editor.dll:
@@ -1049,4 +1047,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/Main_Scene.unity
   - Assets/Scenes/Loading_Scene.unity
   - Assets/Scenes/Stage_StoneAge.unity
-  playerPath: D:/Study/GitHub/Projects/Team Project/Rhythm-Game/Game/apk/08-01_03-29.apk
+  playerPath: D:/Study/GitHub/Projects/Team Project/Rhythm-Game/Game/apk/08-01_14-28.apk
