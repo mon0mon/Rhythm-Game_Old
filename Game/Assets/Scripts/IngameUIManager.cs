@@ -300,16 +300,16 @@ public class IngameUIManager : MonoBehaviour
         switch (state)
         {
             case ResultState.BossDead :
-                resText = "PERFECT";
+                resText = "Perfect Hunting";
                 break;
             case ResultState.BossGroggy :
-                resText = "GREAT";
+                resText = "Hunting Sucess";
                 break;
             case ResultState.BossRun :
-                resText = "GOOD";
+                resText = "Clear";
                 break;
             case ResultState.PlayerRun :
-                resText = "BAD";
+                resText = "Run away";
                 break;
             case ResultState.PlayerFail :
                 resText = "FAILED";

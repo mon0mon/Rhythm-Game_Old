@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
 
     private GameObject PressedButton;
 
+    public SceneList Stage = SceneList.NULL;
     public SceneList NextScene = SceneList.NULL;
     public IsPuased GameStatus = IsPuased.Playing;
     public bool EnableLoadingScreen = true;
@@ -149,7 +150,7 @@ public class GameManager : MonoBehaviour
                     if (_textEffect.TextEffect == TextEffectEnable.Enable)
                         StartCoroutine(PrintText(TextEffectDelayFrame, TextPrintType.Hit,
                             PressedButton.GetComponent<ButtonController>()));
-                        // PressedButton.GetComponent<ButtonController>().SelectTextType();
+                    // PressedButton.GetComponent<ButtonController>().SelectTextType();
                     break;
                 case TouchInputType.Swipe :
                     _ingameAnimManager.GetAction(AnimState.PlayerDodge);
@@ -159,7 +160,7 @@ public class GameManager : MonoBehaviour
                     if (_textEffect.TextEffect == TextEffectEnable.Enable)
                         StartCoroutine(PrintText(TextEffectDelayFrame, TextPrintType.Dodge,
                             PressedButton.GetComponent<ButtonController>()));
-                        // PressedButton.GetComponent<ButtonController>().SelectTextType();
+                    // PressedButton.GetComponent<ButtonController>().SelectTextType();
                     break;
             }
         }
@@ -179,7 +180,7 @@ public class GameManager : MonoBehaviour
                     if (_textEffect.TextEffect == TextEffectEnable.Enable)
                         StartCoroutine(PrintText(TextEffectDelayFrame, TextPrintType.Miss,
                             PressedButton.GetComponent<ButtonController>()));
-                        // PressedButton.GetComponent<ButtonController>().SelectTextType(TextPrintType.Miss);
+                    // PressedButton.GetComponent<ButtonController>().SelectTextType(TextPrintType.Miss);
                     missCount++;
                     break;
                 case TouchInputType.Swipe :
@@ -193,7 +194,7 @@ public class GameManager : MonoBehaviour
                     if (_textEffect.TextEffect == TextEffectEnable.Enable)
                         StartCoroutine(PrintText(TextEffectDelayFrame, TextPrintType.Damaged,
                             PressedButton.GetComponent<ButtonController>()));
-                        // PressedButton.GetComponent<ButtonController>().SelectTextType(TextPrintType.Damaged);
+                    // PressedButton.GetComponent<ButtonController>().SelectTextType(TextPrintType.Damaged);
                     break;
                 case TouchInputType.NULL :
                     break;
@@ -213,49 +214,32 @@ public class GameManager : MonoBehaviour
         
         // 맘모스와 원시인 그로기 상태 확정되면 그때 추가하기
         // 클리어 퍼센트에 따른 엔딩 분기 조절
-        switch (SceneManager.GetActiveScene().name)
+        if (cntClear >= 100)
         {
-            case "Stage_StoneAge" :
-                
-                if (cntClear >= 100)
-                {
-                    state = ResultState.BossDead;
-                    str = "Boss Dead";
-                    Debug.Log("Boss Dead");
-                } else if (85 <= cntClear && cntClear < 100)
-                {
-                    state = ResultState.BossGroggy;
-                    str = "Boss Groggy";
-                    Debug.Log("Boss Groggy");
-                } else if (50 <= cntClear && cntClear < 85)
-                {
-                    state = ResultState.BossRun;
-                    str = "Boss Run";
-                    Debug.Log("Boss Run");
-                } else if (0 < cntClear && cntClear < 50)
-                {
-                    state = ResultState.PlayerRun;
-                    str = "Player Run";
-                    Debug.Log("Player Run");
-                }
-                else
-                {
-                    state = ResultState.PlayerFail;
-                    str = "Player Failed";
-                    Debug.Log("Player Failed");
-                }
-                
-                break;
-            case "Stage_MiddleAge" :
-                break;
-            case "Stage_MordernAge" :
-                break;
-            case "Stage_SciFi" :
-                break;
-            default:
-                // 잘못된 씬 이름을 적용했을 경우
-                Debug.Log("GameManager - CheckHitNotes - GetActiveSceneName : Unexcpected Value");
-                break;
+            state = ResultState.BossDead;
+            str = "Boss Dead";
+            Debug.Log("Boss Dead");
+        } else if (85 <= cntClear && cntClear < 100)
+        {
+            state = ResultState.BossGroggy;
+            str = "Boss Groggy";
+            Debug.Log("Boss Groggy");
+        } else if (50 <= cntClear && cntClear < 85)
+        {
+            state = ResultState.BossRun;
+            str = "Boss Run";
+            Debug.Log("Boss Run");
+        } else if (0 < cntClear && cntClear < 50)
+        {
+            state = ResultState.PlayerRun;
+            str = "Player Run";
+            Debug.Log("Player Run");
+        }
+        else
+        {
+            state = ResultState.PlayerFail;
+            str = "Player Failed";
+            Debug.Log("Player Failed");
         }
 
         Debug.Log("Score : " + score);

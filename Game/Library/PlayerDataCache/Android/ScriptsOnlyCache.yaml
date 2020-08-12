@@ -28,6 +28,8 @@ ScriptsOnlyBuild:
     - UnityEditor.U2D.Animation.BoneGizmo
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridPaintingState
+    - UnityEditor.Tilemaps.GridPaletteBrushes
+    - UnityEditor.Tilemaps.GridPalettes
     - UnityEditor.Tilemaps.SceneViewGridManager
     - UnityEditor.Tilemaps.TileDragAndDropManager
     Unity.DeviceSimulator.Editor.dll:
@@ -44,8 +46,10 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -60,6 +64,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
     - UnityEngine.UI.Mask
+    - UnityEngine.UI.Outline
     - UnityEngine.UI.ScrollRect
     - UnityEngine.UI.Scrollbar
     - UnityEngine.UI.Slider
@@ -279,6 +284,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 14254}
     - Class: 114
       Script: {instanceID: 14586}
+    - Class: 114
+      Script: {instanceID: 14594}
     - Class: 114
       Script: {instanceID: 14654}
     - Class: 114
@@ -977,7 +984,7 @@ ScriptsOnlyBuild:
     className: TMP_SubMesh
   - hash:
       serializedVersion: 2
-      Hash: 026182a9e0e3e78e32292aca20c9dc2e
+      Hash: cae5e78923b3c2f06f2a267c289c1f4e
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
@@ -1047,4 +1054,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/Main_Scene.unity
   - Assets/Scenes/Loading_Scene.unity
   - Assets/Scenes/Stage_StoneAge.unity
-  playerPath: D:/Study/GitHub/Projects/Team Project/Rhythm-Game/Game/apk/08-01_14-28.apk
+  playerPath: D:/Study/GitHub/Projects/Team Project/Rhythm-Game/Game/apk/08-07_15-19.apk
