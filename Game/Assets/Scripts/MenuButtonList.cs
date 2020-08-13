@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
+// Main_Scene에서 사용하는 스크립트
 public class MenuButtonList : MonoBehaviour
 {
     private MenuManger _menuManger;
@@ -187,10 +188,19 @@ public class MenuButtonList : MonoBehaviour
         }
     }
 
+    // Start_Scene에서 사용하는 버튼
+    public void OnClick_Start()
+    {
+        GameObject.Find("Start").GetComponent<Button>().interactable = false;
+        _menuManger.MoveNextScene();
+    }
+
+    // Main_Scene에서 사용하는 버튼
     public void OnClick_GameStart()
     {
         if (_selectedButton == ButtonSelected.OnClickGameStart)
         {
+            GameObject.Find("Game_Start").GetComponent<Button>().interactable = false;
             _menuManger.MoveNextScene();
             _MenuSFX.PlayLoadingSFX();
             if (SelectedScene != SceneList.NULL)

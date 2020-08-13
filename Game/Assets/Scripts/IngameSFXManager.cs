@@ -47,7 +47,14 @@ public class IngameSFXManager : MonoBehaviour
     public void VolChangeSFX(float value)
     {
         SFX_Vol = value;
-        AudioMixer.SetFloat("SFX_Vol", value);
+        if (value == -30f)
+        {
+            AudioMixer.SetFloat("SFX_Vol", -100f);
+        }
+        else
+        {
+            AudioMixer.SetFloat("SFX_Vol", value);
+        }
     }
 
     public float GetSFXVol()

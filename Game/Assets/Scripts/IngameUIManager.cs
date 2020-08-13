@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
 
@@ -28,6 +29,7 @@ public class IngameUIManager : MonoBehaviour
     private Toggle _toggleTextEffect;
     private Dropdown _timeDropDown;
     private GameObject ButtonCheckImage;
+    private Sprite _sprite;
 
     private bool isEnd = false;
     private bool isConfigOn = false;
@@ -47,6 +49,7 @@ public class IngameUIManager : MonoBehaviour
     private bool isEnableBackground;
     private ButtonSelected _selectedButton = ButtonSelected.NULL;
 
+    public SceneList ActiveScene = SceneList.NULL;
     public float EndSceneOpenTime = 1.5f;
 
     // Start is called before the first frame update
@@ -104,6 +107,28 @@ public class IngameUIManager : MonoBehaviour
         }
 
         hitCount = dodgeCount = missCount = badCount = 0;
+
+        if (ActiveScene == SceneList.NULL)
+        {
+            switch (SceneManager.GetActiveScene().name)
+            {
+                case "Stage_StoneAge" :
+                    ActiveScene = SceneList.StoneAge;
+                    break;
+                case "Stage_MiddleAge" :
+                    ActiveScene = SceneList.MiddleAge;
+                    break;
+                case "Stage_ModernAge" :
+                    ActiveScene = SceneList.ModernAge;
+                    break;
+                case "Stage_SciFiAge" :
+                    ActiveScene = SceneList.SciFi;
+                    break;
+                default :
+                    Debug.Log("UIManger : Unexepceted ActiveScene Name");
+                    break;
+            }
+        }
     }
 
     // Update is called once per frame
@@ -132,29 +157,47 @@ public class IngameUIManager : MonoBehaviour
         _blackScreen.enabled = true;
         _endScene.SetActive(true);
 
-        switch (resultState)
+        switch (ActiveScene)
         {
-            case ResultState.BossDead :
-                temp = "TrgBossDie";
+            case SceneList.StoneAge :
+                switch (resultState)
+                {
+                    case ResultState.BossDead :
+                        temp = "TrgBossDie";
+                        _sprite = Resources.Load<Sprite>("Stage/StoneAge/mammoth_hunting-Boss_dead");
+                        _endScene.transform.Find("Ending_IMG").GetComponent<Image>().transform.localScale = new Vector3(0.65f, 0.8f, 1.0f);
+                        break;
+                    case ResultState.BossGroggy :
+                        temp = "TrgBossGroggy";
+                        _sprite = Resources.Load<Sprite>("Stage/StoneAge/mammoth_hunting-Boss_groggy");
+                        break;
+                    case ResultState.BossRun :
+                        temp = "TrgBossRun";
+                        _sprite = Resources.Load<Sprite>("Stage/StoneAge/mammoth_hunting-Boss_Run");
+                        break;
+                    case ResultState.PlayerRun :
+                        temp = "TrgPlayerRun";
+                        _sprite = Resources.Load<Sprite>("Stage/StoneAge/mammoth_hunting-Player_run");
+                        break;
+                    case ResultState.PlayerFail :
+                        temp = "TrgPlayerFail";
+                        _sprite = Resources.Load<Sprite>("Stage/StoneAge/mammoth_hunting-Player_dead");
+                        _endScene.transform.Find("Ending_IMG").GetComponent<Image>().transform.localScale = new Vector3(0.72f, 0.6f, 1.0f);
+                        break;
+                }
                 break;
-            case ResultState.BossGroggy :
-                temp = "TrgBossGroggy";
+            case SceneList.MiddleAge :
                 break;
-            case ResultState.BossRun :
-                temp = "TrgBossRun";
+            case SceneList.ModernAge :
                 break;
-            case ResultState.PlayerRun :
-                temp = "TrgPlayerRun";
+            case SceneList.SciFi :
                 break;
-            case ResultState.PlayerFail :
-                temp = "TrgPlayerFail";
-                break;
-            
         }
         Debug.Log(temp);
-        // 현재 디버깅 용으로 Buttons 애니메이터에서 ResultState의 모든 상황을 TrgBossDie로 만듦
+        Debug.Log(_sprite);
         // 추후 이미지 추가될시 반드시 변경할 것
         _endScene.transform.Find("Buttons").GetComponent<Animator>().SetTrigger(temp);
+        _endScene.transform.Find("Ending_IMG").GetComponent<Image>().sprite = _sprite;
 
         // ResultState 상태에 따라 이미지 변경
         GameObject.Find("Result_Text").GetComponent<Text>().text = resText;
@@ -300,21 +343,22 @@ public class IngameUIManager : MonoBehaviour
         switch (state)
         {
             case ResultState.BossDead :
-                resText = "Perfect Hunting";
+                resText = "Perfect\n Hunting";
                 break;
             case ResultState.BossGroggy :
-                resText = "Hunting Sucess";
+                resText = "Hunting\n Sucess";
                 break;
             case ResultState.BossRun :
                 resText = "Clear";
                 break;
             case ResultState.PlayerRun :
-                resText = "Run away";
+                resText = "Run Away";
                 break;
             case ResultState.PlayerFail :
-                resText = "FAILED";
+                resText = "Failed";
                 break;
         }
+
         this.resultState = state;
         this.bossStatus = bossStatus;
         this.score = score;

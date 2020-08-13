@@ -61,13 +61,27 @@ public class MusicManager : MonoBehaviour
     public void VolChangeBGM(float value)
     {
         BGM_Vol = value;
-        AudioMixer.SetFloat("BGM_Vol", value);
+        if (value == -30f)
+        {
+            AudioMixer.SetFloat("BGM_Vol", -100f);
+        }
+        else
+        {
+            AudioMixer.SetFloat("BGM_Vol", value);
+        }
     }
 
     public void VolChangeSFX(float value)
     {
         SFX_Vol = value;
-        AudioMixer.SetFloat("SFX_Vol", value);
+        if (value == -30f)
+        {
+            AudioMixer.SetFloat("SFX_Vol", -100f);
+        }
+        else
+        {
+            AudioMixer.SetFloat("SFX_Vol", value);
+        }
     }
 
     public float GetBGMVol()

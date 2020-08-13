@@ -1103,8 +1103,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6438316102660697658}
-        m_MethodName: MoveNextScene
+      - m_Target: {fileID: 3289872817747339854}
+        m_MethodName: OnClick_Start
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1822,6 +1822,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectedScene: 0
+  StoneAge_Enable: 1
+  MiddleAge_Enable: 1
+  ModernAge_Enable: 1
+  SciFi_Enable: 1
   Default_Barbarian: {fileID: 0}
   Default_Knight: {fileID: 0}
   Default_Worker: {fileID: 0}

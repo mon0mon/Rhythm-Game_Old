@@ -93,7 +93,14 @@ public class IngameMusicManager : MonoBehaviour
     public void VolChangeBGM(float value)
     {
         BGM_Vol = value;
-        AudioMixer.SetFloat("BGM_Vol", value);
+        if (value == -30f)
+        {
+            AudioMixer.SetFloat("BGM_Vol", -100f);
+        }
+        else
+        {
+            AudioMixer.SetFloat("BGM_Vol", value);
+        }
     }
 
     public float GetBGMVol()

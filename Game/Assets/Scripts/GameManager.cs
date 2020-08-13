@@ -147,6 +147,7 @@ public class GameManager : MonoBehaviour
                     hitCount++;
                     score += AddScoreAmount;
                     _ingameUI.OnBossHPChageListener();
+                    // 텍스트 효과 출력
                     if (_textEffect.TextEffect == TextEffectEnable.Enable)
                         StartCoroutine(PrintText(TextEffectDelayFrame, TextPrintType.Hit,
                             PressedButton.GetComponent<ButtonController>()));
@@ -157,6 +158,7 @@ public class GameManager : MonoBehaviour
                     _ingameSFX.PlayStoneAgeSFX(StoneAge_SFX.Babarian_Dodge);
                     Debug.Log("Dodge On Time");
                     dodgeCount++;
+                    // 텍스트 효과 출력
                     if (_textEffect.TextEffect == TextEffectEnable.Enable)
                         StartCoroutine(PrintText(TextEffectDelayFrame, TextPrintType.Dodge,
                             PressedButton.GetComponent<ButtonController>()));
@@ -177,6 +179,7 @@ public class GameManager : MonoBehaviour
                 case TouchInputType.Tab :
                     // 미스를 출력
                     _ingameAnimManager.GetAction(AnimState.PlayerMiss);
+                    // 텍스트 효과 출력
                     if (_textEffect.TextEffect == TextEffectEnable.Enable)
                         StartCoroutine(PrintText(TextEffectDelayFrame, TextPrintType.Miss,
                             PressedButton.GetComponent<ButtonController>()));
@@ -191,6 +194,7 @@ public class GameManager : MonoBehaviour
                     score -= (AddScoreAmount * DodgeFailPenaltyMul);
                     _ingameUI.OnBossHPChageListener();
                     badCount++;
+                    // 텍스트 효과 출력
                     if (_textEffect.TextEffect == TextEffectEnable.Enable)
                         StartCoroutine(PrintText(TextEffectDelayFrame, TextPrintType.Damaged,
                             PressedButton.GetComponent<ButtonController>()));
@@ -208,7 +212,6 @@ public class GameManager : MonoBehaviour
         String str = null;
         ResultState state = ResultState.NULL;
         float cntClear = (float)Math.Round(score / maxScore * 100);
-        Debug.Log(cntClear);
 
         if (score <= 0) score = 0;
         

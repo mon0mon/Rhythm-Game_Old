@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4904458027388330703}
   - component: {fileID: 1265126427549570884}
   - component: {fileID: -8366068425673357040}
+  - component: {fileID: -7241992007537172630}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -48,6 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e708bc0f56d825d4b830d1c3edbd44b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Stage: 10
   NextScene: 3
   GameStatus: 0
   EnableLoadingScreen: 1
@@ -125,30 +127,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TextEffect: 0
-  TextEffect_Hit:
+  TextEffect_Hit: {fileID: 0}
+  TextEffect_Dodge: {fileID: 0}
+  TextEffect_Miss: {fileID: 0}
+  TextEffect_Damaged: {fileID: 0}
+--- !u!114 &-7241992007537172630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4904458027388330700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df322f75bd903b2448a044f867b084f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActiveScene: 10
+  TutorialActive: 1
+  TriggerAction:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  TextEffect_Dodge:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  TextEffect_Miss:
-  - {fileID: 0}
-  - {fileID: 0}
-  TextEffect_Damaged:
-  - {fileID: 0}
-  - {fileID: 0}
-  TextEffect_Hit_Pivot: {fileID: 2037885739918581648, guid: d4922c23f6e0a1a4bbfba9c624b09e4e,
-    type: 3}
-  TextEffect_Dodge_Pivot: {fileID: 8995436927467860399, guid: 7f3bd934f8367104cb270bcf7e6fa140,
-    type: 3}
-  TextEffectLiveTime: 1.3
-  TextEffectSpeed: 170
 --- !u!1 &5515190002214617340
 GameObject:
   m_ObjectHideFlags: 0
